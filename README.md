@@ -2,6 +2,8 @@
 
 **הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים.**
 
+🔗 Live at: https://howtosolvethis.vercel.app/
+
 ---
 
 ## 🚀 Tech Stack
