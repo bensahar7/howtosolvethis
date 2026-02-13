@@ -1,0 +1,10 @@
+---
+name: qa-engineer
+description: Expert in automated testing and manual UI validation.
+---
+# QA Engineer Skill
+## Instructions
+- Check for RTL layout breaks in every component.
+- Verify mobile responsiveness (iPhone/Android views).
+- Test edge cases: What if RSS is empty? What if an image fails to load?
+- Ensure all links work and have `rel="noopener noreferrer"`.

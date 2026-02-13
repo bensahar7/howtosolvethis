@@ -1,0 +1,12 @@
+# robots.txt for How To Solve This?
+# https://howtosolvethis.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://howtosolvethis.com/sitemap.xml
+
+# Disallow admin/internal paths (if any in future)
+# Disallow: /api/
+# Disallow: /_next/

@@ -1,0 +1,73 @@
+Design System: "Atmospheric Curiosity"
+1. Vision & Atmosphere
+The Vibe: A high-end, cinematic window into deep-tech solutions. It should feel like a futuristic dashboard or a high-end streaming service (Apple TV+ style).
+
+Core Principle: Depth is created through transparency and blur, never through shadows or solid colors.
+
+2. Visual Tokens (Tailwind)
+Background: Fixed full-screen image (/images/earth-hero.jpg) with a bg-black/40 overlay.
+
+Glassmorphism:
+
+Surface: bg-white/5 (Ultra-transparent).
+
+Blur: backdrop-blur-xl (Creates the "frosted glass" look).
+
+Border: border border-white/10 (A sharp, thin hairline edge).
+
+Shadows: STRICTLY FORBIDDEN. Do not use shadow-sm, shadow-md, etc.
+
+Corner Radius: rounded-none or rounded-sm. Keep it sharp and professional, avoid the "bubbly" look.
+
+3. Typography (RTL/Hebrew)
+Font Family: SF Hebrew (Local) as primary, sans-serif as fallback.
+
+Headlines: * Weight: font-bold.
+
+Tracking: tracking-tighter.
+
+Scale: Use large sizes (text-5xl to text-7xl) for Hero sections.
+
+Body: * Weight: font-normal.
+
+Line Height: leading-relaxed (1.625) to ensure readability in long transcripts.
+
+Direction: Always dir="rtl" for Hebrew text.
+
+4. Component Laws
+Guest Photos:
+
+Apply grayscale brightness-75 contrast-125.
+
+On Hover: Transition to grayscale-0 brightness-100 over 400ms.
+
+Buttons:
+
+No solid backgrounds. Use the Glassmorphism token.
+
+Hover effect: A subtle white outer glow (box-shadow: 0 0 20px rgba(255,255,255,0.15)) and a slight scale up (scale-105).
+
+Spacing: Be generous. Use p-12 for cards and gap-24 between major sections.
+
+5. System States (Edge Cases)
+Loading State:
+
+Use Skeleton Screens using bg-white/5 and animate-pulse.
+
+Do not use spinning wheels.
+
+- **404 - Lost in Space:** - Keep Earth background + 40% dark overlay.
+    - Copy: "עובדים על זה, תכף נשוב."
+    - Visual: Central Glassmorphism card with a "Back to Orbit" button.
+
+Center a single Glass card with: "אנחנו עובדים על זה"
+
+Error States:
+
+Use a subtle red tint for borders (border-red-500/30) instead of solid red backgrounds.
+
+## 6. Advanced "Non-Generic" Constraints
+* **Layout Opinion:** Strictly avoid symmetric grids. Use a 12-column Swiss grid where content blocks start and end on unexpected columns (e.g., a card spanning from column 2 to 7).
+* **Typography as Art:** Large display titles should have a `z-index` that allows them to be partially layered behind glass cards or bleed off the viewport edges.
+* **Technical Details (The HUD Look):** Use a secondary Monospace font (like JetBrains Mono) for metadata. Add thin vertical/horizontal reference lines (0.5px white/10) to frame sections, mimicking a technical blueprint.
+* **Macro-Animation:** Instead of simple fades, use "mask-reveals" where text slides out from an invisible boundary, creating a high-end motion-graphics feel.

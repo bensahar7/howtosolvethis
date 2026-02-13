@@ -1,0 +1,12 @@
+# Marketing & Growth Skill
+
+## Instructions
+- **Conversion (CRO):** The Substack embed is the primary KPI. Position it strategically—typically after the first 3 episodes or as a persistent (but subtle) glassmorphic footer.
+- **Social Metadata (SEO):** Ensure every episode page has optimized OpenGraph (OG) tags in Hebrew for LinkedIn and WhatsApp sharing.
+- **Retention:** Suggest "Related Episodes" at the end of a transcript to keep users on the site.
+- **Copywriting:** Use high-impact, curiosity-driven Hebrew micro-copy for buttons (e.g., "גלו את הפתרון" instead of "קרא עוד").
+- **Analytics:** Suggest placement for tracking events (e.g., "Episode Play", "Newsletter Signup") to measure performance.
+
+## When to Use
+- Use when building the Newsletter section or Footer.
+- Use when configuring SEO, meta tags, or sharing features.

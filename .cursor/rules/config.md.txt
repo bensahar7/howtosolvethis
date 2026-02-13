@@ -1,0 +1,28 @@
+# Site Configuration
+
+## Podcast Info
+- **Name:** איך פותרים את זה?
+- **RSS Feed:** https://anchor.fm/s/f75630a4/podcast/rss
+- **Stats:** 15+ Episodes, 2 Seasons
+
+## Sitemap
+1. **Hero:** Earth Background + "בעיות גדולות, בגובה העיניים".
+2. **Stats Strip:** Dynamic numbers (Episodes, Companies).
+3. **Featured Logos:** Scrollable wall of company logos.
+4. **Episodes Grid:** Glassmorphism cards with RSS images.
+5. **Footer:** Newsletter + Social + Icons
+
+## Podcast Feeds
+- **RSS Feed:** https://anchor.fm/s/f75630a4/podcast/rss
+- **Spotify Show URL:** https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y
+
+## Social Links
+- **Host LinkedIn:** https://www.linkedin.com/in/ben-sahar/
+- **Podcast LinkedIn Page:** https://www.linkedin.com/company/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94
+
+## Newsletter
+- **Service Name:** Substack
+- **Signup URL / Embed ID:** <iframe src="https://ben1580094.substack.com/embed" width="480" height="320" style="border: 1px solid #EEE; background: white" frameborder="0" scrolling="no"></iframe>
+
+## Design Assets
+- **Hero Background:** /images/earth-hero.jpg

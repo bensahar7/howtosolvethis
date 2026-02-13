@@ -1,0 +1,155 @@
+import fs from "fs/promises";
+import path from "path";
+import { LocalMetadata } from "@/types/episode";
+
+const EPISODES_DIR = path.join(process.cwd(), "Context", "Episodes");
+
+/**
+ * Parse a meta.md.txt file and extract structured metadata
+ */
+function parseMetadataFile(content: string, episodeNumber: number): LocalMetadata {
+  const lines = content.split("\n");
+  
+  let title = "";
+  let guests: string[] = [];
+  let sector = "";
+  let keywords: string[] = [];
+  let problem = "";
+  let solution = "";
+  let entrepreneurInsight = "";
+
+  // Extract title from first heading
+  const titleMatch = content.match(/^#\s+(.+?)$/m);
+  if (titleMatch) {
+    title = titleMatch[1].replace(/Episode \d+:\s*/i, "").trim();
+  }
+
+  // Extract guests - handle multiple formats: "Guest:", "Guests:", "Key Experts:"
+  const guestsMatch = content.match(/\*\*(?:Guests?|Key Experts?):\*\*\s*(.+?)$/m);
+  if (guestsMatch) {
+    const guestText = guestsMatch[1].trim();
+    // Remove parenthetical English names if present
+    const cleanedText = guestText.replace(/\([^)]*\)/g, '').trim();
+    guests = cleanedText
+      .split(/[,،]/)
+      .map((g) => g.trim())
+      .filter(Boolean);
+  }
+
+  // Extract sector - handle both "Sector:" and "Sectors:" and "Topic:"
+  const sectorMatch = content.match(/\*\*(?:Sectors?|Topic):\*\*\s*(.+?)$/m);
+  if (sectorMatch) {
+    // Split by / or comma and take first sector, clean it up
+    const sectors = sectorMatch[1].split(/\s*[\/,]\s*/);
+    sector = sectors[0].trim();
+  }
+
+  // Extract keywords
+  const keywordsMatch = content.match(/\*\*Keywords:\*\*\s*(.+?)$/m);
+  if (keywordsMatch) {
+    keywords = keywordsMatch[1]
+      .split(/[,،]/)
+      .map((k) => k.trim())
+      .filter(Boolean);
+  }
+
+  // Extract problem section
+  const problemMatch = content.match(/##\s+The Problem[^\n]*\n([\s\S]*?)(?=\n##|$)/);
+  if (problemMatch) {
+    problem = problemMatch[1].trim().substring(0, 300); // First 300 chars
+  }
+
+  // Extract solution section
+  const solutionMatch = content.match(/##\s+The Solution[^\n]*\n([\s\S]*?)(?=\n##|$)/);
+  if (solutionMatch) {
+    solution = solutionMatch[1].trim().substring(0, 300);
+  }
+
+  // Extract entrepreneur insight
+  const insightMatch = content.match(/##\s+Entrepreneur Insight[^\n]*\n([\s\S]*?)(?=\n##|$)/);
+  if (insightMatch) {
+    entrepreneurInsight = insightMatch[1].trim();
+  }
+
+  return {
+    episodeNumber,
+    title,
+    guests,
+    sector,
+    keywords,
+    problem,
+    solution,
+    entrepreneurInsight,
+  };
+}
+
+/**
+ * Read all local episode metadata files
+ */
+export async function getAllLocalMetadata(): Promise<LocalMetadata[]> {
+  try {
+    const entries = await fs.readdir(EPISODES_DIR, { withFileTypes: true });
+    const episodeDirs = entries.filter((entry) => entry.isDirectory());
+
+    const metadataPromises = episodeDirs.map(async (dir) => {
+      const episodePath = path.join(EPISODES_DIR, dir.name);
+      
+      // Try to find meta.md.txt or mark.txt
+      let metaFile = "meta.md.txt";
+      try {
+        await fs.access(path.join(episodePath, metaFile));
+      } catch {
+        metaFile = "mark.txt";
+      }
+
+      try {
+        const content = await fs.readFile(
+          path.join(episodePath, metaFile),
+          "utf-8"
+        );
+
+        // Extract episode number from TITLE in file (more accurate than folder name)
+        const titleMatch = content.match(/^#\s+Episode\s+(\d+):/im);
+        let episodeNumber = titleMatch ? parseInt(titleMatch[1], 10) : 0;
+        
+        // Fallback: try Hebrew "פרק"
+        if (!episodeNumber) {
+          const hebrewMatch = content.match(/^#\s+פרק\s+(\d+):/im);
+          episodeNumber = hebrewMatch ? parseInt(hebrewMatch[1], 10) : 0;
+        }
+        
+        // Last resort: extract from directory name
+        if (!episodeNumber) {
+          const dirMatch = dir.name.match(/ep(\d+)/i);
+          episodeNumber = dirMatch ? parseInt(dirMatch[1], 10) : 0;
+        }
+
+        const parsed = parseMetadataFile(content, episodeNumber);
+        
+        // Add folder name for manual mapping
+        parsed.folderName = dir.name;
+
+        return parsed;
+      } catch (error) {
+        console.error(`Error reading metadata for ${dir.name}:`, error);
+        return null;
+      }
+    });
+
+    const metadata = await Promise.all(metadataPromises);
+    return metadata.filter((m): m is LocalMetadata => m !== null);
+  } catch (error) {
+    console.error("Error reading local metadata:", error);
+    return [];
+  }
+}
+
+/**
+ * Get metadata for a specific episode by number
+ */
+export async function getMetadataByEpisode(
+  episodeNumber: number
+): Promise<LocalMetadata | null> {
+  const allMetadata = await getAllLocalMetadata();
+  return allMetadata.find((m) => m.episodeNumber === episodeNumber) || null;
+}

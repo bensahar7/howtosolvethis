@@ -1,0 +1,333 @@
+@import "tailwindcss";
+
+/* 
+  Design System: "Atmospheric Curiosity"
+  Core Principle: Depth through transparency and blur, NEVER shadows.
+  NO GENERIC PATTERNS. NO TEMPLATE AESTHETICS.
+*/
+
+/* ============================================
+   SF HEBREW LOCAL FONT
+   ============================================ */
+
+/* When font files are added to public/fonts/, uncomment this:
+@font-face {
+  font-family: 'SF Hebrew';
+  src: url('/fonts/SFHebrew-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Hebrew';
+  src: url('/fonts/SFHebrew-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* Fallback to system Hebrew fonts */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Arial Hebrew", system-ui, sans-serif;
+}
+
+/* ============================================
+   GLASSMORPHISM TOKENS
+   ============================================ */
+
+/* Standard Glass Surface - CINEMATIC (NON-NEGOTIABLE) */
+.glass {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* High-Blur Glass (for header, newsletter, footer) - CINEMATIC */
+.glass-high-blur {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Glass Hover Effect - ONLY ALLOWED GLOW */
+.glass-hover {
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Accordion Animation for Episode Cards */
+.accordion-content {
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Expand Button Styling */
+.expand-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.expand-button:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.expand-button svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   IMAGE FILTERS (Cinematic Grayscale)
+   ============================================ */
+
+.img-grayscale-default {
+  filter: grayscale(80%) brightness(0.75) contrast(1.25);
+  transition: filter 400ms ease-in-out;
+}
+
+.img-grayscale-default:hover {
+  filter: grayscale(0%) brightness(1) contrast(1);
+}
+
+/* ============================================
+   TECHNICAL HUD ELEMENTS
+   ============================================ */
+
+/* Thin reference lines (0.5px) */
+.hud-line-vertical {
+  border-right: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-line-horizontal {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Monospace technical metadata */
+.technical-text {
+  font-family: "JetBrains Mono", "Consolas", "Monaco", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   RTL ENHANCEMENTS
+   ============================================ */
+
+[dir="rtl"] {
+  direction: rtl;
+}
+
+/* Ensure proper text alignment in RTL */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* ============================================
+   LOADING STATES (Skeleton Screens)
+   ============================================ */
+
+@keyframes pulse-glass {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeleton-glass {
+  background: rgba(255, 255, 255, 0.05);
+  animation: pulse-glass 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   MASK-REVEAL ANIMATIONS (High-End Motion)
+   ============================================ */
+
+@keyframes mask-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-mask-reveal {
+  animation: mask-reveal 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   TYPOGRAPHY AS ART
+   ============================================ */
+
+/* Large display titles - Enhanced Readability with Proper Line Height */
+.hero-title {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.1; /* leading-tight */
+  color: white;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 4px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Body text with proper Hebrew readability - Enhanced Contrast */
+.body-text {
+  font-weight: 400;
+  line-height: 1.625; /* leading-relaxed */
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* RSS Description HTML Styling */
+.body-text p {
+  margin-bottom: 0.75rem;
+}
+
+.body-text p:last-child {
+  margin-bottom: 0;
+}
+
+.body-text a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.body-text a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.body-text strong,
+.body-text b {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.body-text em,
+.body-text i {
+  font-style: italic;
+}
+
+.body-text br {
+  display: block;
+  content: "";
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   ASYMMETRIC GRID UTILITIES
+   ============================================ */
+
+/* 12-column Swiss grid */
+.grid-swiss {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+/* Unexpected column spans (non-symmetric) */
+.col-span-asymmetric-1 {
+  grid-column: span 5 / span 5;
+}
+
+.col-span-asymmetric-2 {
+  grid-column: span 7 / span 7;
+}
+
+.col-start-offset {
+  grid-column-start: 2;
+}
+
+/* ============================================
+   ACCESSIBILITY & FOCUS STATES
+   ============================================ */
+
+/* Visible focus for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   SMOOTH INTERACTIONS
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shift from images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Link transitions */
+a {
+  transition: color 200ms ease-in-out;
+}
+
+/* ============================================
+   ERROR STATES (Subtle Red Tint)
+   ============================================ */
+
+.error-border {
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   BUTTON STYLES (Glassmorphic)
+   ============================================ */
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 2rem;
+  border-radius: 0.125rem;
+  color: white;
+  font-weight: 500;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-glass:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+.btn-glass:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   SHARP CORNERS ENFORCEMENT
+   ============================================ */
+
+/* Override any accidental rounded corners */
+* {
+  border-radius: 0;
+}
+
+/* Only allow minimal rounding where explicitly needed */
+.rounded-sm {
+  border-radius: 0.125rem !important;
+}

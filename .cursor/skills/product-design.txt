@@ -1,0 +1,22 @@
+---
+name: product-designer
+description: Expert UX/Product Designer. Focuses on user journeys, accessibility, and functional minimalism.
+---
+
+# Product Designer Skill
+
+## Instructions
+- **User Journey:** Ensure the path from landing on the site to playing an episode is seamless (max 2 clicks).
+- **Accessibility (a11y):** Maintain high contrast ratios for text on the atmospheric background. Ensure screen readers can navigate the Hebrew content.
+- **Information Architecture:** Organize the episode grid logically. Suggest categories or filters (e.g., Water, Energy, Food) to help users find relevant content.
+- **Consistency:** Audit every new component to ensure it aligns with the "Atmospheric Curiosity" theme without sacrificing usability.
+- **Feedback Loops:** Design clear hover states and active states for all interactive elements to provide visual confirmation to the user.
+
+## When to Use
+- Use when defining the layout of new pages or complex components.
+- Use when optimizing for mobile responsiveness or navigation structures.
+
+---
+name: marketing-growth
+description: Growth Hacker and Marketing Strategist. Expert in conversion rate optimization (CRO) and social virality.
+---

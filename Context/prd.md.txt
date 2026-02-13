@@ -1,0 +1,28 @@
+# Podcast Strategy & Personas
+
+## Our Mission (The Goal)
+להנגיש את הבעיות הגדולות של תקופתינו, ממשבר האקלים והדיפ-טק לקהל מגוון וסקרן. אנחנו מראיינים חוקרים מהאקדמיה שמציגים בעיה כלשהית, ויזם שמנסה לפתור את הבעיה. אנחנו לא רק מדברים על בעיות, אלא מתמקדים גם בפתרון ובמודלים העסקיים מאחורי החברות, כל זה בצורה נגישה בגובה העיניים. 
+**המטרה באתר:** לייצר סמכות (Authority) בתחום הקליימט-טק הישראלי ולעזור ליזמים וסטודנטים למצוא השראה וכלים מעשיים.
+
+## Target Personas
+1. **The Aspiring Entrepreneur (היזם השאפתן):** מחפש ולידציה לבעיות אמיתיות בשוק, רוצה לשמוע טיפים ממי שכבר בנה מוצר פיזי/חומרי (כמו מאור מאקונקריט או נדב מגריניי).
+2. **The Impact Investor / PM (המשקיע/איש המוצר):** רוצה להבין את ה-Market Map של תחומים כמו FoodTech, AgriTech ו-Carbon Removal. מחפש נתונים ודיוק מקצועי.
+3. **The Academic/Student (הסטודנט/חוקר):** מתעניין בחיבור שבין מחקר במעבדה לבין ייצור תעשייתי.
+
+## Key Value Proposition (לשימוש בדף הבית)
+- "Deep Dive into Climate Solutions"
+- "From Lab to Scale"
+- "Brutally honest conversations about building a sustainable future"
+
+## Business Goals & KPIs
+- **Goal 1: Conversion.** Primary CTA is "Listen on Spotify". Secondary is "Newsletter Signup".
+- **Goal 2: SEO.** Use Semantic HTML, Meta tags per episode, and JSON-LD.
+- **Goal 3: Virality.** Every episode must have LinkedIn sharing buttons with pre-filled optimized text.
+
+## Analytics & Tracking
+- Implement PostHog for event tracking (Play button clicks, Newsletter signups).
+- Ensure all images have Alt tags for SEO.
+
+## Technical Stack Additions
+- Use `framer-motion` for "Eye-catching" animations to increase engagement.
+- Implement a "Sticky Audio Player" using the Spotify Embed API.
