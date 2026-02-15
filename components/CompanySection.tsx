@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 
 interface CompanySectionProps {
   companyName?: string;
@@ -16,10 +17,18 @@ export default function CompanySection({
   sector,
   episodeFolderName,
 }: CompanySectionProps) {
+  const [imageError, setImageError] = useState(false);
+  
   if (!companyName) return null;
 
-  const logoPath = companyLogo && episodeFolderName
-    ? `/Context/Episodes/${episodeFolderName}/${companyLogo}`
+  // Map logo filenames to public folder paths
+  const logoMapping: Record<string, string> = {
+    'logo.jpeg': '/logos/oshi.jpeg',
+    'logo.png': '/logos/polymertal.png',
+  };
+
+  const logoPath = companyLogo && logoMapping[companyLogo] 
+    ? logoMapping[companyLogo]
     : null;
 
   return (
@@ -27,7 +36,7 @@ export default function CompanySection({
       {/* Stack vertically on mobile, horizontal on desktop */}
       <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
         {/* Company Logo - Circular Glass Container */}
-        {logoPath && (
+        {(logoPath && !imageError) ? (
           <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
             <div className="absolute inset-0 glass rounded-full border border-white/20 overflow-hidden">
               <Image
@@ -36,10 +45,20 @@ export default function CompanySection({
                 fill
                 className="object-contain p-3 md:p-4"
                 sizes="(max-width: 768px) 96px, 128px"
+                onError={() => setImageError(true)}
               />
             </div>
           </div>
-        )}
+        ) : companyName ? (
+          // Fallback: First letter placeholder
+          <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+            <div className="absolute inset-0 glass rounded-full border border-white/20 flex items-center justify-center">
+              <span className="text-4xl md:text-5xl font-bold text-white/90">
+                {companyName.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          </div>
+        ) : null}
 
         {/* Company Info - Centered on mobile */}
         <div className="flex-1 text-center md:text-right">

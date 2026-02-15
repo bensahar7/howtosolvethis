@@ -142,7 +142,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
       
       <article className="relative z-0">
         {/* Mobile-First Grid: Full width on mobile, asymmetric on desktop */}
-        <div className="grid grid-cols-12 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6 pt-24 md:pt-32 pb-12 md:pb-24">
+        <div className="grid grid-cols-12 gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-12 md:pb-24">
           
           {/* Main Content - Responsive column span */}
           <div className="col-span-12 lg:col-span-9 lg:col-start-2">
