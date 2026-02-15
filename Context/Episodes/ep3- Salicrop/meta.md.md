@@ -1,15 +1,24 @@
 # Episode 3: Resilient Seeds - חקלאות בצל משבר האקלים
 
 ## Core Metadata
-- **Guests:** פרופ' שמעון רחמילביץ' (אוניברסיטת בן גוריון), אורון בית-אור (Salicrop)
-- **Role:** 
+
+
+- **Guests:** אורון בית-אור (Salicrop)
+- **Role:** COO
 - **Sector:** AgriTech / Climate-Resilient Crops
 - **Keywords:** זרעים עמידים/Resilient Seeds, הסתגלות לאקלים/Climate Adaptation, ביטחון תזונתי/Food Security
+- **Researcher:** פרופ' שמעון רחמילביץ' (אוניברסיטת בן גוריון),
+- **Researcher Website:** [http://www.sri.org.il/Nurit-Eliash-](http://www.bgu.ac.il/people/rshimon/
+## Multi-Company Episode (NEW FORMAT)
+- **Company Name 1:** SaliCrop
+- **Company 1 Logo:** logo.jpng
+- **Company 1 Website:** [https://tobe.green/](https://www.salicrop.com/)
+- **Company 1 Guest:** אורון בית אור
+- **Company 1 Guest Title:** COO
+- **Company 1 Guest LinkedIn:**[ https://il.linkedin.com/in/avner-einav](https://il.linkedin.com/in/oron-bet-or-147b25250
 
 ## The Problem (The Agricultural Challenge)
 גידול האוכלוסייה דורש יותר מזון, אך שינוי האקלים הופך את המשימה לבלתי אפשרית בשיטות המסורתיות. הבעיה המרכזית היא "עקות ביוטיות": חוסר סדירות במשקעים ומליחות מצטברת בקרקע ובמי ההשקיה שפוגעים ביבול ובאיכות התזונתית שלו (ירידה באיכות למרות עליית ה-CO2).
-
-
 
 ## The Solution
 טכנולוגיה של טיפול בזרעים (Seed Treatment) המאפשרת לצמחים לשגשג גם בתנאי מליחות ועקת אקלים. במקום לשנות את הגנטיקה של הצמח (GMO), Salicrop "מחזקת" את הזרע בשלביו המוקדמים כדי שיידע להתמודד עם קרקע קשה, ובכך מבטיחה את ביטחון המזון העולמי.

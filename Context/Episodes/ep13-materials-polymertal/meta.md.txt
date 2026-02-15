@@ -5,6 +5,10 @@
 - **Role:** מנכ"ל Polymertal
 - **Sector:** DeepTech / Material Science / Aerospace & Automotive
 - **Keywords:** חומרים היברידיים/Hybrid Materials, הפחתת משקל/Weight Reduction, קיימות תעשייתית/Industrial Sustainability
+- **Guest LinkedIn:** https://il.linkedin.com/in/ran-carmeli-1917a3b9
+- **Company Website:** https://Polymertal.com/
+- **Company Name:** Polymertal
+- **Company Logo:** logo.png
 
 ## The Problem (The Heavy Industry Toll)
 תעשיות התעופה, הרכב והביטחון מסתמכות על חלקי מתכת כבדים ויקרים לייצור. הבעיה היא כפול משמעות:

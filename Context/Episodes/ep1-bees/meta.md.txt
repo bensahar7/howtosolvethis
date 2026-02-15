@@ -2,10 +2,31 @@
 
 ## Core Metadata
 - **Topic:** Bee-Tech / Pollination / AgriTech
-- **Key Experts:ד"ר נורית אליאש
+- **Researcher:** ד"ר נורית אליאש
+- **Researcher LinkedIn:** https://il.linkedin.com/in/ionathan-lazovski-61aa7b6b
+- **Researcher Google Scholar:** https://scholar.google.com/citations?user=LE7evjIAAAAJ&hl=en
+- **Researcher Website:** http://www.sri.org.il/Nurit-Eliash-
+- **Guests:** אבנר עינב, עידו שוקי
 - **Sectors:** Biodiversity, Food Security, Precision Agriculture
 - **Keywords:** בי-טק/Bee-Tech, האבקה/Pollination, ביטחון תזונתי/Food Security
 - **Companies Mentioned:** Beewise, ToBee, BeeHero, BloomX
+
+## Multi-Company Episode (NEW FORMAT)
+- **Company Name 1:** ToBee
+- **Company 1 Logo:** logo2.jpg
+- **Company 1 Website:** https://tobe.green/
+- **Company 1 Guest:** אבנר עינב
+- **Company 1 Guest Title:** VP Product
+- **Company 1 Guest LinkedIn:** https://il.linkedin.com/in/avner-einav
+- **Company 1 Focus:** בריאות הכוורת / Hive Health
+
+- **Company Name 2:** BeeHero
+- **Company 2 Logo:** logo1.png
+- **Company 2 Website:** https://www.beehero.io/
+- **Company 2 Guest:** עידו שוקי
+- **Company 2 Guest Title:** VP R&D
+- **Company 2 Guest LinkedIn:** https://il.linkedin.com/in/ido-shveki
+- **Company 2 Focus:** אופטימיזציה של האבקה / Pollination Optimization
 
 ## The Problem (The "Bee-Pocalypse")
 היעלמות הדבורים היא לא רק בעיה של "אין דבש". הדבורים אחראיות על האבקה של שליש מהמזון שאנחנו אוכלים. האיומים המרכזיים כוללים את טפיל הוורואה (Varroa mite), הכחדת חרקים גלובלית ושינויי אקלים שמשבשים את סנכרון הפריחה.

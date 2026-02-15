@@ -8,6 +8,8 @@ import Image from "next/image";
 import BilingualTag from "@/components/BilingualTag";
 import GuestInfo from "@/components/GuestInfo";
 import CompanySection from "@/components/CompanySection";
+import MultiCompanySection from "@/components/MultiCompanySection";
+import ResearcherSection from "@/components/ResearcherSection";
 import TranscriptAccordion from "@/components/TranscriptAccordion";
 import ReadMoreDescription from "@/components/ReadMoreDescription";
 import EpisodeStructuredData from "@/components/EpisodeStructuredData";
@@ -196,7 +198,8 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
             </div>
 
             {/* 2. Professional Profile: Guest Name/Role + Company */}
-            {metadata?.guests && metadata.guests.length > 0 && (
+            {/* Guest Info Section - Show ONLY if no researcher/companies (backward compatibility) */}
+            {metadata?.guests && metadata.guests.length > 0 && !metadata.researcher && !metadata.companies && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">אורחים</h2>
                 <div className="flex flex-col gap-4 md:gap-6">
@@ -211,14 +214,24 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* Company Logo - Professional Profile */}
-            <CompanySection
-              companyName={metadata?.companyName}
-              companyWebsite={metadata?.companyWebsite}
-              companyLogo={metadata?.companyLogo}
-              sector={metadata?.sector}
-              episodeFolderName={metadata?.folderName}
-            />
+            {/* NEW: Researcher Section (for multi-guest episodes) */}
+            {metadata?.researcher && (
+              <ResearcherSection researcher={metadata.researcher} />
+            )}
+
+            {/* NEW: Multi-Company Section (for comparative episodes) */}
+            {metadata?.companies && metadata.companies.length > 0 ? (
+              <MultiCompanySection companies={metadata.companies} />
+            ) : (
+              /* LEGACY: Single Company Section (backward compatibility) */
+              <CompanySection
+                companyName={metadata?.companyName}
+                companyWebsite={metadata?.companyWebsite}
+                companyLogo={metadata?.companyLogo}
+                sector={metadata?.sector}
+                episodeFolderName={metadata?.folderName}
+              />
+            )}
 
             {/* 3. Contextual Value: The Problem & The Solution */}
             {metadata?.problem && (
@@ -239,10 +252,10 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* 4. Key Insight: תובנת היום (Entrepreneur Insight) */}
+            {/* 4. Key Insight: טיפ ליזם (Entrepreneur Insight) */}
             {metadata?.entrepreneurInsight && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">תובנת היום</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">טיפ ליזם</h2>
                 <p className="text-white/80 text-sm md:text-base leading-relaxed italic">
                   "{metadata.entrepreneurInsight}"
                 </p>

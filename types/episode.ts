@@ -19,6 +19,26 @@ export interface BilingualTag {
   he: string;
 }
 
+export interface CompanyInfo {
+  name: string;
+  logo: string;              // Filename in public/logos/ (e.g., "tobee.png")
+  website?: string;
+  guestName: string;
+  guestLinkedIn?: string;
+  guestTitle?: string;       // "VP R&D" or "Product Manager"
+  focus?: string;            // "Health Focus" or "Efficiency Focus"
+  sector?: string;           // Optional: can differ from episode sector
+}
+
+export interface ResearcherInfo {
+  name: string;
+  linkedIn?: string;
+  title?: string;            // "Dr." or "Prof."
+  affiliation?: string;      // University or research institute
+  googleScholar?: string;    // Google Scholar profile URL
+  website?: string;          // Personal or institutional website
+}
+
 export interface LocalMetadata {
   episodeNumber: number;
   title: string;
@@ -30,13 +50,17 @@ export interface LocalMetadata {
   keyPoints?: string[];
   entrepreneurInsight?: string;
   folderName?: string; // Added to support manual episode mapping
+  transcript?: string;
   
-  // NEW FIELDS for Knowledge Hub
+  // MULTI-COMPANY SUPPORT (NEW)
+  researcher?: ResearcherInfo; // For academic/expert guests
+  companies?: CompanyInfo[];   // Array of companies featured
+  
+  // LEGACY FIELDS (keep for backward compatibility with single-company episodes)
   guestLinkedIn?: string[];      // Array to support multiple guests
   companyWebsite?: string;
   companyName?: string;
   companyLogo?: string;          // Filename: logo.png
-  transcript?: string;
 }
 
 export interface EnrichedEpisode extends RSSEpisode {

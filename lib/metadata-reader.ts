@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { unstable_cache } from "next/cache";
-import { LocalMetadata, BilingualTag } from "@/types/episode";
+import { LocalMetadata, BilingualTag, CompanyInfo, ResearcherInfo } from "@/types/episode";
 
 const EPISODES_DIR = path.join(process.cwd(), "Context", "Episodes");
 
@@ -22,6 +22,10 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
   let companyWebsite = "";
   let companyName = "";
   let companyLogo = "";
+
+  // NEW: Multi-company support
+  let researcher: ResearcherInfo | undefined = undefined;
+  let companies: CompanyInfo[] = [];
 
   // Extract title from first heading
   const titleMatch = content.match(/^#\s+(.+?)$/m);
@@ -90,6 +94,66 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
     entrepreneurInsight = insightMatch[1].trim();
   }
 
+  // =========================================
+  // NEW: Parse Researcher Info
+  // =========================================
+  const researcherMatch = content.match(/\*\*(?:Researcher|Resercher):\*\*\s*(.+?)$/m); // Note: typo-tolerant
+  if (researcherMatch) {
+    const researcherName = researcherMatch[1].trim();
+    
+    // Extract researcher LinkedIn
+    const researcherLinkedInMatch = content.match(/\*\*Researcher LinkedIn:\*\*\s*(.+?)$/m);
+    
+    // Extract researcher Google Scholar
+    const researcherGoogleScholarMatch = content.match(/\*\*Researcher Google Scholar:\*\*\s*(.+?)$/m);
+    
+    // Extract researcher website
+    const researcherWebsiteMatch = content.match(/\*\*Researcher Website:\*\*\s*(.+?)$/m);
+    
+    researcher = {
+      name: researcherName,
+      linkedIn: researcherLinkedInMatch ? researcherLinkedInMatch[1].trim() : undefined,
+      title: undefined, // Can be manually added later
+      affiliation: undefined,
+      googleScholar: researcherGoogleScholarMatch ? researcherGoogleScholarMatch[1].trim() : undefined,
+      website: researcherWebsiteMatch ? researcherWebsiteMatch[1].trim() : undefined,
+    };
+  }
+
+  // =========================================
+  // NEW: Parse Multi-Company Info
+  // =========================================
+  // Format:
+  // - **Company Name 1:** BeeHero
+  // - **Company 1 Logo:** logo1.jpeg
+  // - **Guests:** Avner Einav, Ido Shuki (parsed above)
+  // We'll parse up to 5 companies (Company 1, Company 2, ..., Company 5)
+  
+  for (let i = 1; i <= 5; i++) {
+    const companyNameMatch = content.match(new RegExp(`\\*\\*Company Name ${i}:\\*\\*\\s*(.+?)$`, 'm'));
+    const companyLogoMatch = content.match(new RegExp(`\\*\\*Company ${i} Logo:\\*\\*\\s*(.+?)$`, 'm'));
+    const companyWebsiteMatch = content.match(new RegExp(`\\*\\*Company ${i} Website:\\*\\*\\s*(.+?)$`, 'm'));
+    const companyFocusMatch = content.match(new RegExp(`\\*\\*Company ${i} Focus:\\*\\*\\s*(.+?)$`, 'm'));
+    const companyGuestMatch = content.match(new RegExp(`\\*\\*Company ${i} Guest:\\*\\*\\s*(.+?)$`, 'm'));
+    const companyGuestTitleMatch = content.match(new RegExp(`\\*\\*Company ${i} Guest Title:\\*\\*\\s*(.+?)$`, 'm'));
+    const companyGuestLinkedInMatch = content.match(new RegExp(`\\*\\*Company ${i} Guest LinkedIn:\\*\\*\\s*(.+?)$`, 'm'));
+
+    if (companyNameMatch) {
+      companies.push({
+        name: companyNameMatch[1].trim(),
+        logo: companyLogoMatch ? companyLogoMatch[1].trim() : '',
+        website: companyWebsiteMatch ? companyWebsiteMatch[1].trim() : undefined,
+        guestName: companyGuestMatch ? companyGuestMatch[1].trim() : guests[i - 1] || '', // Fallback to guests array
+        guestLinkedIn: companyGuestLinkedInMatch ? companyGuestLinkedInMatch[1].trim() : undefined,
+        guestTitle: companyGuestTitleMatch ? companyGuestTitleMatch[1].trim() : undefined,
+        focus: companyFocusMatch ? companyFocusMatch[1].trim() : undefined,
+      });
+    }
+  }
+
+  // =========================================
+  // LEGACY: Single-Company Support (Backward Compatibility)
+  // =========================================
   // Extract LinkedIn URLs (supports comma-separated for multiple guests)
   const linkedInMatch = content.match(/\*\*Guest LinkedIn:\*\*\s*(.+?)$/m);
   if (linkedInMatch) {
@@ -126,6 +190,12 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
     problem,
     solution,
     entrepreneurInsight,
+    
+    // NEW fields
+    researcher: researcher,
+    companies: companies.length > 0 ? companies : undefined,
+    
+    // LEGACY fields (keep for backward compatibility)
     guestLinkedIn: guestLinkedIn.length > 0 ? guestLinkedIn : undefined,
     companyWebsite: companyWebsite || undefined,
     companyName: companyName || undefined,

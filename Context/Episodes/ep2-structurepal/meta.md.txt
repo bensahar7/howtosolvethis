@@ -1,9 +1,15 @@
 # Episode 2: Concrete & Construction - הבטון כבעיה והזדמנות אקלימית
 
 ## Core Metadata
+- **Guest:** יונתן לזובסקי (‏Ionathan Lazovski‏)
+- **Role:** מנכ"ל ומייסד ‏ Structure Pal Ltd‏
 - **Topic:** Sustainable Construction / Green Building / Concrete Decarbonization
 - **Keywords:** טביעת רגל פחמנית/Carbon Footprint, תעשיית צמנט/Cement Industry, חדשנות בבנייה/Construction Innovation
 - **Themes:** "Why solve this?", Future of building, Innovation adoption in conservative industries.
+- **Guest LinkedIn:** https://il.linkedin.com/in/ionathan-lazovski-61aa7b6b
+- **Company Website:** https://www.structure-pal.com/
+- **Company Name:** Structure Pal Ltd‏
+- **Company Logo:** logo.jpeg
 
 ## The Problem (The Climate Toll of Building)
 ענף הבנייה אחראי לחלק עצום מפליטות גזי החממה בעולם (כ-8% מפליטות הפחמן העולמיות מגיעות מייצור צמנט בלבד). הבעיה היא משולשת:

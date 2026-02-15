@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "96230c5c6e48c4c7",
+        "id": "4e29e8eb6ae36f24",
         "type": "tabs",
         "children": [
           {
-            "id": "ef96c44ea9548ba9",
+            "id": "c5a5805e6f641752",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Context/Episodes/ep3- Salicrop/meta.md.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "meta.md"
             }
           }
         ]
@@ -176,8 +180,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "ef96c44ea9548ba9",
+  "active": "c5a5805e6f641752",
   "lastOpenFiles": [
+    "Context/Episodes/ep1-bees/meta.md.txt",
+    "Context/Episodes/ep3- Salicrop/logo.jpg",
+    "Context/Episodes/ep2-structurepal/logo.jpg",
+    "Context/Episodes/ep1-bees/meta.md.md",
+    "Context/Episodes/ep1-bees/logo1.png",
+    "Context/Episodes/ep3- Salicrop/meta.md.md",
+    "Context/Episodes/ep3- Salicrop/Unconfirmed 603541.crdownload",
+    "Context/Episodes/ep1-bees/Untitled.md",
+    "Context/Episodes/ep1-bees/logo2.jpg",
+    "Context/Episodes/ep13-materials-polymertal/logo.png",
     "Context/Episodes/ep12-foodtech-oshi/logo.jpeg",
     "Context/Episodes/ep12-foodtech-oshi/Unconfirmed 408682.crdownload",
     "components/ShareButtons.tsx",
