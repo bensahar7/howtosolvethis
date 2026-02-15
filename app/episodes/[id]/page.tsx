@@ -36,10 +36,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const { id } = await params;
   const episodes = await getEnrichedEpisodes();
-  const episode = episodes.find((ep) => ep.episodeNumber?.toString() === params.id);
+  const episode = episodes.find((ep) => ep.episodeNumber?.toString() === id);
 
   if (!episode) {
     return {
@@ -103,14 +104,15 @@ export async function generateMetadata({
     
     // Canonical URL
     alternates: {
-      canonical: `https://howtosolvethis.com/episodes/${params.id}`,
+      canonical: `https://howtosolvethis.com/episodes/${id}`,
     },
   };
 }
 
-export default async function EpisodePage({ params }: { params: { id: string } }) {
+export default async function EpisodePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const episodes = await getEnrichedEpisodes();
-  const episode = episodes.find((ep) => ep.episodeNumber?.toString() === params.id);
+  const episode = episodes.find((ep) => ep.episodeNumber?.toString() === id);
 
   if (!episode) {
     notFound();
@@ -120,7 +122,7 @@ export default async function EpisodePage({ params }: { params: { id: string } }
   const spotifyEmbedUrl = episode.spotifyEpisodeId
     ? `https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}?utm_source=generator&theme=0`
     : null;
-  const episodeUrl = `https://howtosolvethis.com/episodes/${params.id}`;
+  const episodeUrl = `https://howtosolvethis.com/episodes/${id}`;
 
   return (
     <>

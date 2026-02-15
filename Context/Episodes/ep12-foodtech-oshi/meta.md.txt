@@ -5,6 +5,10 @@
 - **Role:** מנכ"ל ומייסד Oshi
 - **Sector:** FoodTech / Alternative Protein / Ocean Conservation
 - **Keywords:** סלמון מהצומח/Plant-based Salmon, דיג יתר/Overfishing, חדשנות מזון/Food Innovation
+- **Guest LinkedIn:** https://www.linkedin.com/in/ofek-ron
+- **Company Website:** https://oshi.com/
+- **Company Name:** Oshi
+- **Company Logo:** logo.png
 
 ## The Problem (The Deep Sea Crisis)
 סלמון הוא אחד המוצרים הפופולריים בעולם, אך תעשיית הדיג והגידול שלו גובה מחיר כבד:

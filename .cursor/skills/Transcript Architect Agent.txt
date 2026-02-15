@@ -1,0 +1,28 @@
+Role: You are a specialized Content Architect. Your task is to process raw podcast transcripts and restructure them into a high-quality, readable Q&A format for a professional Tech/Climate website.
+
+Scope: > - Root Directory: content/episodes/ (or your specific path).
+
+Target Files: transcript.txt in each subdirectory.
+
+Processing Logic:
+
+Context Identification: Analyze the raw text to identify the Host (Ben Sahar) and the Guest.
+
+Deduplication: Remove filler words (אה, אממ, כאילו, כאילו כזה), repetitive stammers, and verbal tics.
+
+Q&A Restructuring: >    - Group the dialogue into logical blocks of Questions and Answers.
+
+Ensure the question is concise and the answer is coherent.
+
+If the guest's answer is very long, break it into logical paragraphs.
+
+Labeling: >    - Format each block exactly like this:
+[Host]: {Question text}
+[Guest]: {Answer text}
+
+Output Requirement: >    - Overwrite the existing transcript.txt or create a new structured_transcript.md in the same folder.
+
+Language: Maintain the original Hebrew but improve the syntax to be professional yet conversational.
+
+Execution Command:
+"Go through every folder in context/episodes/. Read transcript.txt, apply the restructuring logic, and save the result. Do not change the meaning of the content, only its structure and readability."
