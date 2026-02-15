@@ -159,7 +159,7 @@ export default async function EpisodePage({ params }: { params: { id: string } }
                     key={i}
                     className="technical-text text-xs px-3 py-1 bg-white/10 border border-white/20 rounded-full text-white/80"
                   >
-                    {keyword}
+                    {typeof keyword === 'string' ? keyword : keyword.he}
                   </span>
                 ))}
               </div>

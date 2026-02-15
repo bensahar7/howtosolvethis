@@ -102,11 +102,10 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             <div className="flex-1">
               <div className="technical-text text-[10px] mb-1.5">תאריך</div>
               <div className="text-white/80 text-xs">
-                {metadata?.date ||
-                  new Date(episode.pubDate).toLocaleDateString("he-IL", {
-                    month: "short",
-                    year: "numeric",
-                  })}
+                {new Date(episode.pubDate).toLocaleDateString("he-IL", {
+                  month: "short",
+                  year: "numeric",
+                })}
               </div>
             </div>
           </div>
@@ -126,7 +125,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
                       boxShadow: "0 0 10px rgba(255,255,255,0.1)",
                     }}
                   >
-                    {keyword}
+                    {typeof keyword === 'string' ? keyword : keyword.he}
                   </span>
                 ))}
               </div>
