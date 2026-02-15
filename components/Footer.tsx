@@ -97,7 +97,7 @@ export default function Footer() {
                 className="glass p-3 rounded-sm glass-hover"
                 aria-label="Snipd"
               >
-                <SnipdIcon className="w-5 h-5 text-white/80" />
+                <SnipdIcon className="w-5 h-5" />
               </a>
 
               {/* Podcast LinkedIn Page */}

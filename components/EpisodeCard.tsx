@@ -236,7 +236,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
                 aria-label="Snipd"
                 onClick={(e) => e.stopPropagation()}
               >
-                <SnipdIcon className="w-5 h-5 text-white/80" />
+                <SnipdIcon className="w-5 h-5" />
               </a>
             </div>
           </div>
