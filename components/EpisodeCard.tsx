@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { EnrichedEpisode } from "@/types/episode";
 import { useState, useRef, useEffect } from "react";
+import SpotifyIcon from "./SpotifyIcon";
+import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon } from "./PodcastIcons";
 
 interface EpisodeCardProps {
   episode: EnrichedEpisode;
@@ -132,13 +134,61 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             </div>
           )}
 
-          {/* Click to View CTA */}
+          {/* Platform Icons - Listen Now */}
           <div className="mt-4 pt-4 border-t border-white/10">
-            <div className="flex items-center justify-between text-white/60 group-hover:text-white transition-colors">
-              <span className="technical-text text-xs">לחץ לצפייה מלאה</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+            <div className="technical-text text-[10px] mb-3 text-white/60">
+              האזן עכשיו
+            </div>
+            <div className="flex gap-2">
+              {/* Spotify */}
+              <a
+                href={episode.spotifyEpisodeId 
+                  ? `https://open.spotify.com/episode/${episode.spotifyEpisodeId}` 
+                  : `https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
+                aria-label="Spotify"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <SpotifyIcon className="w-5 h-5" />
+              </a>
+
+              {/* Apple Podcasts */}
+              <a
+                href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
+                aria-label="Apple Podcasts"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ApplePodcastsIcon className="w-5 h-5 text-white/80" />
+              </a>
+
+              {/* YouTube Music */}
+              <a
+                href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
+                aria-label="YouTube Music"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <YouTubeMusicIcon className="w-5 h-5 text-[#FF0000]" />
+              </a>
+
+              {/* Pocket Casts */}
+              <a
+                href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
+                aria-label="Pocket Casts"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <PocketCastsIcon className="w-5 h-5 text-[#F43E37]" />
+              </a>
             </div>
           </div>
         </div>

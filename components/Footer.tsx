@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
-import { ApplePodcastsIcon, YouTubeIcon, YouTubeMusicIcon, GooglePodcastsIcon } from "./PodcastIcons";
+import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon } from "./PodcastIcons";
 
 export default function Footer() {
   return (
@@ -67,17 +67,6 @@ export default function Footer() {
                 <ApplePodcastsIcon className="w-5 h-5 text-white/80" />
               </a>
 
-              {/* YouTube */}
-              <a
-                href="https://www.youtube.com/@howtosolvethis"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-3 rounded-sm glass-hover"
-                aria-label="YouTube"
-              >
-                <YouTubeIcon className="w-5 h-5 text-[#FF0000]" />
-              </a>
-
               {/* YouTube Music */}
               <a
                 href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
@@ -89,28 +78,15 @@ export default function Footer() {
                 <YouTubeMusicIcon className="w-5 h-5 text-[#FF0000]" />
               </a>
 
-              {/* Google Podcasts */}
+              {/* Pocket Casts */}
               <a
-                href="https://podcasts.google.com/"
+                href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
-                aria-label="Google Podcasts"
+                aria-label="Pocket Casts"
               >
-                <GooglePodcastsIcon className="w-5 h-5 text-white/80" />
-              </a>
-
-              {/* RSS Feed */}
-              <a
-                href="https://anchor.fm/s/f8c5a9a8/podcast/rss"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-3 rounded-sm glass-hover"
-                aria-label="RSS Feed"
-              >
-                <svg className="w-5 h-5 text-[#FF6719]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
-                </svg>
+                <PocketCastsIcon className="w-5 h-5 text-[#F43E37]" />
               </a>
 
               {/* Podcast LinkedIn Page */}
