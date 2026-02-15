@@ -131,12 +131,16 @@ export default async function EpisodePage({ params }: { params: { id: string } }
                 <div className="text-white text-sm">{metadata.guests.join(", ")}</div>
               </div>
             )}
-            {metadata?.date && (
-              <div>
-                <div className="technical-text text-xs mb-2">תאריך</div>
-                <div className="text-white text-sm">{metadata.date}</div>
+            <div>
+              <div className="technical-text text-xs mb-2">תאריך</div>
+              <div className="text-white text-sm">
+                {new Date(episode.pubDate).toLocaleDateString("he-IL", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </div>
-            )}
+            </div>
             {metadata?.sector && (
               <div>
                 <div className="technical-text text-xs mb-2">תחום</div>
