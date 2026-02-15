@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { EnrichedEpisode } from "@/types/episode";
 import { useState, useRef, useEffect } from "react";
 
@@ -11,6 +11,7 @@ interface EpisodeCardProps {
 }
 
 export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
+  const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const descriptionRef = useRef<HTMLDivElement>(null);
@@ -25,9 +26,15 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
     }
   }, [episode.description]);
 
+  const handleCardClick = () => {
+    router.push(`/episodes/${episode.episodeNumber}`);
+  };
+
   return (
-    <Link href={`/episodes/${episode.episodeNumber}`}>
-      <article className="glass glass-hover rounded-sm overflow-hidden group relative flex flex-col h-full cursor-pointer transition-all duration-300 hover:scale-[1.02]">
+    <article 
+      onClick={handleCardClick}
+      className="glass glass-hover rounded-sm overflow-hidden group relative flex flex-col h-full cursor-pointer transition-all duration-300 hover:scale-[1.02]"
+    >
         {/* Episode Image with Grayscale Filter */}
         <div className="relative aspect-video overflow-hidden flex-shrink-0">
           <Image
@@ -137,6 +144,5 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
           </div>
         </div>
       </article>
-    </Link>
   );
 }
