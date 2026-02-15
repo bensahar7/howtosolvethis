@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://www.howtosolvethis.com";
+  const baseUrl = "https://howtosolvethis.com";
 
   // Get all episodes for dynamic sitemap entries
   const episodes = await getEnrichedEpisodes();
@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic episode pages (if you add individual episode pages in the future)
+  // Dynamic episode pages
   const episodePages: MetadataRoute.Sitemap = episodes.map((episode) => ({
     url: `${baseUrl}/episodes/${episode.episodeNumber}`,
     lastModified: new Date(episode.pubDate),

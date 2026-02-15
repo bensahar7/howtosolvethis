@@ -2,7 +2,7 @@
 
 **פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה**
 
-🔗 Live at: https://www.howtosolvethis.com
+🔗 Live at: https://howtosolvethis.com
 
 ---
 
