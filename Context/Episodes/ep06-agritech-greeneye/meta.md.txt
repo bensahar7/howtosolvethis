@@ -4,7 +4,7 @@
 - **Guests:** נדב בוכר (Nadav Bocher), ד"ר גיל אשל (Dr. Gil Eshel)
 - **Role:** מייסד ומנכ"ל GreenEye (נדב), חוקר במשרד החקלאות (גיל)
 - **Sector:** AgriTech / Precision Agriculture / AI & Computer Vision
-- **Keywords:** GreenEye, Precision Spraying, Pesticides, Weed Control, Sustainable Farming
+- **Keywords:** ריסוס מדויק/Precision Spraying, חקלאות בת קיימא/Sustainable Farming, בינה מלאכותית/AI Vision
 
 ## The Problem (The "Spray and Pray" Legacy)
 השיטה המסורתית בחקלאות היא "ריסוס אחיד" (Broadcast Spraying) – החקלאי מרסס את כל השדה בכימיקלים, למרות שהעשבים השוטים מהווים רק אחוז קטן מהשטח. זה מוביל ל-3 בעיות קריטיות:

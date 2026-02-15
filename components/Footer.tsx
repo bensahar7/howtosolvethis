@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
-import { ApplePodcastsIcon, YouTubeIcon, GooglePodcastsIcon } from "./PodcastIcons";
+import { ApplePodcastsIcon, YouTubeIcon, YouTubeMusicIcon, GooglePodcastsIcon } from "./PodcastIcons";
 
 export default function Footer() {
   return (
@@ -58,7 +58,7 @@ export default function Footer() {
 
               {/* Apple Podcasts */}
               <a
-                href="https://podcasts.apple.com/il/podcast/איך-פותרים-את-זה/id1600000000"
+                href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
@@ -76,6 +76,17 @@ export default function Footer() {
                 aria-label="YouTube"
               >
                 <YouTubeIcon className="w-5 h-5 text-[#FF0000]" />
+              </a>
+
+              {/* YouTube Music */}
+              <a
+                href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover"
+                aria-label="YouTube Music"
+              >
+                <YouTubeMusicIcon className="w-5 h-5 text-[#FF0000]" />
               </a>
 
               {/* Google Podcasts */}

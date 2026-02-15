@@ -11,7 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 // Using CSS @font-face instead to handle missing files gracefully
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://howtosolvethis.com"),
+  metadataBase: new URL("https://www.howtosolvethis.com"),
   title: {
     default: "איך פותרים את זה? | פודקאסט קליימט-טק ויזמות אקלים",
     template: "%s | איך פותרים את זה?",

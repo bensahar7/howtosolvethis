@@ -14,12 +14,17 @@ export interface RSSEpisode {
   spotifyEpisodeId?: string;
 }
 
+export interface BilingualTag {
+  en: string;
+  he: string;
+}
+
 export interface LocalMetadata {
   episodeNumber: number;
   title: string;
   guests: string[];
   sector: string;
-  keywords: string[];
+  keywords: (string | BilingualTag)[]; // Support both legacy strings and new bilingual objects in same array
   problem: string;
   solution: string;
   keyPoints?: string[];

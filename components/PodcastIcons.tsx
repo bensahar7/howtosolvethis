@@ -60,3 +60,12 @@ export function GooglePodcastsIcon({ className = "w-5 h-5" }: IconProps) {
     </svg>
   );
 }
+
+// YouTube Music Icon
+export function YouTubeMusicIcon({ className = "w-5 h-5" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-11.52c-2.436 0-4.416 1.98-4.416 4.416S9.564 16.416 12 16.416s4.416-1.98 4.416-4.416S14.436 7.584 12 7.584zm-1.248 6.048V10.368L13.248 12l-2.496 1.632z"/>
+    </svg>
+  );
+}

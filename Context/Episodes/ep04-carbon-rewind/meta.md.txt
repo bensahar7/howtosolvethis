@@ -4,7 +4,7 @@
 - **Guests:** ד"ר אבנר גרוס (אוניברסיטת בן גוריון), רם עמר (Rewind)
 - **Role:** 
 - **Sector:** Carbon Removal / CDR (Carbon Dioxide Removal) / Ocean-Tech
-- **Keywords:** Rewind, Carbon Sequestration, Climate Change, Deep Science, Ocean Storage
+- **Keywords:** קיבוע פחמן/Carbon Sequestration, מדע עמוק/Deep Science, אוקיינוס-טק/Ocean Storage
 
 ## The Problem (The Legacy Carbon)
 רוב המאמצים העולמיים מתרכזים בצמצום פליטות חדשות, אך הבעיה הקריטית היא הפחמן שכבר נמצא באטמוספירה ("Legacy Carbon"). ריכוז גזי החממה גבוה מדי, והאקדמיה, למרות הידע המדעי העמוק שלה, עובדת בקצב איטי מדי ביחס לשעון החול האקלימי המתקתק.

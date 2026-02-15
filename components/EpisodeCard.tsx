@@ -7,6 +7,7 @@ import SpotifyIcon from "./SpotifyIcon";
 import {
   ApplePodcastsIcon,
   YouTubeIcon,
+  YouTubeMusicIcon,
   GooglePodcastsIcon,
   SnipdIcon,
   PocketCastsIcon,
@@ -200,7 +201,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
 
               {/* Apple Podcasts */}
               <a
-                href="https://podcasts.apple.com/il/podcast/איך-פותרים-את-זה/id1600000000"
+                href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover flex items-center justify-center"
@@ -249,9 +250,26 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
                 <SnipdIcon className="w-6 h-6 text-white/80" />
               </a>
 
+              {/* YouTube Music */}
+              <a
+                href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover flex items-center justify-center"
+                aria-label="YouTube Music"
+                onClick={() =>
+                  trackEvent("podcast_platform_click", {
+                    platform: "youtube_music",
+                    episodeNumber: episode.episodeNumber,
+                  })
+                }
+              >
+                <YouTubeMusicIcon className="w-6 h-6 text-[#FF0000]" />
+              </a>
+
               {/* Pocket Casts */}
               <a
-                href={`https://pca.st/episode/${episode.guid}`}
+                href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover flex items-center justify-center"
@@ -268,7 +286,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
 
               {/* Castbox */}
               <a
-                href={`https://castbox.fm/episode/id${episode.episodeNumber || 1}`}
+                href="https://castbox.fm/channel/id6193220?country=us"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover flex items-center justify-center"
@@ -317,18 +335,35 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             <div className="technical-text text-[10px] mb-2.5 text-white/60">
               תגיות
             </div>
-            <div className="flex flex-wrap gap-2">
-              {metadata.keywords.slice(0, 3).map((keyword, i) => (
-                <span
-                  key={i}
-                  className="technical-text text-xs px-3 py-1 bg-white/10 border border-white/20 rounded-full text-white/80 hover:bg-white/20 transition-all duration-300 cursor-default"
-                  style={{
-                    boxShadow: "0 0 10px rgba(255,255,255,0.1)",
-                  }}
-                >
-                  {keyword}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-2" dir="rtl">
+              {metadata.keywords.slice(0, 3).map((keyword, i) => {
+                // Check if keyword is bilingual object or legacy string
+                const isBilingual = typeof keyword === 'object' && 'en' in keyword && 'he' in keyword;
+                
+                return (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 cursor-default"
+                    style={{
+                      boxShadow: "0 0 10px rgba(255,255,255,0.1)",
+                    }}
+                  >
+                    {isBilingual ? (
+                      <>
+                        <span className="text-white font-medium">{keyword.he}</span>
+                        <span className="text-white/40">/</span>
+                        <span className="text-white/60 font-mono text-[10px] uppercase tracking-wider">
+                          {keyword.en}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="technical-text text-xs text-white/80">
+                        {keyword}
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
             </div>
           </div>
         )}

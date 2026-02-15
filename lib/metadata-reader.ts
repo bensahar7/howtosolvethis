@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { LocalMetadata } from "@/types/episode";
+import { LocalMetadata, BilingualTag } from "@/types/episode";
 
 const EPISODES_DIR = path.join(process.cwd(), "Context", "Episodes");
 
@@ -13,7 +13,7 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
   let title = "";
   let guests: string[] = [];
   let sector = "";
-  let keywords: string[] = [];
+  let keywords: (string | BilingualTag)[] = [];
   let problem = "";
   let solution = "";
   let entrepreneurInsight = "";
@@ -44,13 +44,27 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
     sector = sectors[0].trim();
   }
 
-  // Extract keywords
+  // Extract keywords - Support both legacy strings and bilingual objects
+  // Format 1 (legacy): **Keywords:** Climate Tech, Carbon Footprint
+  // Format 2 (bilingual): **Keywords:** קליימט-טק/Climate Tech, טביעת רגל פחמנית/Carbon Footprint
   const keywordsMatch = content.match(/\*\*Keywords:\*\*\s*(.+?)$/m);
   if (keywordsMatch) {
-    keywords = keywordsMatch[1]
-      .split(/[,،]/)
-      .map((k) => k.trim())
-      .filter(Boolean);
+    const keywordText = keywordsMatch[1];
+    const keywordParts = keywordText.split(/[,،]/).map((k) => k.trim()).filter(Boolean);
+    
+    keywords = keywordParts.map((keyword) => {
+      // Check if keyword contains bilingual format (Hebrew/English)
+      const bilingualMatch = keyword.match(/^(.+?)\s*\/\s*(.+?)$/);
+      if (bilingualMatch) {
+        const [, he, en] = bilingualMatch;
+        return {
+          he: he.trim(),
+          en: en.trim()
+        };
+      }
+      // Legacy format - just return as string
+      return keyword;
+    });
   }
 
   // Extract problem section

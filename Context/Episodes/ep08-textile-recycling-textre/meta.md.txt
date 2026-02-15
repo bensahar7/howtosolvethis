@@ -4,7 +4,7 @@
 - **Guests:** ד"ר מיטל פלג מזרחי (אוניברסיטת ייל), לי כהן (Textre)
 - **Role:** חוקרת אופנה בת קיימא (מיטל), מנכ"לית ומייסדת Textre (לי)
 - **Sector:** Circular Economy / Fashion-Tech / Waste Management
-- **Keywords:** Textre, Fast Fashion, Polyester, Textile Waste, Synthetic Fabrics, Upcycling
+- **Keywords:** אופנה מהירה/Fast Fashion, מחזור טקסטיל/Textile Recycling, כלכלה מעגלית/Circular Economy
 
 ## The Problem (The "Plastic" Closet)
 תעשיית האופנה המהירה (Fast Fashion) עברה לשימוש מאסיבי בבדים סינתטיים מבוססי נפט. ב-H&M כ-66% מהבגדים מכילים פלסטיק, וב-Shein המספר מגיע ל-95.2%. הבעיה מחמירה כי:

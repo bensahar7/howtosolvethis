@@ -2,7 +2,7 @@
 
 ## Core Metadata
 - **Topic:** Sustainable Construction / Green Building / Concrete Decarbonization
-- **Keywords:** Carbon Footprint, Cement Industry, Resource Depletion, Innovation in Construction
+- **Keywords:** טביעת רגל פחמנית/Carbon Footprint, תעשיית צמנט/Cement Industry, חדשנות בבנייה/Construction Innovation
 - **Themes:** "Why solve this?", Future of building, Innovation adoption in conservative industries.
 
 ## The Problem (The Climate Toll of Building)

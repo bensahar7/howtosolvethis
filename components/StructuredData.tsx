@@ -10,13 +10,13 @@ export default function StructuredData() {
     name: "איך פותרים את זה?",
     description:
       "הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים",
-    url: "https://howtosolvethis.com",
+    url: "https://www.howtosolvethis.com",
     author: {
       "@type": "Person",
       name: "בן סהר",
       url: "https://www.linkedin.com/in/ben-sahar/",
     },
-    image: "https://howtosolvethis.com/images/earth-hero.png",
+    image: "https://www.howtosolvethis.com/images/earth-hero.png",
     inLanguage: "he",
     genre: ["Technology", "Climate", "Innovation", "Entrepreneurship"],
     webFeed: "https://anchor.fm/s/f8c5a9a8/podcast/rss",

@@ -4,7 +4,7 @@
 - **Guests:** פרופ' שמעון רחמילביץ' (אוניברסיטת בן גוריון), אורון בית-אור (Salicrop)
 - **Role:** 
 - **Sector:** AgriTech / Climate-Resilient Crops
-- **Keywords:** Salicrop, Seed Treatment, Salinity, Climate Adaptation, Food Security
+- **Keywords:** זרעים עמידים/Resilient Seeds, הסתגלות לאקלים/Climate Adaptation, ביטחון תזונתי/Food Security
 
 ## The Problem (The Agricultural Challenge)
 גידול האוכלוסייה דורש יותר מזון, אך שינוי האקלים הופך את המשימה לבלתי אפשרית בשיטות המסורתיות. הבעיה המרכזית היא "עקות ביוטיות": חוסר סדירות במשקעים ומליחות מצטברת בקרקע ובמי ההשקיה שפוגעים ביבול ובאיכות התזונתית שלו (ירידה באיכות למרות עליית ה-CO2).
