@@ -42,17 +42,17 @@ export async function generateMetadata({
 
   return {
     title: episode.title,
-    description: episode.description || metadata?.summary || "איך פותרים את זה? - פודקאסט",
+    description: episode.description || metadata?.problem || "איך פותרים את זה? - פודקאסט",
     openGraph: {
       title: episode.title,
-      description: episode.description || metadata?.summary || "",
+      description: episode.description || metadata?.problem || "",
       images: [episode.imageUrl],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: episode.title,
-      description: episode.description || metadata?.summary || "",
+      description: episode.description || metadata?.problem || "",
       images: [episode.imageUrl],
     },
   };
