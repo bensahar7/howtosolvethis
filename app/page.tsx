@@ -92,7 +92,6 @@ export default function HomePage() {
               פרקים אחרונים
             </h2>
             <p className="body-text text-lg text-white/70">
-              צוללים לעומק הפתרונות הטכנולוגיים למשבר האקלים
             </p>
           </div>
 

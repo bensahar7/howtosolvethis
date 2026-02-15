@@ -15,7 +15,7 @@
 - ✅ Created `public/robots.txt` allowing all crawlers with sitemap reference
 
 ### Metadata Updates (`layout.tsx`)
-- ✅ Title: "איך פותרים את זה? | פודקאסט קליימט-טק ויזמות אקלים"
+- ✅ Title: "איך פותרים את זה?"
 - ✅ Added keywords: "Climate-Tech Israel", "Sustainability", "Startups"
 - ✅ Updated metadataBase to `https://howtosolvethis.com`
 

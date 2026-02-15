@@ -13,11 +13,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.howtosolvethis.com"),
   title: {
-    default: "איך פותרים את זה? | פודקאסט קליימט-טק ויזמות אקלים",
+    default: "איך פותרים את זה?",
     template: "%s | איך פותרים את זה?",
   },
   description:
-    "הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים. בעיות גדולות, בגובה העיניים.",
+    "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
   keywords: [
     "Climate-Tech Israel",
     "Sustainability",
@@ -58,22 +58,22 @@ export const metadata: Metadata = {
     locale: "he_IL",
     url: "/",
     siteName: "איך פותרים את זה?",
-    title: "איך פותרים את זה? | פודקאסט על קליימט-טק ישראלי",
+    title: "איך פותרים את זה?",
     description:
-      "הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים.",
+      "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
     images: [
       {
         url: "/images/earth-hero.png",
         width: 1200,
         height: 630,
-        alt: "איך פותרים את זה? - פודקאסט על קליימט-טק",
+        alt: "איך פותרים את זה?",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "איך פותרים את זה? | פודקאסט על קליימט-טק ישראלי",
-    description: "הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים",
+    title: "איך פותרים את זה?",
+    description: "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
     images: ["/images/earth-hero.png"],
     creator: "@bensahar",
   },

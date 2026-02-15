@@ -1,8 +1,8 @@
 # איך פותרים את זה? 🌍
 
-**הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים.**
+**פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה**
 
-🔗 Live at: https://howtosolvethis.vercel.app/
+🔗 Live at: https://www.howtosolvethis.com
 
 ---
 

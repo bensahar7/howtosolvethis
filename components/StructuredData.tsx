@@ -9,7 +9,7 @@ export default function StructuredData() {
     "@type": "PodcastSeries",
     name: "איך פותרים את זה?",
     description:
-      "הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים",
+      "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
     url: "https://www.howtosolvethis.com",
     author: {
       "@type": "Person",
