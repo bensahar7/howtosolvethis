@@ -182,12 +182,15 @@
   },
   "active": "c5a5805e6f641752",
   "lastOpenFiles": [
+    "Context/Episodes/ep04-carbon-rewind/meta.md.md",
+    "Context/Episodes/ep04-carbon-rewind/logo.jpg",
+    "Context/Episodes/ep04-carbon-rewind/Unconfirmed 175049.crdownload",
+    "Context/Episodes/ep3- Salicrop/meta.md.md",
     "Context/Episodes/ep1-bees/meta.md.txt",
     "Context/Episodes/ep3- Salicrop/logo.jpg",
     "Context/Episodes/ep2-structurepal/logo.jpg",
     "Context/Episodes/ep1-bees/meta.md.md",
     "Context/Episodes/ep1-bees/logo1.png",
-    "Context/Episodes/ep3- Salicrop/meta.md.md",
     "Context/Episodes/ep3- Salicrop/Unconfirmed 603541.crdownload",
     "Context/Episodes/ep1-bees/Untitled.md",
     "Context/Episodes/ep1-bees/logo2.jpg",
@@ -199,8 +202,6 @@
     "components/EpisodeStructuredData.tsx",
     "components/ReadMoreDescription.tsx",
     "components/TranscriptAccordion.tsx",
-    "components/CompanySection.tsx",
-    "components/GuestInfo.tsx",
-    "components/BilingualTag.tsx"
+    "components/CompanySection.tsx"
   ]
 }

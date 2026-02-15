@@ -8,7 +8,7 @@
 - **Sector:** AgriTech / Climate-Resilient Crops
 - **Keywords:** זרעים עמידים/Resilient Seeds, הסתגלות לאקלים/Climate Adaptation, ביטחון תזונתי/Food Security
 - **Researcher:** פרופ' שמעון רחמילביץ' (אוניברסיטת בן גוריון),
-- **Researcher Website:** [http://www.sri.org.il/Nurit-Eliash-](http://www.bgu.ac.il/people/rshimon/
+- **Researcher Website:** http://www.bgu.ac.il/people/rshimon/
 ## Multi-Company Episode (NEW FORMAT)
 - **Company Name 1:** SaliCrop
 - **Company 1 Logo:** logo.jpng

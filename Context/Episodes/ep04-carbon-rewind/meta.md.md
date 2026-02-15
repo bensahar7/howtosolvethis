@@ -1,10 +1,19 @@
 # Episode 4: Carbon Sequestration - מה עושים עם הפחמן שכבר נפלט?
 
 ## Core Metadata
-- **Guests:** ד"ר אבנר גרוס (אוניברסיטת בן גוריון), רם עמר (Rewind)
-- **Role:** 
+- **Guests:** רם עמר (Rewind)
 - **Sector:** Carbon Removal / CDR (Carbon Dioxide Removal) / Ocean-Tech
 - **Keywords:** קיבוע פחמן/Carbon Sequestration, מדע עמוק/Deep Science, אוקיינוס-טק/Ocean Storage
+- **Keywords:** זרעים עמידים/Resilient Seeds, הסתגלות לאקלים/Climate Adaptation, ביטחון תזונתי/Food Security
+- **Researcher:**  ד"ר אבנר גרוס (אוניברסיטת בן גוריון) 
+- **Researcher Website:** https://in.bgu.ac.il/humsos/geog/pages/staff/avnergross.aspx
+## Multi-Company Episode (NEW FORMAT)
+- **Company Name 1:** Rewind
+- **Company 1 Logo:** logo.jpng
+- **Company 1 Website:** https://www.rewind.earth/
+- **Company 1 Guest:** Rewind
+- **Company 1 Guest Title:** CEO
+- **Company 1 Guest LinkedIn:** https://il.linkedin.com/in/ramamar
 
 ## The Problem (The Legacy Carbon)
 רוב המאמצים העולמיים מתרכזים בצמצום פליטות חדשות, אך הבעיה הקריטית היא הפחמן שכבר נמצא באטמוספירה ("Legacy Carbon"). ריכוז גזי החממה גבוה מדי, והאקדמיה, למרות הידע המדעי העמוק שלה, עובדת בקצב איטי מדי ביחס לשעון החול האקלימי המתקתק.
