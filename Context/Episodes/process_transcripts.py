@@ -157,9 +157,19 @@ def process_episode_folder(folder_path):
         return False
     
     try:
-        # Read the raw transcript
-        with open(transcript_path, 'r', encoding='utf-8') as f:
-            raw_content = f.read()
+        # Try different encodings
+        raw_content = None
+        for encoding in ['utf-8', 'cp1255', 'windows-1255', 'iso-8859-8']:
+            try:
+                with open(transcript_path, 'r', encoding=encoding) as f:
+                    raw_content = f.read()
+                break
+            except UnicodeDecodeError:
+                continue
+        
+        if raw_content is None:
+            print(f"[ERROR] Could not decode {folder_path.name} with any known encoding")
+            return False
         
         # Process it
         formatted_content = process_transcript(raw_content)

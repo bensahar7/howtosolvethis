@@ -1,4 +1,5 @@
 import Parser from "rss-parser";
+import { unstable_cache } from "next/cache";
 import { RSSEpisode } from "@/types/episode";
 
 const RSS_FEED_URL = "https://anchor.fm/s/f75630a4/podcast/rss";
@@ -56,7 +57,7 @@ function extractSpotifyEpisodeId(item: CustomItem): string | null {
  * Fetches and parses the podcast RSS feed
  * Implements caching via Next.js fetch with revalidation
  */
-export async function fetchRSSFeed(): Promise<RSSEpisode[]> {
+async function fetchRSSFeedUncached(): Promise<RSSEpisode[]> {
   try {
     const parser: Parser<CustomFeed, CustomItem> = new Parser({
       customFields: {
@@ -116,7 +117,9 @@ export async function fetchRSSFeed(): Promise<RSSEpisode[]> {
       // Last resort: use reverse index (but log warning)
       if (!episodeNumber) {
         episodeNumber = feed.items.length - index;
-        console.warn(`[RSS PARSER] Could not extract episode number from title: "${item.title}", using index: ${episodeNumber}`);
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`[RSS PARSER] Could not extract episode number from title: "${item.title}", using index: ${episodeNumber}`);
+        }
       }
 
       // Extract Spotify episode ID
@@ -146,11 +149,19 @@ export async function fetchRSSFeed(): Promise<RSSEpisode[]> {
 
     return episodes;
   } catch (error) {
-    console.error("Error fetching RSS feed:", error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error("Error fetching RSS feed:", error);
+    }
     // Return empty array on error - fallback to local metadata
     return [];
   }
 }
+
+export const fetchRSSFeed = unstable_cache(
+  fetchRSSFeedUncached,
+  ['rss-feed'],
+  { revalidate: 3600, tags: ['rss'] }
+);
 
 /**
  * Get podcast statistics from RSS feed
@@ -164,7 +175,9 @@ export async function getPodcastStats() {
       companiesFeatured: episodes.length, // Approximate - one company per episode
     };
   } catch (error) {
-    console.error("Error getting podcast stats:", error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error("Error getting podcast stats:", error);
+    }
     return {
       totalEpisodes: 16,
       totalSeasons: 2,

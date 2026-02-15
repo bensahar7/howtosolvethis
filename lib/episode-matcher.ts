@@ -1,4 +1,5 @@
 import { EnrichedEpisode, RSSEpisode, LocalMetadata } from "@/types/episode";
+import { unstable_cache } from "next/cache";
 import { fetchRSSFeed } from "./rss-parser";
 import { getAllLocalMetadata } from "./metadata-reader";
 import { EPISODE_MAPPING } from "./episode-mapping";
@@ -14,7 +15,9 @@ function matchEpisodeWithMetadata(
   const rssEpisodeNum = rssEpisode.episodeNumber;
 
   if (!rssEpisodeNum) {
-    console.warn(`[MATCHER] No episode number for RSS episode: "${rssEpisode.title}"`);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[MATCHER] No episode number for RSS episode: "${rssEpisode.title}"`);
+    }
     return null;
   }
 
@@ -22,7 +25,9 @@ function matchEpisodeWithMetadata(
   const targetFolder = EPISODE_MAPPING[rssEpisodeNum];
   
   if (!targetFolder) {
-    console.warn(`[MATCHER] No mapping found for RSS episode #${rssEpisodeNum}: "${rssEpisode.title}"`);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[MATCHER] No mapping found for RSS episode #${rssEpisodeNum}: "${rssEpisode.title}"`);
+    }
     return null;
   }
 
@@ -30,19 +35,24 @@ function matchEpisodeWithMetadata(
   const match = allMetadata.find((meta) => meta.folderName === targetFolder);
 
   if (match) {
-    console.log(`[MATCHER] ✓ Matched RSS #${rssEpisodeNum} "${rssEpisode.title}" → "${match.title}"`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[MATCHER] ✓ Matched RSS #${rssEpisodeNum} "${rssEpisode.title}" → "${match.title}"`);
+    }
     return match;
   } else {
-    console.warn(`[MATCHER] ✗ Target folder "${targetFolder}" not found for RSS episode #${rssEpisodeNum}`);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[MATCHER] ✗ Target folder "${targetFolder}" not found for RSS episode #${rssEpisodeNum}`);
+    }
     return null;
   }
 }
 
 /**
- * Fetch all episodes with enriched metadata
+ * Fetch all episodes with enriched metadata (WITHOUT transcripts for performance)
  * Combines RSS feed data with local metadata files
+ * Transcripts are loaded separately only when needed
  */
-export async function getEnrichedEpisodes(): Promise<EnrichedEpisode[]> {
+async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
   try {
     // Fetch both RSS and local metadata in parallel
     const [rssEpisodes, localMetadata] = await Promise.all([
@@ -52,7 +62,9 @@ export async function getEnrichedEpisodes(): Promise<EnrichedEpisode[]> {
 
     // If RSS failed, create episodes from local metadata only
     if (rssEpisodes.length === 0 && localMetadata.length > 0) {
-      console.log("RSS feed unavailable, using local metadata as fallback");
+      if (process.env.NODE_ENV === 'development') {
+        console.log("RSS feed unavailable, using local metadata as fallback");
+      }
       return localMetadata.map((metadata) => {
         // Use deterministic timestamp based on episode number
         // Base date: 2024-01-01, add episode number as days offset
@@ -73,33 +85,25 @@ export async function getEnrichedEpisodes(): Promise<EnrichedEpisode[]> {
       });
     }
 
-    // Match RSS episodes with local metadata
-    console.log(`\n[EPISODE MATCHER] Starting to match ${rssEpisodes.length} RSS episodes with ${localMetadata.length} local metadata files\n`);
+    // Match RSS episodes with local metadata (NO transcript loading for performance)
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`\n[EPISODE MATCHER] Starting to match ${rssEpisodes.length} RSS episodes with ${localMetadata.length} local metadata files\n`);
+    }
     
-    const enrichedEpisodes: EnrichedEpisode[] = await Promise.all(
-      rssEpisodes.map(async (rssEpisode) => {
-        const metadata = matchEpisodeWithMetadata(rssEpisode, localMetadata);
-        
-        // Fetch transcript if metadata exists
-        if (metadata) {
-          console.log(`[MATCH SUCCESS] Episode ${rssEpisode.episodeNumber}: "${rssEpisode.title}"`);
-          console.log(`  → Guests: ${metadata.guests.join(", ")}`);
-          console.log(`  → Sector: ${metadata.sector}`);
-          
-          // Fetch transcript
-          const transcript = await getTranscriptByEpisode(
-            metadata.episodeNumber,
-            metadata.folderName
-          );
-          metadata.transcript = transcript || undefined;
-        }
-        
-        return {
-          ...rssEpisode,
-          metadata,
-        };
-      })
-    );
+    const enrichedEpisodes: EnrichedEpisode[] = rssEpisodes.map((rssEpisode) => {
+      const metadata = matchEpisodeWithMetadata(rssEpisode, localMetadata);
+      
+      if (metadata && process.env.NODE_ENV === 'development') {
+        console.log(`[MATCH SUCCESS] Episode ${rssEpisode.episodeNumber}: "${rssEpisode.title}"`);
+        console.log(`  → Guests: ${metadata.guests.join(", ")}`);
+        console.log(`  → Sector: ${metadata.sector}`);
+      }
+      
+      return {
+        ...rssEpisode,
+        metadata,
+      };
+    });
 
     // Sort by episode number (newest first)
     enrichedEpisodes.sort((a, b) => {
@@ -110,10 +114,18 @@ export async function getEnrichedEpisodes(): Promise<EnrichedEpisode[]> {
 
     return enrichedEpisodes;
   } catch (error) {
-    console.error("Error enriching episodes:", error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error("Error enriching episodes:", error);
+    }
     return [];
   }
 }
+
+export const getEnrichedEpisodes = unstable_cache(
+  getEnrichedEpisodesUncached,
+  ['enriched-episodes'],
+  { revalidate: 3600, tags: ['episodes'] }
+);
 
 /**
  * Get a single enriched episode by episode number
@@ -124,3 +136,37 @@ export async function getEnrichedEpisodeByNumber(
   const episodes = await getEnrichedEpisodes();
   return episodes.find((e) => e.episodeNumber === episodeNumber) || null;
 }
+
+/**
+ * Get a single episode WITH transcript (for individual episode pages)
+ * Cached separately to avoid loading transcripts for all episodes
+ */
+async function getEpisodeWithTranscriptUncached(
+  episodeNumber: number
+): Promise<EnrichedEpisode | null> {
+  const episodes = await getEnrichedEpisodes();
+  const episode = episodes.find((ep) => ep.episodeNumber === episodeNumber);
+  
+  if (!episode) {
+    return null;
+  }
+  
+  // Fetch transcript only for this specific episode
+  if (episode.metadata?.folderName) {
+    const transcript = await getTranscriptByEpisode(
+      episodeNumber,
+      episode.metadata.folderName
+    );
+    if (transcript && episode.metadata) {
+      episode.metadata.transcript = transcript;
+    }
+  }
+  
+  return episode;
+}
+
+export const getEpisodeWithTranscript = unstable_cache(
+  getEpisodeWithTranscriptUncached,
+  ['episode-with-transcript'],
+  { revalidate: 3600, tags: ['episodes', 'transcripts'] }
+);

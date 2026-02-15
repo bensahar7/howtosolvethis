@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { unstable_cache } from "next/cache";
 import { LocalMetadata, BilingualTag } from "@/types/episode";
 
 const EPISODES_DIR = path.join(process.cwd(), "Context", "Episodes");
@@ -134,8 +135,9 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
 
 /**
  * Read all local episode metadata files
+ * Cached for 1 hour to improve performance
  */
-export async function getAllLocalMetadata(): Promise<LocalMetadata[]> {
+async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
   try {
     const entries = await fs.readdir(EPISODES_DIR, { withFileTypes: true });
     const episodeDirs = entries.filter((entry) => entry.isDirectory());
@@ -180,7 +182,9 @@ export async function getAllLocalMetadata(): Promise<LocalMetadata[]> {
 
         return parsed;
       } catch (error) {
-        console.error(`Error reading metadata for ${dir.name}:`, error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error(`Error reading metadata for ${dir.name}:`, error);
+        }
         return null;
       }
     });
@@ -188,10 +192,18 @@ export async function getAllLocalMetadata(): Promise<LocalMetadata[]> {
     const metadata = await Promise.all(metadataPromises);
     return metadata.filter((m): m is LocalMetadata => m !== null);
   } catch (error) {
-    console.error("Error reading local metadata:", error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error("Error reading local metadata:", error);
+    }
     return [];
   }
 }
+
+export const getAllLocalMetadata = unstable_cache(
+  getAllLocalMetadataUncached,
+  ['local-metadata'],
+  { revalidate: 3600, tags: ['metadata'] }
+);
 
 /**
  * Get metadata for a specific episode by number

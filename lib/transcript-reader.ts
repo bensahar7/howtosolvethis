@@ -26,7 +26,9 @@ export async function getTranscriptByEpisode(
     
     return content || null;
   } catch (error) {
-    console.warn(`Transcript not found for episode ${episodeNumber}:`, error);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`Transcript not found for episode ${episodeNumber}:`, error);
+    }
     return null;
   }
 }

@@ -1,4 +1,4 @@
-import { getEnrichedEpisodes } from "@/lib/episode-matcher";
+import { getEnrichedEpisodes, getEpisodeWithTranscript } from "@/lib/episode-matcher";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Header from "@/components/Header";
@@ -23,6 +23,10 @@ import {
   SnipdIcon,
   GooglePodcastsIcon,
 } from "@/components/PodcastIcons";
+
+// Force static generation for better performance
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
 
 // Generate static params for all episodes
 export async function generateStaticParams() {
@@ -76,7 +80,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       locale: "he_IL",
-      url: `https://howtosolvethis.com/episodes/${params.id}`,
+      url: `https://howtosolvethis.com/episodes/${id}`,
       siteName: "איך פותרים את זה?",
       title: episode.title,
       description: seoDescription,
@@ -111,12 +115,17 @@ export async function generateMetadata({
 
 export default async function EpisodePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const episodes = await getEnrichedEpisodes();
-  const episode = episodes.find((ep) => ep.episodeNumber?.toString() === id);
+  const episodeNumber = parseInt(id, 10);
+  
+  // Use the optimized function that loads transcript only for this episode
+  const episode = await getEpisodeWithTranscript(episodeNumber);
 
   if (!episode) {
     notFound();
   }
+  
+  // Fetch all episodes for RelatedEpisodes component (without transcripts for performance)
+  const allEpisodes = await getEnrichedEpisodes();
 
   const metadata = episode.metadata;
   const spotifyEmbedUrl = episode.spotifyEpisodeId
@@ -149,7 +158,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               חזרה לפרקים
             </Link>
 
-            {/* Episode Header */}
+            {/* 1. Hero: Episode Title */}
             <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
               <div className="flex items-start gap-4 mb-6">
                 <div className="glass px-3 py-1 rounded-sm">
@@ -175,6 +184,8 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                   className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 70vw"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
 
@@ -184,13 +195,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               )}
             </div>
 
-            {/* Share Buttons */}
-            <ShareButtons 
-              episodeTitle={episode.title}
-              episodeUrl={episodeUrl}
-            />
-
-            {/* Guest Info Section */}
+            {/* 2. Professional Profile: Guest Name/Role + Company */}
             {metadata?.guests && metadata.guests.length > 0 && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">אורחים</h2>
@@ -206,7 +211,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* Company Section */}
+            {/* Company Logo - Professional Profile */}
             <CompanySection
               companyName={metadata?.companyName}
               companyWebsite={metadata?.companyWebsite}
@@ -215,37 +220,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               episodeFolderName={metadata?.folderName}
             />
 
-            {/* Keywords with Bilingual Tags */}
-            {metadata?.keywords && metadata.keywords.length > 0 && (
-              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-                <h2 className="technical-text text-xs mb-4 md:mb-6">KEYWORDS</h2>
-                <div className="flex flex-wrap gap-2 md:gap-3">
-                  {metadata.keywords.map((keyword, i) => (
-                    <BilingualTag key={i} keyword={keyword} />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Spotify Player */}
-            {spotifyEmbedUrl && (
-              <div className="glass p-4 md:p-6 rounded-sm mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">האזן לפרק</h2>
-                {/* Taller aspect ratio on mobile for better Spotify embed */}
-                <div className="aspect-[3/2] md:aspect-[3/1] rounded-sm overflow-hidden">
-                  <iframe
-                    src={spotifyEmbedUrl}
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Problem & Solution */}
+            {/* 3. Contextual Value: The Problem & The Solution */}
             {metadata?.problem && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">הבעיה</h2>
@@ -264,7 +239,17 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* Key Discussion Points */}
+            {/* 4. Key Insight: תובנת היום (Entrepreneur Insight) */}
+            {metadata?.entrepreneurInsight && (
+              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">תובנת היום</h2>
+                <p className="text-white/80 text-sm md:text-base leading-relaxed italic">
+                  "{metadata.entrepreneurInsight}"
+                </p>
+              </div>
+            )}
+
+            {/* Key Discussion Points (After Insight) */}
             {metadata?.keyPoints && metadata.keyPoints.length > 0 && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">נקודות מפתח</h2>
@@ -276,22 +261,22 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* Entrepreneur Insight */}
-            {metadata?.entrepreneurInsight && (
-              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">תובנת היזם</h2>
-                <p className="text-white/80 text-sm md:text-base leading-relaxed italic">
-                  "{metadata.entrepreneurInsight}"
-                </p>
+            {/* 5. Conversion: Podcast Player & Platform Links */}
+            {spotifyEmbedUrl && (
+              <div className="glass p-4 md:p-6 rounded-sm mb-6 md:mb-8">
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">האזן לפרק</h2>
+                {/* Taller aspect ratio on mobile for better Spotify embed */}
+                <div className="aspect-[3/2] md:aspect-[3/1] rounded-sm overflow-hidden">
+                  <iframe
+                    src={spotifyEmbedUrl}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-            )}
-
-            {/* Transcript Section */}
-            {metadata?.transcript && (
-              <TranscriptAccordion
-                transcript={metadata.transcript}
-                episodeTitle={episode.title}
-              />
             )}
 
             {/* Platform Links */}
@@ -357,10 +342,36 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
+            {/* Share Buttons */}
+            <ShareButtons 
+              episodeTitle={episode.title}
+              episodeUrl={episodeUrl}
+            />
+
+            {/* Keywords with Bilingual Tags */}
+            {metadata?.keywords && metadata.keywords.length > 0 && (
+              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
+                <h2 className="technical-text text-xs mb-4 md:mb-6">KEYWORDS</h2>
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {metadata.keywords.map((keyword, i) => (
+                    <BilingualTag key={i} keyword={keyword} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 6. Content Archive: Transcript (Accordion - closed by default) */}
+            {metadata?.transcript && (
+              <TranscriptAccordion
+                transcript={metadata.transcript}
+                episodeTitle={episode.title}
+              />
+            )}
+
             {/* Related Episodes */}
             <RelatedEpisodes
               currentEpisode={episode}
-              allEpisodes={episodes}
+              allEpisodes={allEpisodes}
             />
           </div>
         </div>

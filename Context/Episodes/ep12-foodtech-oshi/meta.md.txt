@@ -8,7 +8,7 @@
 - **Guest LinkedIn:** https://www.linkedin.com/in/ofek-ron
 - **Company Website:** https://oshi.com/
 - **Company Name:** Oshi
-- **Company Logo:** logo.png
+- **Company Logo:** logo.jpeg
 
 ## The Problem (The Deep Sea Crisis)
 סלמון הוא אחד המוצרים הפופולריים בעולם, אך תעשיית הדיג והגידול שלו גובה מחיר כבד:

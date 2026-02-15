@@ -27,5 +27,8 @@
     "rss-parser": "^3.13.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^16.1.6"
   }
 }

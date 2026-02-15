@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const nextConfig: NextConfig = {
   images: {
@@ -18,6 +19,15 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Remove X-Powered-By header for security
   poweredByHeader: false,
+  // Experimental features for better optimization
+  experimental: {
+    optimizePackageImports: ['@/components', '@/lib'],
+  },
 };
 
-export default nextConfig;
+// Wrap with bundle analyzer (enabled with ANALYZE=true)
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+export default bundleAnalyzer(nextConfig);

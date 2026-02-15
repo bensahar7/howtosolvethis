@@ -16,13 +16,13 @@ export default function Header() {
           {/* Left Side - Navigation + CTA (RTL) */}
           <nav className="flex items-center gap-8">
             <Link
-              href="#episodes"
+              href="/#episodes"
               className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
             >
               פרקים
             </Link>
             <Link
-              href="#about"
+              href="/#about"
               className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
             >
               אודות

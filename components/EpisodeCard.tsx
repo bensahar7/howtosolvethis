@@ -45,7 +45,10 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             fill
             className="object-cover img-grayscale-default group-hover:filter-none transition-all duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={index < 2}
+            priority={index < 3}
+            loading={index < 6 ? 'eager' : 'lazy'}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
           />
           
           {/* Episode Number Badge - HUD Style */}
