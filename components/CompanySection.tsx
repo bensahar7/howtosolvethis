@@ -82,13 +82,13 @@ export default function CompanySection({
             </div>
           )}
 
-          {/* Company Website Button - Full width on mobile */}
+          {/* Company Website Icon - Just the globe icon */}
           {companyWebsite && (
             <a
               href={companyWebsite}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full md:w-auto items-center justify-center gap-2 glass px-6 py-3 rounded-sm transition-all duration-300 hover:scale-105 min-h-[48px]"
+              className="inline-flex items-center justify-center glass p-3 rounded-sm transition-all duration-300 hover:scale-110 active:scale-95"
               style={{ boxShadow: "0 0 20px rgba(255,255,255,0)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.boxShadow = "0 0 20px rgba(255,255,255,0.15)";
@@ -96,12 +96,11 @@ export default function CompanySection({
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = "0 0 20px rgba(255,255,255,0)";
               }}
+              aria-label={`Visit ${companyName} website`}
             >
               <svg className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
               </svg>
-              // End of Selection
-```
             </a>
           )}
         </div>
