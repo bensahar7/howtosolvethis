@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
-import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon } from "./PodcastIcons";
+import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
 
 export default function Footer() {
   return (
@@ -87,6 +87,17 @@ export default function Footer() {
                 aria-label="Pocket Casts"
               >
                 <PocketCastsIcon className="w-5 h-5 text-[#F43E37]" />
+              </a>
+
+              {/* Snipd */}
+              <a
+                href="https://share.snipd.com/show/7a974146-82a7-43fb-b42e-b7b4a719201d"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover"
+                aria-label="Snipd"
+              >
+                <SnipdIcon className="w-5 h-5 text-white/80" />
               </a>
 
               {/* Podcast LinkedIn Page */}

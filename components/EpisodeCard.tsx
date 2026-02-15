@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { EnrichedEpisode } from "@/types/episode";
 import { useState, useRef, useEffect } from "react";
 import SpotifyIcon from "./SpotifyIcon";
-import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon } from "./PodcastIcons";
+import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
 
 interface EpisodeCardProps {
   episode: EnrichedEpisode;
@@ -225,6 +225,18 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
                 onClick={(e) => e.stopPropagation()}
               >
                 <PocketCastsIcon className="w-5 h-5 text-[#F43E37]" />
+              </a>
+
+              {/* Snipd */}
+              <a
+                href="https://share.snipd.com/show/7a974146-82a7-43fb-b42e-b7b4a719201d"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
+                aria-label="Snipd"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <SnipdIcon className="w-5 h-5 text-white/80" />
               </a>
             </div>
           </div>
