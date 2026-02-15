@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
+import { ApplePodcastsIcon, YouTubeIcon, GooglePodcastsIcon } from "./PodcastIcons";
 
 export default function Footer() {
   return (
@@ -43,7 +44,7 @@ export default function Footer() {
           {/* Social Links */}
           <div className="col-span-12 lg:col-span-4">
             <h4 className="technical-text mb-4">Connect</h4>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               {/* Spotify */}
               <a
                 href="https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y"
@@ -53,6 +54,52 @@ export default function Footer() {
                 aria-label="Spotify"
               >
                 <SpotifyIcon className="w-5 h-5" />
+              </a>
+
+              {/* Apple Podcasts */}
+              <a
+                href="https://podcasts.apple.com/il/podcast/איך-פותרים-את-זה/id1600000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover"
+                aria-label="Apple Podcasts"
+              >
+                <ApplePodcastsIcon className="w-5 h-5 text-white/80" />
+              </a>
+
+              {/* YouTube */}
+              <a
+                href="https://www.youtube.com/@howtosolvethis"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover"
+                aria-label="YouTube"
+              >
+                <YouTubeIcon className="w-5 h-5 text-[#FF0000]" />
+              </a>
+
+              {/* Google Podcasts */}
+              <a
+                href="https://podcasts.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover"
+                aria-label="Google Podcasts"
+              >
+                <GooglePodcastsIcon className="w-5 h-5 text-white/80" />
+              </a>
+
+              {/* RSS Feed */}
+              <a
+                href="https://anchor.fm/s/f8c5a9a8/podcast/rss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-3 rounded-sm glass-hover"
+                aria-label="RSS Feed"
+              >
+                <svg className="w-5 h-5 text-[#FF6719]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                </svg>
               </a>
 
               {/* Podcast LinkedIn Page */}

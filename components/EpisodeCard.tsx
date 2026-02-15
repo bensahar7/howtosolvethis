@@ -7,6 +7,7 @@ import SpotifyIcon from "./SpotifyIcon";
 import {
   ApplePodcastsIcon,
   YouTubeIcon,
+  GooglePodcastsIcon,
   SnipdIcon,
   PocketCastsIcon,
   CastboxIcon,
@@ -199,7 +200,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
 
               {/* Apple Podcasts */}
               <a
-                href={`https://podcasts.apple.com/il/podcast/איך-פותרים-את-זה/id1ddFDGd1vH4UWIlfGjhS2Y?i=1000${episode.episodeNumber || 1}`}
+                href="https://podcasts.apple.com/il/podcast/איך-פותרים-את-זה/id1600000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover flex items-center justify-center"
@@ -216,7 +217,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
 
               {/* YouTube */}
               <a
-                href={`https://www.youtube.com/@howtosolvethis/videos`}
+                href="https://www.youtube.com/@howtosolvethis"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover flex items-center justify-center"

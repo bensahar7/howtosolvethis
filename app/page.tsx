@@ -13,7 +13,7 @@ export default function HomePage() {
       <Header />
 
       {/* Hero Section - Asymmetric but CENTERED Container */}
-      <section className="max-w-7xl mx-auto px-6 pb-16">
+      <section className="max-w-7xl mx-auto px-6 pb-16 pt-32">
           <div className="grid grid-cols-12 gap-6">
             {/* Large Display Title - Typography as Art */}
             {/* Asymmetric placement WITHIN the centered container */}
@@ -41,20 +41,20 @@ export default function HomePage() {
                 </p>
 
                 {/* HUD Technical Details */}
-                <div className="flex gap-8 pt-8 border-t border-white/10">
-                  <div>
-                    <div className="technical-text">Episodes</div>
-                    <div className="text-3xl font-bold text-white mt-2">15+</div>
+                <div className="flex flex-wrap gap-6 md:gap-8 pt-8 border-t border-white/10">
+                  <div className="flex-1 min-w-[100px]">
+                    <div className="technical-text">COMPANIES</div>
+                    <div className="text-3xl font-bold text-white mt-2">+15</div>
                   </div>
-                  <div className="hud-line-vertical" />
-                  <div>
-                    <div className="technical-text">Seasons</div>
+                  <div className="hud-line-vertical hidden md:block" />
+                  <div className="flex-1 min-w-[100px]">
+                    <div className="technical-text">SEASONS</div>
                     <div className="text-3xl font-bold text-white mt-2">2</div>
                   </div>
-                  <div className="hud-line-vertical" />
-                  <div>
-                    <div className="technical-text">Companies</div>
-                    <div className="text-3xl font-bold text-white mt-2">15+</div>
+                  <div className="hud-line-vertical hidden md:block" />
+                  <div className="flex-1 min-w-[100px]">
+                    <div className="technical-text">EPISODES</div>
+                    <div className="text-3xl font-bold text-white mt-2">+15</div>
                   </div>
                 </div>
 
@@ -69,7 +69,16 @@ export default function HomePage() {
                   >
                     <SpotifyIcon className="w-8 h-8" />
                   </a>
-                  <button className="btn-glass">לפרקים</button>
+                  <a
+                    href="#episodes"
+                    className="btn-glass"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById('episodes')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    לפרקים
+                  </a>
                 </div>
               </div>
             </div>

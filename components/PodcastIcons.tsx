@@ -51,3 +51,12 @@ export function CastboxIcon({ className = "w-5 h-5" }: IconProps) {
     </svg>
   );
 }
+
+// Google Podcasts Icon
+export function GooglePodcastsIcon({ className = "w-5 h-5" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M1.5 10.5h3v3h-3v-3zM6 13.5h3v7.5H6v-7.5zM10.5 6h3v12h-3V6zM15 3h3v18h-3V3zM19.5 9h3v6h-3V9z"/>
+    </svg>
+  );
+}

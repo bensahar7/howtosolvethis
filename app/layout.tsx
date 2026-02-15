@@ -11,14 +11,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 // Using CSS @font-face instead to handle missing files gracefully
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL("https://howtosolvethis.com"),
   title: {
-    default: "איך פותרים את זה? | פודקאסט על קליימט-טק ישראלי",
+    default: "איך פותרים את זה? | פודקאסט קליימט-טק ויזמות אקלים",
     template: "%s | איך פותרים את זה?",
   },
   description:
     "הפודקאסט שמחבר בין יזמים, מדענים ומשקיעים לפתרונות טכנולוגיים למשבר האקלים. בעיות גדולות, בגובה העיניים.",
   keywords: [
+    "Climate-Tech Israel",
+    "Sustainability",
+    "Startups",
     "פודקאסט",
     "קליימט-טק",
     "חדשנות",

@@ -45,7 +45,7 @@ export default function Newsletter() {
       <div className="grid grid-cols-12 gap-6">
         {/* Asymmetric placement */}
         <div className="col-span-12 lg:col-span-8 lg:col-start-3">
-          <div className="glass-high-blur p-12 rounded-sm">
+          <div className="glass p-12 rounded-sm">
             {/* Section Header */}
             <div className="text-center mb-8">
               <h2 className="text-4xl font-bold text-white mb-4">
@@ -58,43 +58,21 @@ export default function Newsletter() {
             {/* HUD Line Separator */}
             <div className="border-t border-white/10 mb-8" />
 
-            {/* Newsletter Form */}
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-              <div className="flex gap-2 items-stretch">
-                {/* Email Input */}
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Type your email..."
-                  required
-                  disabled={status === "loading" || status === "success"}
-                  className="flex-1 px-4 py-3 bg-black/40 border border-white/20 rounded-sm text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 transition-colors disabled:opacity-50"
-                  dir="ltr"
-                />
-
-                {/* Subscribe Button */}
-                <button
-                  type="submit"
-                  disabled={status === "loading" || status === "success"}
-                  className="px-8 py-3 bg-[#FF6719] hover:bg-[#FF7829] text-white font-medium rounded-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                >
-                  {status === "loading" ? "..." : status === "success" ? "✓" : "Subscribe"}
-                </button>
-              </div>
-
-              {/* Status Messages */}
-              {status === "success" && (
-                <p className="text-center mt-4 text-green-400 text-sm">
-                  תודה! נשלח לך אימייל לאישור ההרשמה
-                </p>
-              )}
-              {status === "error" && (
-                <p className="text-center mt-4 text-red-400 text-sm">
-                  משהו השתבש. אנא נסו שוב
-                </p>
-              )}
-            </form>
+            {/* Substack iframe with dark theme filter */}
+            <div className="max-w-md mx-auto">
+              <iframe
+                src="https://ben1580094.substack.com/embed"
+                width="100%"
+                height="150"
+                style={{ 
+                  border: 'none',
+                  background: 'transparent',
+                  filter: 'invert(0.9) hue-rotate(180deg)'
+                }}
+                frameBorder="0"
+                scrolling="no"
+              />
+            </div>
 
             {/* Privacy Note */}
             <p className="technical-text text-center mt-6 text-white/40">
