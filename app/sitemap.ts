@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const baseUrl = "https://www.howtosolvethis.com";
 
   // Get all episodes for dynamic sitemap entries
   const episodes = await getEnrichedEpisodes();
