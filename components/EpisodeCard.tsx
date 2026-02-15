@@ -69,20 +69,41 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             {episode.title}
           </h3>
 
-          {/* Description Container with Fixed Height */}
-          <div className="relative mb-4 flex-1">
-            {/* Description - Collapsible with max height */}
+          {/* Description Container - Now with proper toggle */}
+          <div className="mb-4 flex-1">
+            {/* Description - Collapsible with line-clamp */}
             <div 
               ref={descriptionRef}
-              className={`body-text text-sm text-white/80 leading-relaxed prose prose-invert prose-sm max-w-none overflow-hidden transition-all duration-300 ${
-                isExpanded ? "max-h-none" : "max-h-[120px]"
+              className={`body-text text-sm text-white/80 leading-relaxed prose prose-invert prose-sm max-w-none transition-all duration-300 ${
+                isExpanded ? "" : "line-clamp-3"
               }`}
               dangerouslySetInnerHTML={{ __html: episode.description }}
             />
             
-            {/* Gradient Fade Effect (only when collapsed and overflowing) */}
-            {!isExpanded && isOverflowing && (
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+            {/* Read More / Show Less Button */}
+            {isOverflowing && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsExpanded(!isExpanded);
+                }}
+                className="mt-2 inline-flex items-center gap-1 text-white/60 hover:text-white text-xs transition-all duration-200"
+                aria-label={isExpanded ? "הצג פחות" : "קרא עוד"}
+              >
+                <span className="technical-text">
+                  {isExpanded ? "הצג פחות" : "קרא עוד"}
+                </span>
+                <svg
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    isExpanded ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             )}
           </div>
 
@@ -112,24 +133,40 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             </div>
           </div>
 
-          {/* Keywords Tags - Hebrew Label: תגיות */}
+          {/* Keywords Tags - Bilingual Format: Hebrew / English */}
           {metadata?.keywords && metadata.keywords.length > 0 && (
             <div className="mt-6">
               <div className="technical-text text-[10px] mb-2.5 text-white/60">
                 תגיות
               </div>
               <div className="flex flex-wrap gap-2">
-                {metadata.keywords.slice(0, 3).map((keyword, i) => (
-                  <span
-                    key={i}
-                    className="technical-text text-xs px-3 py-1 bg-white/10 border border-white/20 rounded-full text-white/80 hover:bg-white/20 transition-all duration-300 cursor-default"
-                    style={{
-                      boxShadow: "0 0 10px rgba(255,255,255,0.1)",
-                    }}
-                  >
-                    {typeof keyword === 'string' ? keyword : keyword.he}
-                  </span>
-                ))}
+                {metadata.keywords.slice(0, 3).map((keyword, i) => {
+                  // Handle both string and BilingualTag format
+                  const isString = typeof keyword === 'string';
+                  const heText = isString ? keyword : keyword.he;
+                  const enText = isString ? null : keyword.en;
+                  
+                  return (
+                    <span
+                      key={i}
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 cursor-default"
+                    >
+                      {/* Hebrew text */}
+                      <span className="text-white text-xs font-medium">
+                        {heText}
+                      </span>
+                      {/* English text - only if bilingual */}
+                      {enText && (
+                        <>
+                          <span className="text-white/20">/</span>
+                          <span className="text-white/40 text-[10px] font-mono uppercase tracking-tighter">
+                            {enText}
+                          </span>
+                        </>
+                      )}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           )}
