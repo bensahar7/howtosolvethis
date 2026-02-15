@@ -5,6 +5,7 @@ import Newsletter from "@/components/Newsletter";
 import LinkedInBadge from "@/components/LinkedInBadge";
 import Footer from "@/components/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import ScrollToEpisodesButton from "@/components/ScrollToEpisodesButton";
 import { Suspense } from "react";
 
 export default function HomePage() {
@@ -69,16 +70,7 @@ export default function HomePage() {
                   >
                     <SpotifyIcon className="w-8 h-8" />
                   </a>
-                  <a
-                    href="#episodes"
-                    className="btn-glass"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById('episodes')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                  >
-                    לפרקים
-                  </a>
+                  <ScrollToEpisodesButton />
                 </div>
               </div>
             </div>
