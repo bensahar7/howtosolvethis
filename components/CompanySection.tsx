@@ -38,7 +38,7 @@ export default function CompanySection({
         {/* Company Logo - Circular Glass Container */}
         {(logoPath && !imageError) ? (
           <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
-            <div className="absolute inset-0 glass rounded-full border border-white/20 overflow-hidden">
+            <div className="absolute inset-0 glass rounded-full border border-white/20 overflow-hidden bg-white/5">
               <Image
                 src={logoPath}
                 alt={`${companyName} logo`}
@@ -46,6 +46,8 @@ export default function CompanySection({
                 className="object-contain p-3 md:p-4"
                 sizes="(max-width: 768px) 96px, 128px"
                 onError={() => setImageError(true)}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
               />
             </div>
           </div>
