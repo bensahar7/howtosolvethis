@@ -4,7 +4,7 @@
 - **Guest:** רן כרמלי(Ran Cohen)
 - **Role:** מנכ"ל Polymertal
 - **Sector:** DeepTech / Material Science / Aerospace & Automotive
-- **Keywords:** Polymertal, Hybrid Materials, Metal Plating, Weight Reduction, Sustainability, Circular Economy
+- **Keywords:** חומרים היברידיים/Hybrid Materials, הפחתת משקל/Weight Reduction, קיימות תעשייתית/Industrial Sustainability
 
 ## The Problem (The Heavy Industry Toll)
 תעשיות התעופה, הרכב והביטחון מסתמכות על חלקי מתכת כבדים ויקרים לייצור. הבעיה היא כפול משמעות:

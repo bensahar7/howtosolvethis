@@ -5,7 +5,7 @@
 - **Role:** מנכ"ל CoffeeSai
 - **Parent Company:** Pluri
 - **Sector:** FoodTech / DeepTech / ClimateTech
-- **Keywords:** Cell-based coffee, Coffee Belt, Sustainability, Biomas
+- **Keywords:** קפה מתורבת/Cell-based Coffee, חגורת הקפה/Coffee Belt, קיימות/Climate Sustainability
 
 ## The Problem (The "Drama")
 תעשיית הקפה (250 מיליארד דולר) נמצאת בצומת דרכים היסטורי. כ-50% מהשטחים לגידול קפה ערביקה נמצאים בסכנה עקב אירועי אקלים קיצוניים. בנוסף, מנת אספרסו אחת דורשת כ-140 ליטר מים, מה שהופך את צריכת הקפה הנוכחית לבלתי מקיימת בטווח הארוך.

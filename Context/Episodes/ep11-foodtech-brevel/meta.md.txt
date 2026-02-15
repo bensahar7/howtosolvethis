@@ -5,7 +5,7 @@
 - **Role:** מנכ"ל ומייסד שותף, Brevel
 - **Background:** תואר שני בפיזיקה והתמחות בביופיזיקה (האוניברסיטה העברית)
 - **Sector:** FoodTech / Alternative Protein / ClimateTech
-- **Keywords:** Microalgae, Fermentation, Sustainable Protein, Brevel, Food Security
+- **Keywords:** מיקרו-אצות/Microalgae, חלבון בר-קיימא/Sustainable Protein, פוד-טק/FoodTech
 
 ## The Problem (The Protein Ceiling)
 תעשיית המזון מהחי היא אחת המזהמות בעולם, אך תחליפי החלבון הקיימים סובלים מ"תקרת זכוכית". הבעיה היא משולשת:

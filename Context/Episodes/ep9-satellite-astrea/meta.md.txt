@@ -5,7 +5,7 @@
 - **Role:** מייסד אסטרה (Astrea)
 - **Background:** גיאופיזיקאי (האוניברסיטה העברית ובן-גוריון)
 - **Sector:** Space-Tech / Water-Tech / Infrastructure Monitoring
-- **Keywords:** Satellite, Microwaves, Leak Detection, Geophysics, Remote Sensing
+- **Keywords:** ניטור לווייני/Satellite Monitoring, זיהוי נזילות/Leak Detection, חישה מרחוק/Remote Sensing
 
 ## The Problem (The Invisible Waste)
 תשתיות מים ואנרגיה תת-קרקעיות סובלות מנזילות ודליפות שקשה מאוד לאתר בזמן אמת. בעולם המים, מדובר על אובדן של מיליארדי קוב מים מתוקים מדי שנה בגלל פיצוצי צינורות שאיש לא יודע עליהם עד שהם פורצים אל פני השטח. השיטות המסורתיות דורשות הגעה פיזית לשטח ("ציידי נזילות"), מה שהופך את הניטור לאיטי, יקר ולא יעיל בקנה מידה רחב.
