@@ -2,6 +2,7 @@ import { EnrichedEpisode, RSSEpisode, LocalMetadata } from "@/types/episode";
 import { fetchRSSFeed } from "./rss-parser";
 import { getAllLocalMetadata } from "./metadata-reader";
 import { EPISODE_MAPPING } from "./episode-mapping";
+import { getTranscriptByEpisode } from "./transcript-reader";
 
 /**
  * Match an RSS episode with local metadata using manual mapping
@@ -75,20 +76,30 @@ export async function getEnrichedEpisodes(): Promise<EnrichedEpisode[]> {
     // Match RSS episodes with local metadata
     console.log(`\n[EPISODE MATCHER] Starting to match ${rssEpisodes.length} RSS episodes with ${localMetadata.length} local metadata files\n`);
     
-    const enrichedEpisodes: EnrichedEpisode[] = rssEpisodes.map((rssEpisode) => {
-      const metadata = matchEpisodeWithMetadata(rssEpisode, localMetadata);
-      
-      if (metadata) {
-        console.log(`[MATCH SUCCESS] Episode ${rssEpisode.episodeNumber}: "${rssEpisode.title}"`);
-        console.log(`  → Guests: ${metadata.guests.join(", ")}`);
-        console.log(`  → Sector: ${metadata.sector}`);
-      }
-      
-      return {
-        ...rssEpisode,
-        metadata,
-      };
-    });
+    const enrichedEpisodes: EnrichedEpisode[] = await Promise.all(
+      rssEpisodes.map(async (rssEpisode) => {
+        const metadata = matchEpisodeWithMetadata(rssEpisode, localMetadata);
+        
+        // Fetch transcript if metadata exists
+        if (metadata) {
+          console.log(`[MATCH SUCCESS] Episode ${rssEpisode.episodeNumber}: "${rssEpisode.title}"`);
+          console.log(`  → Guests: ${metadata.guests.join(", ")}`);
+          console.log(`  → Sector: ${metadata.sector}`);
+          
+          // Fetch transcript
+          const transcript = await getTranscriptByEpisode(
+            metadata.episodeNumber,
+            metadata.folderName
+          );
+          metadata.transcript = transcript || undefined;
+        }
+        
+        return {
+          ...rssEpisode,
+          metadata,
+        };
+      })
+    );
 
     // Sort by episode number (newest first)
     enrichedEpisodes.sort((a, b) => {

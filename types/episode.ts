@@ -30,6 +30,13 @@ export interface LocalMetadata {
   keyPoints?: string[];
   entrepreneurInsight?: string;
   folderName?: string; // Added to support manual episode mapping
+  
+  // NEW FIELDS for Knowledge Hub
+  guestLinkedIn?: string[];      // Array to support multiple guests
+  companyWebsite?: string;
+  companyName?: string;
+  companyLogo?: string;          // Filename: logo.png
+  transcript?: string;
 }
 
 export interface EnrichedEpisode extends RSSEpisode {

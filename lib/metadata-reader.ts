@@ -17,6 +17,10 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
   let problem = "";
   let solution = "";
   let entrepreneurInsight = "";
+  let guestLinkedIn: string[] = [];
+  let companyWebsite = "";
+  let companyName = "";
+  let companyLogo = "";
 
   // Extract title from first heading
   const titleMatch = content.match(/^#\s+(.+?)$/m);
@@ -85,6 +89,33 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
     entrepreneurInsight = insightMatch[1].trim();
   }
 
+  // Extract LinkedIn URLs (supports comma-separated for multiple guests)
+  const linkedInMatch = content.match(/\*\*Guest LinkedIn:\*\*\s*(.+?)$/m);
+  if (linkedInMatch) {
+    guestLinkedIn = linkedInMatch[1]
+      .split(/[,،]/)
+      .map((url) => url.trim())
+      .filter(Boolean);
+  }
+
+  // Extract Company Website
+  const companyMatch = content.match(/\*\*Company Website:\*\*\s*(.+?)$/m);
+  if (companyMatch) {
+    companyWebsite = companyMatch[1].trim();
+  }
+
+  // Extract Company Name
+  const companyNameMatch = content.match(/\*\*Company Name:\*\*\s*(.+?)$/m);
+  if (companyNameMatch) {
+    companyName = companyNameMatch[1].trim();
+  }
+
+  // Extract Company Logo filename
+  const logoMatch = content.match(/\*\*Company Logo:\*\*\s*(.+?)$/m);
+  if (logoMatch) {
+    companyLogo = logoMatch[1].trim();
+  }
+
   return {
     episodeNumber,
     title,
@@ -94,6 +125,10 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
     problem,
     solution,
     entrepreneurInsight,
+    guestLinkedIn: guestLinkedIn.length > 0 ? guestLinkedIn : undefined,
+    companyWebsite: companyWebsite || undefined,
+    companyName: companyName || undefined,
+    companyLogo: companyLogo || undefined,
   };
 }
 
