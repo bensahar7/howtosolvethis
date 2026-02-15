@@ -3,7 +3,6 @@
 ## Core Metadata
 - **Topic:** Bee-Tech / Pollination / AgriTech
 - **Researcher:** ד"ר נורית אליאש
-- **Researcher LinkedIn:** https://il.linkedin.com/in/ionathan-lazovski-61aa7b6b
 - **Researcher Google Scholar:** https://scholar.google.com/citations?user=LE7evjIAAAAJ&hl=en
 - **Researcher Website:** http://www.sri.org.il/Nurit-Eliash-
 - **Guests:** אבנר עינב, עידו שוקי

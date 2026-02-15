@@ -9,7 +9,7 @@
 - **Guest LinkedIn:** https://il.linkedin.com/in/ionathan-lazovski-61aa7b6b
 - **Company Website:** https://www.structure-pal.com/
 - **Company Name:** Structure Pal Ltd‏
-- **Company Logo:** logo.jpeg
+- **Company Logo:** logo.jpg
 
 ## The Problem (The Climate Toll of Building)
 ענף הבנייה אחראי לחלק עצום מפליטות גזי החממה בעולם (כ-8% מפליטות הפחמן העולמיות מגיעות מייצור צמנט בלבד). הבעיה היא משולשת:
