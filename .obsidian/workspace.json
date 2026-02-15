@@ -182,6 +182,10 @@
   },
   "active": "c5a5805e6f641752",
   "lastOpenFiles": [
+    "public/logos/salicrop.jpg",
+    "Context/Episodes/ep3- Salicrop/transcript.txt",
+    "Context/Episodes/ep3- Salicrop/meta.md.txt",
+    "public/logos/structurepal.jpg",
     "Context/Episodes/ep2-structurepal/transcript.md",
     "Context/Episodes/ep1-bees/transcript.md",
     "Context/Episodes/ep3- Salicrop/transcript.md",
@@ -202,8 +206,6 @@
     "components/ShareButtons.tsx",
     "components/RelatedEpisodes.tsx",
     "components/EpisodeStructuredData.tsx",
-    "components/ReadMoreDescription.tsx",
-    "components/TranscriptAccordion.tsx",
-    "components/CompanySection.tsx"
+    "components/ReadMoreDescription.tsx"
   ]
 }

@@ -25,6 +25,7 @@ export default function CompanySection({
   const logoMapping: Record<string, string> = {
     'logo.jpeg': '/logos/oshi.jpeg',
     'logo.png': '/logos/polymertal.png',
+    'logo.jpg': '/logos/structurepal.jpg',
   };
 
   const logoPath = companyLogo && logoMapping[companyLogo] 
@@ -33,6 +34,13 @@ export default function CompanySection({
 
   return (
     <section className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
+      {/* Section Title at Top */}
+      <div className="mb-6 md:mb-8 pb-4 border-b border-white/10">
+        <div className="technical-text text-xs text-white/40">
+          COMPANY PROFILE
+        </div>
+      </div>
+      
       {/* Stack vertically on mobile, horizontal on desktop */}
       <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
         {/* Company Logo - Circular Glass Container */}
@@ -92,16 +100,10 @@ export default function CompanySection({
               <svg className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
               </svg>
-              <span className="text-white text-sm">בקר באתר החברה</span>
+              // End of Selection
+```
             </a>
           )}
-        </div>
-      </div>
-
-      {/* Thin HUD reference line */}
-      <div className="mt-8 pt-8 border-t border-white/10">
-        <div className="technical-text text-xs text-white/40">
-          COMPANY PROFILE
         </div>
       </div>
     </section>
