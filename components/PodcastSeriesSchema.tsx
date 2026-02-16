@@ -1,9 +1,7 @@
 /**
  * PodcastSeries Schema Component
- * Specific to the home page - defines the podcast series
+ * Used on the home page to define the podcast series
  */
-
-import { stringifySchema, createImageSchema } from "@/lib/schema-helpers";
 
 export default function PodcastSeriesSchema() {
   const podcastSeriesSchema = {
@@ -14,7 +12,12 @@ export default function PodcastSeriesSchema() {
     alternateName: "How To Solve This?",
     description: "פודקאסט קליימט-טק ויזמות אקלים",
     url: "https://howtosolvethis.com",
-    image: createImageSchema("https://howtosolvethis.com/images/earth-hero.png", 1200, 630),
+    image: {
+      "@type": "ImageObject",
+      url: "https://howtosolvethis.com/images/earth-hero.png",
+      width: 1200,
+      height: 630,
+    },
     author: {
       "@type": "Person",
       name: "בן סהר",
@@ -36,15 +39,17 @@ export default function PodcastSeriesSchema() {
       "Entrepreneurship",
       "Climate Tech",
       "Sustainability",
+      "Business",
+      "Science",
     ],
-    keywords: "Climate-Tech, קליימט-טק, פודקאסט, ישראל, יזמות, חדשנות, סביבה",
+    keywords: "קליימט-טק, יזמות, אקלים, חדשנות, סביבה, טכנולוגיה, ישראל, Climate Tech, Sustainability, Startups",
     webFeed: "https://anchor.fm/s/f8c5a9a8/podcast/rss",
     potentialAction: {
       "@type": "ListenAction",
       target: [
         {
           "@type": "EntryPoint",
-          urlTemplate: "https://open.spotify.com/show/YOUR_SHOW_ID",
+          urlTemplate: "https://open.spotify.com/show/4VKarRdsnGJxd4VDXXfVKH",
           actionPlatform: [
             "http://schema.org/DesktopWebPlatform",
             "http://schema.org/MobileWebPlatform",
@@ -68,7 +73,7 @@ export default function PodcastSeriesSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: stringifySchema(podcastSeriesSchema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(podcastSeriesSchema) }}
     />
   );
 }

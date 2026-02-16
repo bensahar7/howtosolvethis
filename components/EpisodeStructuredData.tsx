@@ -1,5 +1,4 @@
 import { EnrichedEpisode } from "@/types/episode";
-import { stringifySchema, formatKeywords, createImageSchema } from "@/lib/schema-helpers";
 
 interface EpisodeStructuredDataProps {
   episode: EnrichedEpisode;
@@ -7,108 +6,90 @@ interface EpisodeStructuredDataProps {
 
 /**
  * Dynamic PodcastEpisode Schema Component
- * Generates rich structured data for each episode page
- * Enhances SEO, voice search, and podcast app discovery
+ * Generates episode-specific structured data for SEO
  */
 export default function EpisodeStructuredData({ episode }: EpisodeStructuredDataProps) {
   const metadata = episode.metadata;
   
-  // Build guest/creator array with LinkedIn profiles if available
-  const creators = [];
-  
-  // Add researcher if present
-  if (metadata?.researcher) {
-    creators.push({
-      "@type": "Person",
-      "name": metadata.researcher.name,
-      "sameAs": metadata.researcher.linkedIn || undefined,
-    });
-  }
-  
-  // Add company guests
-  if (metadata?.companies) {
-    metadata.companies.forEach(company => {
-      if (company.guestName) {
-        creators.push({
-          "@type": "Person",
-          "name": company.guestName,
-          "worksFor": {
-            "@type": "Organization",
-            "name": company.name,
-            "url": company.website,
-          },
-          "sameAs": company.guestLinkedIn || undefined,
-        });
-      }
-    });
-  }
-  
-  // Fallback to legacy guests array
-  if (creators.length === 0 && metadata?.guests) {
-    metadata.guests.forEach((guest, index) => {
-      creators.push({
-        "@type": "Person",
-        "name": guest,
-        "sameAs": metadata.guestLinkedIn?.[index] || undefined,
-      });
-    });
-  }
-
-  const structuredData = {
+  // Build the episode schema dynamically from episode data
+  const episodeSchema = {
     "@context": "https://schema.org",
     "@type": "PodcastEpisode",
     "@id": `https://howtosolvethis.com/episodes/${episode.episodeNumber}#episode`,
-    "episodeNumber": episode.episodeNumber,
-    "name": episode.title,
-    "description": metadata?.problem || episode.description,
-    "url": `https://howtosolvethis.com/episodes/${episode.episodeNumber}`,
-    "datePublished": episode.pubDate,
-    "image": createImageSchema(episode.imageUrl, 1200, 630),
-    "audio": {
-      "@type": "AudioObject",
-      "contentUrl": episode.audioUrl,
-      "duration": episode.duration,
-      "encodingFormat": "audio/mpeg",
+    name: episode.title,
+    description: metadata?.problem || episode.description,
+    url: `https://howtosolvethis.com/episodes/${episode.episodeNumber}`,
+    datePublished: episode.pubDate,
+    dateModified: episode.pubDate,
+    image: {
+      "@type": "ImageObject",
+      url: episode.imageUrl,
+      width: 1400,
+      height: 1400,
     },
-    "partOfSeries": {
+    audio: {
+      "@type": "AudioObject",
+      contentUrl: episode.audioUrl,
+      duration: episode.duration,
+      encodingFormat: "audio/mpeg",
+    },
+    partOfSeries: {
       "@type": "PodcastSeries",
       "@id": "https://howtosolvethis.com/#podcast",
-      "name": "איך פותרים את זה?",
-      "url": "https://howtosolvethis.com",
+      name: "איך פותרים את זה?",
+      url: "https://howtosolvethis.com",
     },
-    "publisher": {
-      "@id": "https://howtosolvethis.com/#organization",
-    },
-    "creator": creators.length > 0 ? creators : undefined,
-    "about": metadata?.sector ? {
+    episodeNumber: episode.episodeNumber,
+    inLanguage: "he",
+    // Dynamic creator/guest information
+    creator: metadata?.guests?.map(guest => ({
+      "@type": "Person",
+      name: guest,
+    })) || [{
+      "@type": "Person",
+      name: "בן סהר",
+    }],
+    // Topic/sector information
+    about: metadata?.sector ? {
       "@type": "Thing",
-      "name": metadata.sector,
-    } : undefined,
-    "keywords": metadata?.keywords ? formatKeywords(metadata.keywords) : undefined,
-    "inLanguage": "he",
-    // Transcript for voice search optimization
-    "transcript": metadata?.transcript ? {
+      name: metadata.sector,
+      description: metadata.problem,
+    } : {
+      "@type": "Thing",
+      name: "Climate Tech",
+    },
+    // Keywords for discoverability
+    keywords: metadata?.keywords?.map(k => 
+      typeof k === 'string' ? k : `${k.he}, ${k.en}`
+    ).join(", ") || "קליימט-טק, יזמות, אקלים",
+    // Company/organization mentions
+    mentions: metadata?.companyName ? [{
+      "@type": "Organization",
+      name: metadata.companyName,
+      url: metadata.companyWebsite,
+    }] : undefined,
+    // Transcript for voice search optimization (if available)
+    transcript: metadata?.transcript ? {
       "@type": "MediaObject",
-      "text": metadata.transcript.substring(0, 5000), // First 5000 chars for SEO
-      "encodingFormat": "text/plain",
-      "inLanguage": "he",
+      text: metadata.transcript.substring(0, 5000), // First 5000 chars for SEO
+      encodingFormat: "text/plain",
+      inLanguage: "he",
     } : undefined,
-    // Add mentions of companies featured
-    "mentions": metadata?.companies?.map(company => ({
-      "@type": "Organization",
-      "name": company.name,
-      "url": company.website,
-    })) || (metadata?.companyName ? [{
-      "@type": "Organization",
-      "name": metadata.companyName,
-      "url": metadata.companyWebsite,
-    }] : undefined),
+    // Interaction statistics (if available)
+    interactionStatistic: {
+      "@type": "InteractionCounter",
+      interactionType: "https://schema.org/ListenAction",
+      userInteractionCount: 0, // Can be updated with real analytics
+    },
   };
+
+  // Remove undefined fields for clean JSON-LD
+  const cleanedSchema = JSON.parse(JSON.stringify(episodeSchema));
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: stringifySchema(structuredData) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanedSchema) }}
     />
   );
 }

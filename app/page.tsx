@@ -12,7 +12,9 @@ import { Suspense } from "react";
 export default function HomePage() {
   return (
     <>
+      {/* PodcastSeries Schema for Home Page */}
       <PodcastSeriesSchema />
+      
       <Header />
 
       {/* Hero Section - Asymmetric but CENTERED Container */}
