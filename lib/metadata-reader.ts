@@ -95,6 +95,25 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
   }
 
   // =========================================
+  // NEW: Parse Entrepreneur Tip (טיפ ליזם)
+  // =========================================
+  let entrepreneurTip: string | undefined = undefined;
+  const entrepreneurTipMatch = content.match(/\*\*(?:Entrepreneur Tip|טיפ ליזם):\*\*\s*(.+?)$/m);
+  if (entrepreneurTipMatch) {
+    entrepreneurTip = entrepreneurTipMatch[1].trim();
+  }
+
+  // =========================================
+  // NEW: Parse SEO Keywords
+  // =========================================
+  let seoKeywords: string[] | undefined = undefined;
+  const seoKeywordsMatch = content.match(/\*\*SEO Keywords:\*\*\s*(.+?)$/m);
+  if (seoKeywordsMatch) {
+    const keywordText = seoKeywordsMatch[1];
+    seoKeywords = keywordText.split(/[,،]/).map((k) => k.trim()).filter(Boolean);
+  }
+
+  // =========================================
   // NEW: Parse Researcher Info
   // =========================================
   const researcherMatch = content.match(/\*\*(?:Researcher|Resercher):\*\*\s*(.+?)$/m); // Note: typo-tolerant
@@ -191,7 +210,11 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
     solution,
     entrepreneurInsight,
     
-    // NEW fields
+    // GROWTH HIERARCHY fields
+    entrepreneurTip: entrepreneurTip,
+    seoKeywords: seoKeywords,
+    
+    // MULTI-COMPANY fields
     researcher: researcher,
     companies: companies.length > 0 ? companies : undefined,
     
@@ -210,9 +233,6 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
 async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
   try {
     const entries = await fs.readdir(EPISODES_DIR, { withFileTypes: true });
-    // #region agent log
-    fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:198',message:'Found episode directories',data:{totalEntries:entries.length,directories:entries.filter(e=>e.isDirectory()).map(e=>e.name)},timestamp:Date.now(),runId:'init',hypothesisId:'H5'})}).catch(()=>{});
-    // #endregion
     const episodeDirs = entries.filter((entry) => entry.isDirectory());
 
     const metadataPromises = episodeDirs.map(async (dir) => {
@@ -230,9 +250,6 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
           await fs.access(path.join(episodePath, file));
           metaFile = file;
           foundFile = true;
-          // #region agent log
-          fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:212',message:'Found metadata file',data:{episodeDir:dir.name,foundFile:file},timestamp:Date.now(),runId:'init',hypothesisId:'H1'})}).catch(()=>{});
-          // #endregion
           break;
         } catch {
           continue;
@@ -240,9 +257,6 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
       }
       
       if (!foundFile) {
-        // #region agent log
-        fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:224',message:'No metadata file found',data:{episodeDir:dir.name,triedFiles:possibleFiles},timestamp:Date.now(),runId:'init',hypothesisId:'H1'})}).catch(()=>{});
-        // #endregion
         return null;
       }
 
@@ -269,10 +283,6 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
         }
 
         const parsed = parseMetadataFile(content, episodeNumber);
-        
-        // #region agent log
-        fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:240',message:'Parsed metadata',data:{episodeDir:dir.name,episodeNumber:parsed.episodeNumber,title:parsed.title,hasCompanies:!!parsed.companies,companyCount:parsed.companies?.length||0,hasResearcher:!!parsed.researcher},timestamp:Date.now(),runId:'init',hypothesisId:'H2,H3,H4'})}).catch(()=>{});
-        // #endregion
         
         // Add folder name for manual mapping
         parsed.folderName = dir.name;
