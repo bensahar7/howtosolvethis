@@ -210,17 +210,40 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
 async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
   try {
     const entries = await fs.readdir(EPISODES_DIR, { withFileTypes: true });
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:198',message:'Found episode directories',data:{totalEntries:entries.length,directories:entries.filter(e=>e.isDirectory()).map(e=>e.name)},timestamp:Date.now(),runId:'init',hypothesisId:'H5'})}).catch(()=>{});
+    // #endregion
     const episodeDirs = entries.filter((entry) => entry.isDirectory());
 
     const metadataPromises = episodeDirs.map(async (dir) => {
       const episodePath = path.join(EPISODES_DIR, dir.name);
       
-      // Try to find meta.md.txt or mark.txt
+      // Try to find meta.md.txt, meta.md, meta.md.md, or mark.txt
       let metaFile = "meta.md.txt";
-      try {
-        await fs.access(path.join(episodePath, metaFile));
-      } catch {
-        metaFile = "mark.txt";
+      let foundFile = false;
+      
+      // Try multiple file extensions in order
+      const possibleFiles = ["meta.md.txt", "meta.md", "meta.md.md", "mark.txt"];
+      
+      for (const file of possibleFiles) {
+        try {
+          await fs.access(path.join(episodePath, file));
+          metaFile = file;
+          foundFile = true;
+          // #region agent log
+          fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:212',message:'Found metadata file',data:{episodeDir:dir.name,foundFile:file},timestamp:Date.now(),runId:'init',hypothesisId:'H1'})}).catch(()=>{});
+          // #endregion
+          break;
+        } catch {
+          continue;
+        }
+      }
+      
+      if (!foundFile) {
+        // #region agent log
+        fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:224',message:'No metadata file found',data:{episodeDir:dir.name,triedFiles:possibleFiles},timestamp:Date.now(),runId:'init',hypothesisId:'H1'})}).catch(()=>{});
+        // #endregion
+        return null;
       }
 
       try {
@@ -246,6 +269,10 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
         }
 
         const parsed = parseMetadataFile(content, episodeNumber);
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:240',message:'Parsed metadata',data:{episodeDir:dir.name,episodeNumber:parsed.episodeNumber,title:parsed.title,hasCompanies:!!parsed.companies,companyCount:parsed.companies?.length||0,hasResearcher:!!parsed.researcher},timestamp:Date.now(),runId:'init',hypothesisId:'H2,H3,H4'})}).catch(()=>{});
+        // #endregion
         
         // Add folder name for manual mapping
         parsed.folderName = dir.name;
