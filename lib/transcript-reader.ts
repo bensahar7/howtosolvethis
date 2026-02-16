@@ -13,10 +13,25 @@ export async function getTranscriptByEpisode(
     
     // Use folderName if provided, otherwise try to match by episode number
     const targetFolder = folderName || `ep${episodeNumber}`;
-    const transcriptPath = path.join(EPISODES_DIR, targetFolder, "transcript.txt");
     
-    // Read file with UTF-8 encoding
-    let content = await fs.readFile(transcriptPath, "utf-8");
+    // Try multiple transcript file extensions (.md, .txt)
+    const possibleFiles = ["transcript.md", "transcript.txt"];
+    let content: string | null = null;
+    
+    for (const fileName of possibleFiles) {
+      try {
+        const transcriptPath = path.join(EPISODES_DIR, targetFolder, fileName);
+        content = await fs.readFile(transcriptPath, "utf-8");
+        break; // Found the file, stop searching
+      } catch {
+        // File not found, try next extension
+        continue;
+      }
+    }
+    
+    if (!content) {
+      throw new Error(`No transcript file found in ${targetFolder}`);
+    }
     
     // Strip BOM if present
     content = content.replace(/^\uFEFF/, "");
