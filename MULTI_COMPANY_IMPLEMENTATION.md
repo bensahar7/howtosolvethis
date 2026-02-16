@@ -47,7 +47,7 @@ Successfully implemented full support for multi-company/multi-guest episodes (e.
 
 #### `ResearcherSection.tsx`
 - 🔬 Academic/research guest display
-- 🎨 Distinct styling: Blue accent, shield icon, full-width layout
+- 🎨 Distinct styling: Blue accent, full-width layout (no generic shield icon)
 - 📱 Responsive: Stacks on mobile, horizontal on desktop
 - 🔗 LinkedIn integration
 
@@ -108,7 +108,7 @@ Successfully implemented full support for multi-company/multi-guest episodes (e.
 │                         │                                │
 │  🎯 בריאות הכוורת       │  🎯 אופטימיזציה של האבקה      │
 │                         │                                │
-│  [🌐 בקר באתר]          │  [🌐 בקר באתר]                │
+│        [🌐]              │        [🌐]                  │
 └────────────────────────┴────────────────────────────────┘
 
 💬 Note: "Both companies offer different approaches to the same problem"

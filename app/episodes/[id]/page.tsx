@@ -375,13 +375,25 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               episodeUrl={episodeUrl}
             />
 
-            {/* Keywords with Bilingual Tags */}
-            {metadata?.keywords && metadata.keywords.length > 0 && (
+            {/* Keywords Section - Combined bilingual tags + SEO keywords */}
+            {((metadata?.keywords && metadata.keywords.length > 0) || 
+              (metadata?.seoKeywords && metadata.seoKeywords.length > 0)) && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="technical-text text-xs mb-4 md:mb-6">KEYWORDS</h2>
                 <div className="flex flex-wrap gap-2 md:gap-3">
-                  {metadata.keywords.map((keyword, i) => (
-                    <BilingualTag key={i} keyword={keyword} />
+                  {/* Bilingual Keywords (fancy tags) */}
+                  {metadata?.keywords?.map((keyword, i) => (
+                    <BilingualTag key={`bilingual-${i}`} keyword={keyword} />
+                  ))}
+                  
+                  {/* SEO Keywords (simple tags) */}
+                  {metadata?.seoKeywords?.map((keyword, i) => (
+                    <span 
+                      key={`seo-${i}`}
+                      className="px-3 py-1 text-xs text-white/50 bg-white/5 rounded-full border border-white/10"
+                    >
+                      {keyword}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -393,22 +405,6 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 transcript={metadata.transcript}
                 episodeTitle={episode.title}
               />
-            )}
-
-            {/* NEW: SEO Keywords (Subtle tags at bottom for SEO indexing) */}
-            {metadata?.seoKeywords && metadata.seoKeywords.length > 0 && (
-              <div className="mb-6 md:mb-8">
-                <div className="flex flex-wrap gap-2">
-                  {metadata.seoKeywords.map((keyword, i) => (
-                    <span 
-                      key={i}
-                      className="px-3 py-1 text-xs text-white/50 bg-white/5 rounded-full border border-white/10"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
-              </div>
             )}
 
             {/* Related Episodes */}

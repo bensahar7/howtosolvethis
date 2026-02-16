@@ -18,6 +18,10 @@ interface CompanyCardProps {
 export default function CompanyCard({ company, index = 0 }: CompanyCardProps) {
   const [imageError, setImageError] = useState(false);
 
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CompanyCard.tsx:21',message:'CompanyCard rendered',data:{companyName:company.name,companyLogo:company.logo},timestamp:Date.now(),hypothesisId:'H1,H2,H3,H5'})}).catch(()=>{});
+  // #endregion
+
   // Map logo filenames to public folder paths
   const logoMapping: Record<string, string> = {
     "logo.jpeg": "/logos/oshi.jpeg",
@@ -32,6 +36,10 @@ export default function CompanyCard({ company, index = 0 }: CompanyCardProps) {
     company.logo && logoMapping[company.logo]
       ? logoMapping[company.logo]
       : null;
+  
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CompanyCard.tsx:42',message:'Logo path resolved in CompanyCard',data:{companyLogo:company.logo,logoPath,mappingKeys:Object.keys(logoMapping)},timestamp:Date.now(),hypothesisId:'H1,H3'})}).catch(()=>{});
+  // #endregion
 
   return (
     <div
@@ -154,7 +162,7 @@ export default function CompanyCard({ company, index = 0 }: CompanyCardProps) {
               d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
             />
           </svg>
-          <span className="text-white text-sm">בקר באתר</span>
+          {/* רק האיקון, בלי טקסט */}
         </a>
       )}
     </div>

@@ -19,18 +19,40 @@ export default function CompanySection({
 }: CompanySectionProps) {
   const [imageError, setImageError] = useState(false);
   
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CompanySection.tsx:23',message:'CompanySection rendered',data:{companyName,companyLogo,episodeFolderName},timestamp:Date.now(),hypothesisId:'H1,H2,H3,H5'})}).catch(()=>{});
+  // #endregion
+  
   if (!companyName) return null;
 
-  // Map logo filenames to public folder paths
-  const logoMapping: Record<string, string> = {
-    'logo.jpeg': '/logos/oshi.jpeg',
-    'logo.png': '/logos/polymertal.png',
-    'logo.jpg': '/logos/structurepal.jpg',
-  };
-
-  const logoPath = companyLogo && logoMapping[companyLogo] 
-    ? logoMapping[companyLogo]
-    : null;
+  // Dynamic logo path construction based on episode folder name
+  // This prevents cross-episode contamination where multiple episodes have "logo.png"
+  let logoPath: string | null = null;
+  
+  if (companyLogo && episodeFolderName) {
+    // Extract just the extension from companyLogo (e.g., "logo.jpeg" -> "jpeg")
+    const extension = companyLogo.split('.').pop() || '';
+    
+    // Map episode folders to their specific logo files in public/logos/
+    // Only include episodes where the logo file actually exists
+    const episodeLogoMap: Record<string, string> = {
+      'ep12-foodtech-oshi': `/logos/oshi.jpeg`,
+      'ep13-materials-polymertal': `/logos/polymertal.png`,
+      'ep4-structurepal': `/logos/structurepal.jpg`,
+      'ep2- Salicrop': `/logos/salicrop.jpg`,
+      'ep3-daikawood': `/logos/daikawood.png`,
+      'ep6-textile-recycling-textre': `/logos/textre.jpg`,
+      'ep8-satellite-astrea': `/logos/astrea.jpg`,
+      // ep10-waste-to-energy-boson: logo file missing, will show fallback
+      'ep11-foodtech-brevel': `/logos/brevel.png`,
+    };
+    
+    logoPath = episodeLogoMap[episodeFolderName] || null;
+  }
+  
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CompanySection.tsx:52',message:'Logo path resolved',data:{companyLogo,logoPath,episodeFolderName},timestamp:Date.now(),hypothesisId:'H1,H3'})}).catch(()=>{});
+  // #endregion
 
   return (
     <section className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
