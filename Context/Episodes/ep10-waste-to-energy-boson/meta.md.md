@@ -5,7 +5,10 @@
 - **Role:** סמנכ"ל טכנולוגיה (CTO) ב-Boson Energy
 - **Sector:** Waste-to-Energy / Circular Economy / CleanTech
 - **Keywords:** פסולת לאנרגיה/Waste-to-Energy, טיפול תרמי/Thermal Treatment, מימן ירוק/Green Hydrogen
-
+- **Guest LinkedIn:** https://il.linkedin.com/in/lirandor
+- **Company Website:** https://bosonenergy.com
+- **Company Name:** Boson Energy‏
+- **Company Logo:** logo.jpeg
 ## The Problem (The Energy-Waste Crisis)
 העולם סובל משתי בעיות מקבילות: הצטברות אינסופית של פסולת והצורך הגובר באנרגיה זמינה (במיוחד עם עליית ה-AI והקריפטו). בישראל ובעולם, הטיפול בפסולת עדיין לוקה בחסר, ומשאבים יקרים נטמנים באדמה במקום להיות מנוצלים, מה שיוצר "עוני אנרגטי" ובזבוז של חומרים שיכולים להפוך לדלק.
 

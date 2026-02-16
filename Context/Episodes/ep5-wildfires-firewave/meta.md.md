@@ -1,12 +1,3 @@
-- **Guest:** אופק רון (Ofek Ron)
-- **Role:** מנכ"ל ומייסד Oshi
-- **Sector:** FoodTech / Alternative Protein / Ocean Conservation
-- **Keywords:** סלמון מהצומח/Plant-based Salmon, דיג יתר/Overfishing, חדשנות מזון/Food Innovation
-- **Guest LinkedIn:** https://www.linkedin.com/in/ofek-ron
-- **Company Website:** https://oshi.com/
-- **Company Name:** Oshi
-- **Company Logo:** logo.jpeg
-
 # Episode 5: Firewave - להתמודד עם מגפת השריפות העולמית
 
 ## Core Metadata

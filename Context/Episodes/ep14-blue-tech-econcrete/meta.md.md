@@ -4,9 +4,10 @@
 - **Guest:** מאור בזנר (Maor Bezner)
 - **Role:** CTO (סמנכ"ל טכנולוגיה)
 - **Sector:** Blue-Tech / Climate-Tech / Sustainable Infrastructure
-- **Guest's Linkedin :** 
-- **Company's Website:** 
+- **Guest's Linkedin :** https://il.linkedin.com/in/maor-bezner-a1576a8b
+- **Company's Website:** https://econcretetech.com/
 - **Keywords:** בטון אקולוגי/Ecological Concrete, הגנה חופית/Coastal Defense, מגוון ביולוגי/Marine Biodiversity
+- **Company Logo:** https://econcretetech.com/
 
 
 ## The Problem (The Marine Construction Paradox)

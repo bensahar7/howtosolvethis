@@ -6,6 +6,10 @@
 - **Background:** תואר שני בפיזיקה והתמחות בביופיזיקה (האוניברסיטה העברית)
 - **Sector:** FoodTech / Alternative Protein / ClimateTech
 - **Keywords:** מיקרו-אצות/Microalgae, חלבון בר-קיימא/Sustainable Protein, פוד-טק/FoodTech
+- **Guest LinkedIn:** https://il.linkedin.com/in/yonatan-golan
+- **Company Website:** https://brevel.co.il/ 
+- **Company Name:** Brevel
+- **Company Logo:** logo.png
 
 ## The Problem (The Protein Ceiling)
 תעשיית המזון מהחי היא אחת המזהמות בעולם, אך תחליפי החלבון הקיימים סובלים מ"תקרת זכוכית". הבעיה היא משולשת:

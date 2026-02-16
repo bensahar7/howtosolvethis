@@ -1,4 +1,5 @@
 import { EnrichedEpisode } from "@/types/episode";
+import { stringifySchema, formatKeywords, createImageSchema } from "@/lib/schema-helpers";
 
 interface EpisodeStructuredDataProps {
   episode: EnrichedEpisode;
@@ -6,71 +7,68 @@ interface EpisodeStructuredDataProps {
 
 /**
  * Dynamic PodcastEpisode Schema Component
- * Generates episode-specific structured data for SEO
+ * Generates rich structured data for each episode page
+ * Enhances SEO, voice search, and podcast app discovery
  */
 export default function EpisodeStructuredData({ episode }: EpisodeStructuredDataProps) {
   const metadata = episode.metadata;
   
-  // Build description from metadata or RSS
-  const description = metadata?.problem || episode.description || "";
-  const cleanDescription = typeof description === 'string' 
-    ? description.replace(/<[^>]*>/g, '').substring(0, 300)
-    : "";
+  // Build guest/creator array with LinkedIn profiles if available
+  const creators = [];
   
-  // Build guest/creator array
-  const creators: any[] = [];
-  
-  // Add guests
-  if (metadata?.guests && metadata.guests.length > 0) {
-    metadata.guests.forEach((guest, index) => {
-      creators.push({
-        "@type": "Person",
-        "name": guest,
-        "url": metadata.guestLinkedIn?.[index] || undefined,
-      });
-    });
-  }
-  
-  // Add researcher if exists
+  // Add researcher if present
   if (metadata?.researcher) {
     creators.push({
       "@type": "Person",
       "name": metadata.researcher.name,
-      "url": metadata.researcher.linkedIn || undefined,
-      "jobTitle": "Researcher",
+      "sameAs": metadata.researcher.linkedIn || undefined,
     });
   }
   
-  // Add host
-  creators.push({
-    "@type": "Person",
-    "name": "בן סהר",
-    "url": "https://www.linkedin.com/in/ben-sahar/",
-    "jobTitle": "Host",
-  });
+  // Add company guests
+  if (metadata?.companies) {
+    metadata.companies.forEach(company => {
+      if (company.guestName) {
+        creators.push({
+          "@type": "Person",
+          "name": company.guestName,
+          "worksFor": {
+            "@type": "Organization",
+            "name": company.name,
+            "url": company.website,
+          },
+          "sameAs": company.guestLinkedIn || undefined,
+        });
+      }
+    });
+  }
   
-  const episodeSchema = {
+  // Fallback to legacy guests array
+  if (creators.length === 0 && metadata?.guests) {
+    metadata.guests.forEach((guest, index) => {
+      creators.push({
+        "@type": "Person",
+        "name": guest,
+        "sameAs": metadata.guestLinkedIn?.[index] || undefined,
+      });
+    });
+  }
+
+  const structuredData = {
     "@context": "https://schema.org",
     "@type": "PodcastEpisode",
     "@id": `https://howtosolvethis.com/episodes/${episode.episodeNumber}#episode`,
+    "episodeNumber": episode.episodeNumber,
     "name": episode.title,
-    "description": cleanDescription,
+    "description": metadata?.problem || episode.description,
     "url": `https://howtosolvethis.com/episodes/${episode.episodeNumber}`,
     "datePublished": episode.pubDate,
-    "image": {
-      "@type": "ImageObject",
-      "url": episode.imageUrl,
-      "width": "1200",
-      "height": "630",
-    },
-    "associatedMedia": {
+    "image": createImageSchema(episode.imageUrl, 1200, 630),
+    "audio": {
       "@type": "AudioObject",
       "contentUrl": episode.audioUrl,
       "duration": episode.duration,
       "encodingFormat": "audio/mpeg",
-      "embedUrl": episode.spotifyEpisodeId 
-        ? `https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}`
-        : undefined,
     },
     "partOfSeries": {
       "@type": "PodcastSeries",
@@ -78,20 +76,24 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       "name": "איך פותרים את זה?",
       "url": "https://howtosolvethis.com",
     },
-    "creator": creators,
     "publisher": {
       "@id": "https://howtosolvethis.com/#organization",
     },
-    "inLanguage": "he",
+    "creator": creators.length > 0 ? creators : undefined,
     "about": metadata?.sector ? {
       "@type": "Thing",
       "name": metadata.sector,
     } : undefined,
-    "keywords": metadata?.keywords?.map(k => 
-      typeof k === 'string' ? k : `${k.he}, ${k.en}`
-    ).join(", ") || undefined,
-    "episodeNumber": episode.episodeNumber,
-    // Add company mentions if available
+    "keywords": metadata?.keywords ? formatKeywords(metadata.keywords) : undefined,
+    "inLanguage": "he",
+    // Transcript for voice search optimization
+    "transcript": metadata?.transcript ? {
+      "@type": "MediaObject",
+      "text": metadata.transcript.substring(0, 5000), // First 5000 chars for SEO
+      "encodingFormat": "text/plain",
+      "inLanguage": "he",
+    } : undefined,
+    // Add mentions of companies featured
     "mentions": metadata?.companies?.map(company => ({
       "@type": "Organization",
       "name": company.name,
@@ -103,13 +105,10 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
     }] : undefined),
   };
 
-  // Remove undefined fields
-  const cleanedSchema = JSON.parse(JSON.stringify(episodeSchema));
-
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanedSchema) }}
+      dangerouslySetInnerHTML={{ __html: stringifySchema(structuredData) }}
     />
   );
 }

@@ -6,6 +6,18 @@
 - **Sector:** AgriTech / Precision Agriculture / AI & Computer Vision
 - **Keywords:** ריסוס מדויק/Precision Spraying, חקלאות בת קיימא/Sustainable Farming, בינה מלאכותית/AI Vision
 
+- **Researcher:**  ד"ר גיל אשל (המכון הוולקני) 
+- **Researcher Google Scholar:** 
+- **Researcher Linkedin:** https://il.linkedin.com/in/gil-eshel-03405917
+
+## Multi-Company Episode (NEW FORMAT)
+- **Company Name 1:** GreenEye
+- **Company 1 Logo:** logo.png
+- **Company 1 Website:** https://greeneye.ag
+- **Company 1 Guest:** GreenEye
+- **Company 1 Guest Title:** Co Founder & CEO
+- **Company 1 Guest LinkedIn:** https://il.linkedin.com/in/nadav-bocher-a907a3171
+
 ## The Problem (The "Spray and Pray" Legacy)
 השיטה המסורתית בחקלאות היא "ריסוס אחיד" (Broadcast Spraying) – החקלאי מרסס את כל השדה בכימיקלים, למרות שהעשבים השוטים מהווים רק אחוז קטן מהשטח. זה מוביל ל-3 בעיות קריטיות:
 1. **נזק סביבתי:** זיהום קרקע ומי תהום.

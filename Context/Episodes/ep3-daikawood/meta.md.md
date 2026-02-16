@@ -3,9 +3,14 @@
 ## Core Metadata
 - **Guest:** ד"ר מיכאל ליאני (Dr. Michael Liani)
 - **Role:** מייסד Daikawood
+- **Guest LinkedIn:** https://il.linkedin.com/in/michael-layani-00560919
+- **Company Website:** [https://www.structure-pal.com/](https://daikawood.com/)
+- **Company Name:** Structure Pal Ltd‏
+- **Company Logo:** logo.jpg
 - **Background:** דוקטורט במדעי החומרים
 - **Sector:** Circular Economy / Material Science / CleanTech
 - **Keywords:** פסולת עץ/Wood Waste, חומרים בני קיימא/Sustainable Materials, שדרוג חומרים/Upcycling
+- Logo: logo.png
 
 ## The Problem (The "Hidden" Waste)
 למרות שעץ נתפס כחומר טבעי, תעשיית פסולת העץ היא עצומה ומזהמת. בארה"ב לבדה מיוצרים כ-20 מיליון טון של פסולת עץ בשנה (רהיטים, משטחים, אריזות). הנתון המדהים: כ-80% מהפסולת הזו מגיעה למטמנות אשפה רגילות ולא ממוחזרת, מה שמוביל לפליטות גזי חממה ובזבוז משאב יקר.

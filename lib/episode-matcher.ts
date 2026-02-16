@@ -16,7 +16,7 @@ function matchEpisodeWithMetadata(
 
   if (!rssEpisodeNum) {
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`[MATCHER] No episode number for RSS episode: "${rssEpisode.title}"`);
+    console.warn(`[MATCHER] No episode number for RSS episode: "${rssEpisode.title}"`);
     }
     return null;
   }
@@ -26,7 +26,7 @@ function matchEpisodeWithMetadata(
   
   if (!targetFolder) {
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`[MATCHER] No mapping found for RSS episode #${rssEpisodeNum}: "${rssEpisode.title}"`);
+    console.warn(`[MATCHER] No mapping found for RSS episode #${rssEpisodeNum}: "${rssEpisode.title}"`);
     }
     return null;
   }
@@ -36,12 +36,12 @@ function matchEpisodeWithMetadata(
 
   if (match) {
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[MATCHER] ✓ Matched RSS #${rssEpisodeNum} "${rssEpisode.title}" → "${match.title}"`);
+    console.log(`[MATCHER] ✓ Matched RSS #${rssEpisodeNum} "${rssEpisode.title}" → "${match.title}"`);
     }
     return match;
   } else {
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`[MATCHER] ✗ Target folder "${targetFolder}" not found for RSS episode #${rssEpisodeNum}`);
+    console.warn(`[MATCHER] ✗ Target folder "${targetFolder}" not found for RSS episode #${rssEpisodeNum}`);
     }
     return null;
   }
@@ -63,7 +63,7 @@ async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
     // If RSS failed, create episodes from local metadata only
     if (rssEpisodes.length === 0 && localMetadata.length > 0) {
       if (process.env.NODE_ENV === 'development') {
-        console.log("RSS feed unavailable, using local metadata as fallback");
+      console.log("RSS feed unavailable, using local metadata as fallback");
       }
       return localMetadata.map((metadata) => {
         // Use deterministic timestamp based on episode number
@@ -87,7 +87,7 @@ async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
 
     // Match RSS episodes with local metadata (NO transcript loading for performance)
     if (process.env.NODE_ENV === 'development') {
-      console.log(`\n[EPISODE MATCHER] Starting to match ${rssEpisodes.length} RSS episodes with ${localMetadata.length} local metadata files\n`);
+    console.log(`\n[EPISODE MATCHER] Starting to match ${rssEpisodes.length} RSS episodes with ${localMetadata.length} local metadata files\n`);
     }
     
     const enrichedEpisodes: EnrichedEpisode[] = rssEpisodes.map((rssEpisode) => {
@@ -115,7 +115,7 @@ async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
     return enrichedEpisodes;
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {
-      console.error("Error enriching episodes:", error);
+    console.error("Error enriching episodes:", error);
     }
     return [];
   }
