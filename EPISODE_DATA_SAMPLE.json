@@ -1,0 +1,68 @@
+{
+  "episodeNumber": 9,
+  "title": "Precision Spraying - להפסיק לרסס את כל השדה",
+  "guests": ["נדב בוכר", "ד\"ר גיל אשל"],
+  "sector": "AgriTech / Precision Agriculture / AI & Computer Vision",
+  "keywords": [
+    {
+      "he": "ריסוס מדויק",
+      "en": "Precision Spraying"
+    },
+    {
+      "he": "חקלאות בת קיימא",
+      "en": "Sustainable Farming"
+    },
+    {
+      "he": "בינה מלאכותית",
+      "en": "AI Vision"
+    }
+  ],
+  "problem": "השיטה המסורתית בחקלאות היא \"ריסוס אחיד\" (Broadcast Spraying) – החקלאי מרסס את כל השדה בכימיקלים, למרות שהעשבים השוטים מהווים רק אחוז קטן מהשטח. זה מוביל ל-3 בעיות קריטיות: נזק סביבתי, בריאות הציבור, ועמידות של עשבים לחומרי הדברה.",
+  "solution": "חברת GreenEye משתמשת בבינה מלאכותית וראייה ממוחשבת המותקנת על המרסס עצמו. המערכת מזהה בזמן אמת (תוך מילי-שניות) מהו \"צמח\" ומהו \"עשב רע\", ומרססת אך ורק את העשב. הפתרון מאפשר הפחתה של עד 90% בשימוש בחומרי הדברה.",
+  "entrepreneurInsight": "אל תתאהבו בפתרון, תתאהבו בבעיה. יזמים רבים בונים טכנולוגיה מדהימה שהיא 'Nice to have', אבל כדי להצליח בתעשיות קשות כמו חקלאות, אתם חייבים לפתור Pain Point אמיתי שהלקוח מוכן לשלם עליו.",
+  
+  "NEW_FIELDS": {
+    "entrepreneurTip": "אל תתאהבו בפתרון, תתאהבו בבעיה. בתעשיות שמרניות כמו חקלאות, חייבים לפתור Pain Point אמיתי שהלקוח מוכן לשלם עליו. חיבור לשותף אסטרטגי (חברת כימיה או מיכון) בשלב מוקדם הוא קריטי לוולידציה.",
+    "seoKeywords": [
+      "ריסוס מדויק",
+      "חקלאות מדויקת",
+      "אגריטק",
+      "בינה מלאכותית בחקלאות",
+      "חקלאות בת קיימא",
+      "פרסיז'ן אגריקלצ'ר"
+    ]
+  },
+
+  "UI_RENDERING": {
+    "entrepreneurTip_location": "Below Problem/Solution section",
+    "entrepreneurTip_design": {
+      "container": "High-contrast callout box",
+      "background": "Gradient from blue-500/10 to purple-500/10",
+      "border": "2px solid blue-400/30",
+      "badge": "Glass effect with 'טיפ ליזם' label",
+      "icon": "💡 emoji prefix",
+      "textColor": "white",
+      "fontSize": "text-base to text-lg",
+      "fontWeight": "font-medium"
+    },
+    "seoKeywords_location": "Bottom of page, before Related Episodes",
+    "seoKeywords_design": {
+      "container": "Flex wrap with gap-2",
+      "tag_style": "Rounded-full pill",
+      "background": "white/5",
+      "textColor": "white/50",
+      "fontSize": "text-xs",
+      "border": "1px solid white/10",
+      "purpose": "SEO indexing without visual distraction"
+    }
+  },
+
+  "VERIFICATION": {
+    "existing_data_preserved": true,
+    "backward_compatibility": true,
+    "linter_errors": 0,
+    "episodes_updated": 16,
+    "total_keywords_added": 96,
+    "total_tips_added": 16
+  }
+}

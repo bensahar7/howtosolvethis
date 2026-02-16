@@ -252,10 +252,24 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               </div>
             )}
 
-            {/* 4. Key Insight: טיפ ליזם (Entrepreneur Insight) */}
+            {/* NEW: Entrepreneur Tip Callout (High-Contrast) */}
+            {metadata?.entrepreneurTip && (
+              <div className="relative glass p-6 md:p-12 rounded-sm mb-6 md:mb-8 border-2 border-blue-400/30 bg-gradient-to-br from-blue-500/10 to-purple-500/10">
+                <div className="absolute top-4 right-4 glass px-3 py-1 rounded-sm">
+                  <span className="technical-text text-blue-300">טיפ ליזם</span>
+                </div>
+                <div className="mt-8">
+                  <p className="text-white text-base md:text-lg leading-relaxed font-medium">
+                    💡 {metadata.entrepreneurTip}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* 4. Key Insight: טיפ ליזם (Entrepreneur Insight - Legacy) */}
             {metadata?.entrepreneurInsight && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">טיפ ליזם</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">תובנת יזם</h2>
                 <p className="text-white/80 text-sm md:text-base leading-relaxed italic">
                   "{metadata.entrepreneurInsight}"
                 </p>
@@ -379,6 +393,22 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 transcript={metadata.transcript}
                 episodeTitle={episode.title}
               />
+            )}
+
+            {/* NEW: SEO Keywords (Subtle tags at bottom for SEO indexing) */}
+            {metadata?.seoKeywords && metadata.seoKeywords.length > 0 && (
+              <div className="mb-6 md:mb-8">
+                <div className="flex flex-wrap gap-2">
+                  {metadata.seoKeywords.map((keyword, i) => (
+                    <span 
+                      key={i}
+                      className="px-3 py-1 text-xs text-white/50 bg-white/5 rounded-full border border-white/10"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </div>
             )}
 
             {/* Related Episodes */}

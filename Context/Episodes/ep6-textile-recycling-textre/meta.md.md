@@ -1,10 +1,24 @@
-# Episode 8: Textile Recycling - אנחנו לובשים פלסטיק
+# Episode 6: Textile Recycling - אנחנו לובשים פלסטיק
 
 ## Core Metadata
-- **Guests:** ד"ר מיטל פלג מזרחי (אוניברסיטת ייל), לי כהן (Textre)
-- **Role:** חוקרת אופנה בת קיימא (מיטל), מנכ"לית ומייסדת Textre (לי)
+- **Guests:** לי כהן
+- **Role:** מייסדת ומנכלית
 - **Sector:** Circular Economy / Fashion-Tech / Waste Management
 - **Keywords:** אופנה מהירה/Fast Fashion, מחזור טקסטיל/Textile Recycling, כלכלה מעגלית/Circular Economy
+- **Researcher:** ד"ר מיטל פלג מזרחי (אוניברסיטת ייל)
+- **Researcher Website:** https://cbey.yale.edu/our-community/dr-meital-peleg-mizrachi
+- **Researcher Facebook:** https://www.facebook.com/meital.peleg.1/
+- **Researcher Instagram:** https://www.instagram.com/dressed_to_save_the_world/?hl=en
+- **Researcher Linkedin:** https://www.linkedin.com/in/meital-peleg-mizrahi
+
+
+## Multi-Company Episode (NEW FORMAT)
+- **Company Name 1:** TextRe
+- **Company 1 Logo:** logo.jpeg
+- **Company 1 Website:** https://www.text-re.com
+- **Company 1 Guest:** לי כהן
+- **Company 1 Guest Title:** Co-Founder & CEO
+- **Company 1 Guest LinkedIn:** https://www.linkedin.com/in/lee-cohen-466b41106
 
 ## The Problem (The "Plastic" Closet)
 תעשיית האופנה המהירה (Fast Fashion) עברה לשימוש מאסיבי בבדים סינתטיים מבוססי נפט. ב-H&M כ-66% מהבגדים מכילים פלסטיק, וב-Shein המספר מגיע ל-95.2%. הבעיה מחמירה כי:
@@ -27,3 +41,7 @@
 
 ## Entrepreneur Insight
 "אל תפחדו להעז ולנסות. מכישלונות צומחים הרבה יותר מאשר מהצלחות, והדבר הכי נורא הוא להתבאס שלא ניסיתם. טיפ קונקרטי: תבחרו בפינצטה את האנשים שאיתם אתם מקימים את המיזם, כי זה מסע ארוך ומאתגר שדורש שותפים לדרך שמאמינים בערך של מה שאתם עושים."
+
+## Growth Hierarchy Fields
+- **Entrepreneur Tip:** בחירת השותפים למיזם היא קריטית. בתחום הקלינטק והכלכלה המעגלית, המסע ארוך ומאתגר - תבחרו בפינצטה אנשים שמאמינים בערך של מה שאתם עושים ולא רק בפוטנציאל הכלכלי.
+- **SEO Keywords:** אופנה מהירה, מחזור טקסטיל, כלכלה מעגלית, פאשן-טק, קיימות, פסולת טקסטיל

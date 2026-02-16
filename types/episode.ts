@@ -52,6 +52,10 @@ export interface LocalMetadata {
   folderName?: string; // Added to support manual episode mapping
   transcript?: string;
   
+  // GROWTH HIERARCHY FIELDS (NEW)
+  entrepreneurTip?: string;      // Key actionable advice for entrepreneurs (Label: "טיפ ליזם")
+  seoKeywords?: string[];        // High-intent SEO keywords array
+  
   // MULTI-COMPANY SUPPORT (NEW)
   researcher?: ResearcherInfo; // For academic/expert guests
   companies?: CompanyInfo[];   // Array of companies featured

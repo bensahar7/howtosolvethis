@@ -6,11 +6,13 @@ import LinkedInBadge from "@/components/LinkedInBadge";
 import Footer from "@/components/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import ScrollToEpisodesButton from "@/components/ScrollToEpisodesButton";
+import PodcastSeriesSchema from "@/components/PodcastSeriesSchema";
 import { Suspense } from "react";
 
 export default function HomePage() {
   return (
     <>
+      <PodcastSeriesSchema />
       <Header />
 
       {/* Hero Section - Asymmetric but CENTERED Container */}

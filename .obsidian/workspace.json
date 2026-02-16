@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Context/Episodes/ep1-bees/transcript.md",
+                "file": "Context/Episodes/ep6-textile-recycling-textre/meta.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "transcript"
+              "title": "meta.md"
             }
           }
         ]
@@ -182,30 +182,38 @@
   },
   "active": "c5a5805e6f641752",
   "lastOpenFiles": [
+    "Context/Episodes/ep6-textile-recycling-textre/logo.jpg",
+    "Context/Episodes/ep6-textile-recycling-textre/meta.md.txt",
+    "Context/Episodes/ep5-wildfires-firewave/meta.md.txt",
+    "EPISODE_DATA_SAMPLE.json",
+    "ENTREPRENEUR_TIP_SEO_IMPLEMENTATION.md",
+    "Context/Episodes/ep5-wildfires-firewave/meta.md.md",
+    "Context/Episodes/ep6-textile-recycling-textre/meta.md.md",
+    "Context/Episodes/ep5-wildfires-firewave/logo.png",
+    "Context/Episodes/ep5-wildfires-firewave/Unconfirmed 890282.crdownload",
+    "Context/Episodes/ep12-foodtech-oshi/meta.md.md",
+    "Context/Episodes/ep8-satellite-astrea/transcript.txt",
+    "Context/Episodes/ep8-satellite-astrea/meta.md.txt",
+    "Context/Episodes/ep8-satellite-astrea",
+    "Context/Episodes/ep9-agritech-greeneye/meta.md.txt",
+    "Context/Episodes/ep9-agritech-greeneye/transcript.txt",
+    "Context/Episodes/ep9-agritech-greeneye",
+    "Context/Episodes/ep04-carbon-rewind/meta.md.md",
+    "Context/Episodes/ep7-carbon-rewind/meta.md.md",
+    "Context/Episodes/ep7-carbon-rewind/logo.jpg",
+    "Context/Episodes/ep4-structurepal/transcript.md",
+    "Context/Episodes/ep4-structurepal/logo.jpg",
+    "Context/Episodes/ep2- Salicrop/logo.jpg",
+    "Context/Episodes/ep1-bees/transcript.md",
     "public/logos/salicrop.jpg",
-    "Context/Episodes/ep3- Salicrop/transcript.txt",
-    "Context/Episodes/ep3- Salicrop/meta.md.txt",
     "public/logos/structurepal.jpg",
     "Context/Episodes/ep2-structurepal/transcript.md",
-    "Context/Episodes/ep1-bees/transcript.md",
     "Context/Episodes/ep3- Salicrop/transcript.md",
     "Context/Episodes/ep3- Salicrop/meta.md.md",
     "Context/Episodes/ep2-structurepal/logo.jpg",
-    "Context/Episodes/ep04-carbon-rewind/meta.md.md",
     "Context/Episodes/ep04-carbon-rewind/logo.jpg",
-    "Context/Episodes/ep04-carbon-rewind/Unconfirmed 175049.crdownload",
-    "Context/Episodes/ep1-bees/meta.md.txt",
     "Context/Episodes/ep3- Salicrop/logo.jpg",
     "Context/Episodes/ep1-bees/meta.md.md",
-    "Context/Episodes/ep1-bees/logo1.png",
-    "Context/Episodes/ep3- Salicrop/Unconfirmed 603541.crdownload",
-    "Context/Episodes/ep1-bees/logo2.jpg",
-    "Context/Episodes/ep13-materials-polymertal/logo.png",
-    "Context/Episodes/ep12-foodtech-oshi/logo.jpeg",
-    "Context/Episodes/ep12-foodtech-oshi/Unconfirmed 408682.crdownload",
-    "components/ShareButtons.tsx",
-    "components/RelatedEpisodes.tsx",
-    "components/EpisodeStructuredData.tsx",
-    "components/ReadMoreDescription.tsx"
+    "Context/Episodes/ep1-bees/logo1.png"
   ]
 }
