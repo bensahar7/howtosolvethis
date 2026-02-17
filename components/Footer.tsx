@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
 import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";

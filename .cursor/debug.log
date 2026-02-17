@@ -10513,3 +10513,19 @@
 {"location":"metadata-reader.ts:240","message":"Parsed metadata","data":{"episodeDir":"ep12-foodtech-oshi","episodeNumber":12,"title":"Oshi - פילה סלמון מהצומח ואקטיביזם יזמי","hasCompanies":false,"companyCount":0,"hasResearcher":false},"timestamp":1771227911873,"runId":"init","hypothesisId":"H2,H3,H4"}
 {"location":"metadata-reader.ts:240","message":"Parsed metadata","data":{"episodeDir":"ep7-carbon-rewind","episodeNumber":7,"title":"Carbon Sequestration - מה עושים עם הפחמן שכבר נפלט?","hasCompanies":true,"companyCount":1,"hasResearcher":true},"timestamp":1771227911876,"runId":"init","hypothesisId":"H2,H3,H4"}
 {"location":"metadata-reader.ts:240","message":"Parsed metadata","data":{"episodeDir":"ep15-foodtech-coffeesei","episodeNumber":15,"title":"CoffeeSai - Lab-Grown Cell-Based Coffee","hasCompanies":false,"companyCount":0,"hasResearcher":false},"timestamp":1771227911878,"runId":"init","hypothesisId":"H2,H3,H4"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:42:40.528Z"},"timestamp":1771306960530,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:42:41.648Z"},"timestamp":1771306961648,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:42:43.557Z"},"timestamp":1771306963557,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:42:43.558Z"},"timestamp":1771306963558,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:42:43.666Z"},"timestamp":1771306963666,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:42:43.666Z"},"timestamp":1771306963666,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:56:39.995Z"},"timestamp":1771307799996,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:56:42.758Z"},"timestamp":1771307802758,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:56:42.759Z"},"timestamp":1771307802759,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:56:42.933Z"},"timestamp":1771307802933,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:56:42.933Z"},"timestamp":1771307802933,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:58:53.888Z"},"timestamp":1771307934060,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:58:57.454Z"},"timestamp":1771307937454,"hypothesisId":"H1"}
+{"location":"LinkedInBadge.tsx:12","message":"LinkedInBadge component rendering","data":{"timestamp":"2026-02-17T05:58:57.457Z"},"timestamp":1771307937457,"hypothesisId":"H1"}
+{"location":"Footer.tsx:6","message":"Footer component rendering","data":{"timestamp":"2026-02-17T05:58:57.486Z"},"timestamp":1771307937487,"hypothesisId":"H2"}
+{"location":"Footer.tsx:6","message":"Footer component rendering","data":{"timestamp":"2026-02-17T05:58:57.493Z"},"timestamp":1771307937493,"hypothesisId":"H2"}
