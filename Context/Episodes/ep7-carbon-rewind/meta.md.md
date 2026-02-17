@@ -11,7 +11,7 @@
 - **Company Name 1:** Rewind
 - **Company 1 Logo:** logo.jpng
 - **Company 1 Website:** https://www.rewind.earth/
-- **Company 1 Guest:** Rewind
+- **Company 1 Guest:** רם עמר (Ram Amar)
 - **Company 1 Guest Title:** CEO
 - **Company 1 Guest LinkedIn:** https://il.linkedin.com/in/ramamar
 

@@ -120,20 +120,14 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
   if (researcherMatch) {
     const researcherName = researcherMatch[1].trim();
     
-    // Extract researcher LinkedIn (case-insensitive for "LinkedIn" or "Linkedin")
-    const researcherLinkedInMatch = content.match(/\*\*Researcher (?:LinkedIn|Linkedin):\*\*\s*(.+?)$/m);
+    // Extract researcher LinkedIn
+    const researcherLinkedInMatch = content.match(/\*\*Researcher LinkedIn:\*\*\s*(.+?)$/m);
     
     // Extract researcher Google Scholar
     const researcherGoogleScholarMatch = content.match(/\*\*Researcher Google Scholar:\*\*\s*(.+?)$/m);
     
     // Extract researcher website
     const researcherWebsiteMatch = content.match(/\*\*Researcher Website:\*\*\s*(.+?)$/m);
-    
-    // Extract researcher Facebook
-    const researcherFacebookMatch = content.match(/\*\*Researcher Facebook:\*\*\s*(.+?)$/m);
-    
-    // Extract researcher Instagram
-    const researcherInstagramMatch = content.match(/\*\*Researcher Instagram:\*\*\s*(.+?)$/m);
     
     researcher = {
       name: researcherName,
@@ -142,8 +136,6 @@ function parseMetadataFile(content: string, episodeNumber: number): LocalMetadat
       affiliation: undefined,
       googleScholar: researcherGoogleScholarMatch ? researcherGoogleScholarMatch[1].trim() : undefined,
       website: researcherWebsiteMatch ? researcherWebsiteMatch[1].trim() : undefined,
-      facebook: researcherFacebookMatch ? researcherFacebookMatch[1].trim() : undefined,
-      instagram: researcherInstagramMatch ? researcherInstagramMatch[1].trim() : undefined,
     };
   }
 

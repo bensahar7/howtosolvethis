@@ -37,8 +37,6 @@ export interface ResearcherInfo {
   affiliation?: string;      // University or research institute
   googleScholar?: string;    // Google Scholar profile URL
   website?: string;          // Personal or institutional website
-  facebook?: string;         // Facebook profile URL
-  instagram?: string;        // Instagram profile URL
 }
 
 export interface LocalMetadata {

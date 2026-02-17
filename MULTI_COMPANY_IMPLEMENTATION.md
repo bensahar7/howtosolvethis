@@ -120,7 +120,7 @@ Successfully implemented full support for multi-company/multi-guest episodes (e.
 
 ### **Researcher Section:**
 - Stack vertically
-- Academic badge hidden on mobile
+- לא צריך תג אקדמי (BADGE)
 - Touch-friendly LinkedIn button (48px min-height)
 
 ### **Company Grid:**
