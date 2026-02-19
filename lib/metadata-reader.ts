@@ -239,6 +239,9 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
     const entries = await fs.readdir(EPISODES_DIR, { withFileTypes: true });
     const episodeDirs = entries.filter((entry) => entry.isDirectory());
 
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:242',message:'getAllLocalMetadata: total episode dirs found',data:{count:episodeDirs.length,dirs:episodeDirs.map(d=>d.name)},timestamp:Date.now(),hypothesisId:'H-B'})}).catch(()=>{});
+    // #endregion
     const metadataPromises = episodeDirs.map(async (dir) => {
       const episodePath = path.join(EPISODES_DIR, dir.name);
       
@@ -261,6 +264,9 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
       }
       
       if (!foundFile) {
+        // #region agent log
+        fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:265',message:'No meta file found for directory',data:{dir:dir.name},timestamp:Date.now(),hypothesisId:'H-B'})}).catch(()=>{});
+        // #endregion
         return null;
       }
 
@@ -290,6 +296,10 @@ async function getAllLocalMetadataUncached(): Promise<LocalMetadata[]> {
         
         // Add folder name for manual mapping
         parsed.folderName = dir.name;
+
+        // #region agent log
+        fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'metadata-reader.ts:299',message:'Parsed metadata for episode',data:{dir:dir.name,metaFile,episodeNumber,title:parsed.title,guests:parsed.guests,sector:parsed.sector,hasCompanyName:!!parsed.companyName},timestamp:Date.now(),hypothesisId:'H-C'})}).catch(()=>{});
+        // #endregion
 
         return parsed;
       } catch (error) {

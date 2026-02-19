@@ -9,10 +9,6 @@
 import { trackEvent } from "@/lib/logger";
 
 export default function LinkedInBadge() {
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'LinkedInBadge.tsx:12',message:'LinkedInBadge component rendering',data:{timestamp:new Date().toISOString()},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
-  // #endregion
-
   const handleClick = () => {
     trackEvent("linkedin_badge_click", {
       target: "ben_sahar_profile",
@@ -47,11 +43,6 @@ export default function LinkedInBadge() {
         rel="noopener noreferrer"
         className="glass glass-hover p-3 rounded-full transition-all duration-300"
         aria-label="Ben Sahar on X (Twitter)"
-        onClick={() => {
-          // #region agent log
-          fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'LinkedInBadge.tsx:47',message:'X icon clicked',data:{href:'https://x.com/bensahar'},timestamp:Date.now(),hypothesisId:'H4'})}).catch(()=>{});
-          // #endregion
-        }}
       >
         <svg
           className="w-5 h-5"

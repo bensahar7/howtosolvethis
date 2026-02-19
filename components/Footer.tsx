@@ -4,12 +4,6 @@ import SpotifyIcon from "./SpotifyIcon";
 import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
 
 export default function Footer() {
-  // #region agent log
-  if (typeof window !== 'undefined') {
-    fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Footer.tsx:6',message:'Footer component rendering',data:{timestamp:new Date().toISOString()},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
-  }
-  // #endregion
-
   return (
     <footer className="glass-high-blur border-t border-white/10 mt-24">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -131,11 +125,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
                 aria-label="Facebook Page"
-                onClick={() => {
-                  // #region agent log
-                  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Footer.tsx:127',message:'Facebook icon clicked',data:{href:'https://www.facebook.com/profile.php?id=61560006065019'},timestamp:Date.now(),hypothesisId:'H4'})}).catch(()=>{});
-                  // #endregion
-                }}
+                onClick={() => {}}
               >
                 <svg
                   className="w-5 h-5"

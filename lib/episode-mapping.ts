@@ -19,9 +19,11 @@ export const EPISODE_MAPPING: Record<number, string> = {
   9: "ep9-agritech-greeneye", // "מה הבעיה עם הדברה?" → GreenEye (Precision Spraying)
   10: "ep10-waste-to-energy-boson", // "מה עושים עם הזבל שלנו?" → Boson Energy
   
-  // Season 2 (Episodes 11-14)
+  // Season 2 (Episodes 11-16)
   11: "ep14-blue-tech-econcrete", // S2E1: "מה הבעיה עם בטון בים?" → ECOncrete
   12: "ep11-foodtech-brevel", // S2E2: "איך מפיקים חלבון מאצות?" → Brevel (microalgae)
   13: "ep12-foodtech-oshi", // S2E3: "מה הבעיה עם תעשיית הסלמון?" → Oshi (salmon alternative)
   14: "ep13-materials-polymertal", // S2E4: "Polymertal - החברה שמפתחת אלטרנטיבה למתכת"
+  15: "ep15-foodtech-coffeesei", // S2E5: "CoffeeSai - Lab-Grown Cell-Based Coffee"
+  16: "ep16-coral-reefs-vcorals", // S2E6: "Coral Reefs - להציל את היערות של הים"
 };

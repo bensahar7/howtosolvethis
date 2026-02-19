@@ -96,6 +96,7 @@ export default function RootLayout({
       </head>
       <body
         className="font-sans antialiased min-h-screen relative overflow-x-hidden"
+        suppressHydrationWarning
       >
         <GoogleAnalytics />
         <Analytics />

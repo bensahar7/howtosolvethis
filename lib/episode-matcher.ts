@@ -24,6 +24,10 @@ function matchEpisodeWithMetadata(
   // Use manual mapping to find the correct folder
   const targetFolder = EPISODE_MAPPING[rssEpisodeNum];
   
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'episode-matcher.ts:26',message:'Mapping lookup',data:{rssEpisodeNum,rssTitle:rssEpisode.title,targetFolder:targetFolder||'NOT_FOUND',mappingKeys:Object.keys(EPISODE_MAPPING)},timestamp:Date.now(),hypothesisId:'H-A,H-D'})}).catch(()=>{});
+  // #endregion
+  
   if (!targetFolder) {
     if (process.env.NODE_ENV === 'development') {
     console.warn(`[MATCHER] No mapping found for RSS episode #${rssEpisodeNum}: "${rssEpisode.title}"`);
@@ -59,6 +63,10 @@ async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
       fetchRSSFeed(),
       getAllLocalMetadata(),
     ]);
+
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'episode-matcher.ts:63',message:'Data loaded for matching',data:{rssCount:rssEpisodes.length,rssNumbers:rssEpisodes.map(e=>e.episodeNumber),localCount:localMetadata.length,localFolders:localMetadata.map(m=>m.folderName),localEpNums:localMetadata.map(m=>m.episodeNumber)},timestamp:Date.now(),hypothesisId:'H-D,H-E'})}).catch(()=>{});
+    // #endregion
 
     // If RSS failed, create episodes from local metadata only
     if (rssEpisodes.length === 0 && localMetadata.length > 0) {
@@ -111,6 +119,12 @@ async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
       const numB = b.episodeNumber || 0;
       return numB - numA;
     });
+
+    // #region agent log
+    const matched = enrichedEpisodes.filter(e => e.metadata !== null);
+    const unmatched = enrichedEpisodes.filter(e => e.metadata === null);
+    fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'episode-matcher.ts:120',message:'Final enrichment results',data:{total:enrichedEpisodes.length,matchedCount:matched.length,unmatchedCount:unmatched.length,unmatchedEps:unmatched.map(e=>({num:e.episodeNumber,title:e.title})),matchedEps:matched.map(e=>({num:e.episodeNumber,title:e.title,folder:e.metadata?.folderName}))},timestamp:Date.now(),hypothesisId:'H-A,H-D,H-E'})}).catch(()=>{});
+    // #endregion
 
     return enrichedEpisodes;
   } catch (error) {

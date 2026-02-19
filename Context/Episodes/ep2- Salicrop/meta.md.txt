@@ -11,11 +11,12 @@
 - **Researcher Website:** http://www.bgu.ac.il/people/rshimon/
 ## Multi-Company Episode (NEW FORMAT)
 - **Company Name 1:** SaliCrop
-- **Company 1 Logo:** logo.jpg
+- **Company 1 Logo:** salicrop.jpg
 - **Company 1 Website:** https://www.salicrop.com/
 - **Company 1 Guest:** אורון בית אור
 - **Company 1 Guest Title:** COO
 - **Company 1 Guest LinkedIn:** https://il.linkedin.com/in/oron-bet-or-147b25250
+
 
 ## The Problem (The Agricultural Challenge)
 גידול האוכלוסייה דורש יותר מזון, אך שינוי האקלים הופך את המשימה לבלתי אפשרית בשיטות המסורתיות. הבעיה המרכזית היא "עקות ביוטיות": חוסר סדירות במשקעים ומליחות מצטברת בקרקע ובמי ההשקיה שפוגעים ביבול ובאיכות התזונתית שלו (ירידה באיכות למרות עליית ה-CO2).

@@ -9,7 +9,7 @@
 - **Researcher Website:** https://in.bgu.ac.il/humsos/geog/pages/staff/avnergross.aspx
 ## Multi-Company Episode (NEW FORMAT)
 - **Company Name 1:** Rewind
-- **Company 1 Logo:** logo.jpng
+- **Company 1 Logo:** rewind.jpg
 - **Company 1 Website:** https://www.rewind.earth/
 - **Company 1 Guest:** רם עמר (Ram Amar)
 - **Company 1 Guest Title:** CEO

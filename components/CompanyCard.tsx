@@ -18,28 +18,28 @@ interface CompanyCardProps {
 export default function CompanyCard({ company, index = 0 }: CompanyCardProps) {
   const [imageError, setImageError] = useState(false);
 
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CompanyCard.tsx:21',message:'CompanyCard rendered',data:{companyName:company.name,companyLogo:company.logo},timestamp:Date.now(),hypothesisId:'H1,H2,H3,H5'})}).catch(()=>{});
-  // #endregion
-
   // Map logo filenames to public folder paths
   const logoMapping: Record<string, string> = {
+    // Generic filenames (for multi-company episodes)
     "logo.jpeg": "/logos/oshi.jpeg",
     "logo.png": "/logos/polymertal.png",
     "logo1.jpeg": "/logos/beehero.png",
     "logo1.png": "/logos/beehero.png",
     "logo2.jpeg": "/logos/tobee.jpg",
     "logo2.jpg": "/logos/tobee.jpg",
+    // Specific filenames (for newer episodes with descriptive names)
+    "greeneye.png": "/logos/greeneye.png",
+    "textre.jpeg": "/logos/textre.jpg",
+    "rewind.jpg": "/logos/rewind.jpg",
+    "salicrop.jpg": "/logos/salicrop.jpg",
   };
 
   const logoPath =
     company.logo && logoMapping[company.logo]
       ? logoMapping[company.logo]
-      : null;
-  
-  // #region agent log
-  fetch('http://127.0.0.1:7243/ingest/732c9a20-d459-4eb0-9038-49ff5920b402',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CompanyCard.tsx:42',message:'Logo path resolved in CompanyCard',data:{companyLogo:company.logo,logoPath,mappingKeys:Object.keys(logoMapping)},timestamp:Date.now(),hypothesisId:'H1,H3'})}).catch(()=>{});
-  // #endregion
+      : company.logo 
+        ? `/logos/${company.logo}` // Fallback: try direct path construction
+        : null;
 
   return (
     <div
