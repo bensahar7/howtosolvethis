@@ -45,8 +45,10 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const episodes = await getEnrichedEpisodes();
-  const episode = episodes.find((ep) => ep.episodeNumber?.toString() === id);
+  const episodeNumber = parseInt(id, 10);
+  
+  // Use getEpisodeWithTranscript to fetch full data
+  const episode = await getEpisodeWithTranscript(episodeNumber);
 
   if (!episode) {
     return {
@@ -56,10 +58,14 @@ export async function generateMetadata({
 
   const metadata = episode.metadata;
   
-  // SEO-optimized description
+  // SEO Title: Episode [Number]: [Title] | [Guests]
+  const guests = metadata?.guests?.join(", ") || "";
+  const seoTitle = `Episode ${episodeNumber}: ${episode.title}${guests ? ` | ${guests}` : ""}`;
+  
+  // SEO Description: Use metadata.problem (limit to 155 chars)
   const seoDescription = metadata?.problem 
-    ? metadata.problem.substring(0, 160)
-    : episode.description?.replace(/<[^>]*>/g, '').substring(0, 160) || "";
+    ? metadata.problem.substring(0, 155).trim() + (metadata.problem.length > 155 ? "..." : "")
+    : episode.description?.replace(/<[^>]*>/g, '').substring(0, 155) || "";
   
   // Rich keywords combining sector, guest names, and bilingual keywords
   const seoKeywords = [
@@ -74,7 +80,7 @@ export async function generateMetadata({
   ].filter(Boolean).join(", ");
 
   return {
-    title: episode.title,
+    title: seoTitle,
     description: seoDescription,
     keywords: seoKeywords,
     
@@ -84,7 +90,7 @@ export async function generateMetadata({
       locale: "he_IL",
       url: `https://howtosolvethis.com/episodes/${id}`,
       siteName: "איך פותרים את זה?",
-      title: episode.title,
+      title: seoTitle,
       description: seoDescription,
       images: [
         {
@@ -102,7 +108,7 @@ export async function generateMetadata({
     // Twitter Card
     twitter: {
       card: "summary_large_image",
-      title: episode.title,
+      title: seoTitle,
       description: seoDescription,
       images: [episode.imageUrl],
       creator: "@bensahar",
