@@ -266,23 +266,13 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 </div>
                 <div className="mt-8">
                   <p className="text-white text-base md:text-lg leading-relaxed font-medium">
-                    💡 {metadata.entrepreneurTip}
+                     {metadata.entrepreneurTip}
                   </p>
                 </div>
               </div>
             )}
 
-            {/* 4. Key Insight: טיפ ליזם (Entrepreneur Insight - Legacy) */}
-            {metadata?.entrepreneurInsight && (
-              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">תובנת יזם</h2>
-                <p className="text-white/80 text-sm md:text-base leading-relaxed italic">
-                  "{metadata.entrepreneurInsight}"
-                </p>
-              </div>
-            )}
-
-            {/* Key Discussion Points (After Insight) */}
+            {/* Key Discussion Points */}
             {metadata?.keyPoints && metadata.keyPoints.length > 0 && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">נקודות מפתח</h2>
