@@ -123,13 +123,7 @@ Added parsing logic for new fields:
 ### 3. UI Components Updated
 **File:** `app/episodes/[id]/page.tsx`
 
-#### Entrepreneur Tip Callout (High-Contrast)
-- Positioned below Problem/Solution section
-- High-contrast design with gradient background
-- Border with blue/purple accent
-- Badge label "טיפ ליזם"
-- Prominent emoji (💡) for visual appeal
-- Larger font size for emphasis
+// (section intentionally removed)
 
 #### SEO Keywords Tags
 - Positioned at bottom of page, before Related Episodes
@@ -180,7 +174,7 @@ Added parsing logic for new fields:
 - **Border:** 2px solid blue-400/30
 - **Badge:** Glass effect with "טיפ ליזם" label
 - **Text:** White, font-medium, text-base to text-lg
-- **Icon:** 💡 emoji prefix
+- **Icon:**  emoji prefix
 
 ### SEO Keywords Tags
 - **Background:** white/5
