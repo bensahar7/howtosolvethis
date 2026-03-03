@@ -397,10 +397,19 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
 
             {/* 6. Content Archive: Transcript (Accordion - closed by default) */}
             {metadata?.transcript && (
-              <TranscriptAccordion
-                transcript={metadata.transcript}
-                episodeTitle={episode.title}
-              />
+              <>
+                <TranscriptAccordion
+                  transcript={metadata.transcript}
+                  episodeTitle={episode.title}
+                />
+                
+                {/* Hidden full transcript for search engine crawling */}
+                {/* This ensures the full content is in the initial HTML for Google indexing */}
+                <div className="sr-only" aria-hidden="true">
+                  <h2>תמליל מלא - {episode.title}</h2>
+                  <div>{metadata.transcript}</div>
+                </div>
+              </>
             )}
 
             {/* Related Episodes */}
