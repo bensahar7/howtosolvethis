@@ -32,13 +32,15 @@ export default function CompanySection({
     // Map episode folders to their specific logo files in public/logos/
     // Only include episodes where the logo file actually exists
     const episodeLogoMap: Record<string, string> = {
+      'ep1-bees': `/logos/beehero.png`,
       'ep2- Salicrop': `/logos/salicrop.jpg`,
       'ep3-daikawood': `/logos/daikawood.png`,
       'ep4-structurepal': `/logos/structurepal.jpg`,
       'ep5-wildfires-firewave': `/logos/firewave.png`,
       'ep6-textile-recycling-textre': `/logos/textre.jpg`,
       'ep7-carbon-rewind': `/logos/rewind.jpg`,
-      'ep8-satellite-astrea': `/logos/asterra‏.jpg`,
+      'ep8-satellite-astrea': `/logos/asterra.jpg`,
+      'ep9-agritech-greeneye': `/logos/greeneye.png`,
       'ep10-waste-to-energy-boson': `/logos/boson.jpg`,
       'ep11-foodtech-brevel': `/logos/brevel.png`,
       'ep12-foodtech-oshi': `/logos/oshi.jpeg`,

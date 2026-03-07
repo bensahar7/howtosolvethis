@@ -318,6 +318,134 @@ a {
   transform: scale(0.95);
 }
 
+/* Spotify Button - Glassmorphism with Spotify Brand Color */
+.btn-spotify {
+  background: rgba(29, 185, 84, 0.15); /* Spotify Green with transparency */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #1DB954; /* Spotify Green text */
+  padding: 1rem 2rem;
+  border-radius: 0.125rem; /* Sharp corners (rounded-sm) */
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 56px;
+}
+
+.btn-spotify:hover {
+  background: rgba(29, 185, 84, 0.25);
+  border-color: rgba(29, 185, 84, 0.5);
+  color: #1ed760; /* Brighter Spotify Green on hover */
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.15); /* Subtle glow only */
+}
+
+.btn-spotify:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   INFINITE LOGO SCROLL ANIMATION (POLISHED)
+   ============================================ */
+
+/* Carousel Wrapper with CSS Mask Fade Effect */
+.logo-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* Professional mask-image fade effect */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* Smooth 60fps infinite scroll animation */
+@keyframes scroll-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%); /* Move by 1/3 (one set of logos) */
+  }
+}
+
+/* Scrolling Track */
+.logo-scroll-track {
+  display: flex;
+  gap: 3rem; /* 48px gap between logos */
+  animation: scroll-rtl 35s linear infinite;
+  will-change: transform;
+  /* Ensure no gaps or jumps */
+  width: fit-content;
+}
+
+/* Pause animation on hover for user inspection */
+.logo-scroll-track:hover {
+  animation-play-state: paused;
+}
+
+/* Logo Item Wrapper - Perfect Vertical Centering */
+.logo-item-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Logo Image Container - Consistent Height */
+.logo-image-container {
+  position: relative;
+  height: 3rem; /* 48px - consistent for all logos */
+  width: 8rem; /* 128px - allows horizontal space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Logo Size */
+@media (min-width: 768px) {
+  .logo-image-container {
+    height: 3.5rem; /* 56px on desktop */
+    width: 10rem; /* 160px on desktop */
+  }
+  
+  .logo-scroll-track {
+    gap: 4rem; /* 64px gap on desktop */
+  }
+}
+
+/* Logo Image Styling - Grayscale with Smooth Transition */
+.logo-image {
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+/* Logo Hover State - Full Color */
+.logo-item-wrapper:hover .logo-image {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Ensure smooth animation performance */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-scroll-track {
+    animation-timing-function: linear;
+  }
+}
+
+/* Respect user motion preferences - but keep a very slow animation */
+@media (prefers-reduced-motion: reduce) {
+  .logo-scroll-track {
+    animation: scroll-rtl 120s linear infinite; /* 4x slower for reduced motion */
+  }
+}
+
 /* ============================================
    SHARP CORNERS ENFORCEMENT
    ============================================ */

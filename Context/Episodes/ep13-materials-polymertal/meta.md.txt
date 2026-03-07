@@ -1,7 +1,7 @@
 # Episode 13: Polymertal - המהפכה הירוקה של עולם המתכת והפלסטיק
 
 ## Core Metadata
-- **Guest:** רן כרמלי(Ran Cohen)
+- **Guest:** רן כרמלי(Ran Carmeli)
 - **Role:** מנכ"ל Polymertal
 - **Sector:** DeepTech / Material Science / Aerospace & Automotive
 - **Keywords:** חומרים היברידיים/Hybrid Materials, הפחתת משקל/Weight Reduction, קיימות תעשייתית/Industrial Sustainability

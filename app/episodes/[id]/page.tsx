@@ -243,7 +243,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
             {metadata?.problem && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">הבעיה</h2>
-                <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                <p className="text-white/80 text-sm md:text-base leading-relaxed whitespace-pre-wrap">
                   {metadata.problem}
                 </p>
               </div>
@@ -252,7 +252,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
             {metadata?.solution && (
               <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">הפתרון</h2>
-                <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                <p className="text-white/80 text-sm md:text-base leading-relaxed whitespace-pre-wrap">
                   {metadata.solution}
                 </p>
               </div>

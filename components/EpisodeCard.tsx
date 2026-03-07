@@ -19,6 +19,25 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
   const descriptionRef = useRef<HTMLDivElement>(null);
   const metadata = episode.metadata;
 
+  // Clean markdown and HTML formatting from description
+  const cleanDescription = (text: string): string => {
+    return text
+      .replace(/<\/?p>/gi, '\n\n')          // Convert <p> tags to line breaks
+      .replace(/<br\s*\/?>/gi, '\n')        // Convert <br> to line breaks
+      .replace(/<\/?strong>/gi, '')         // Remove <strong> tags
+      .replace(/<\/?em>/gi, '')             // Remove <em> tags
+      .replace(/<\/?b>/gi, '')              // Remove <b> tags
+      .replace(/<\/?i>/gi, '')              // Remove <i> tags
+      .replace(/<\/?[^>]+(>|$)/g, '')       // Remove any remaining HTML tags
+      .replace(/\*\*\*/g, '')               // Remove triple asterisks
+      .replace(/\*\*/g, '')                 // Remove double asterisks (bold)
+      .replace(/\*/g, '')                   // Remove single asterisks (italic)
+      .replace(/\n{3,}/g, '\n\n')           // Max 2 consecutive line breaks
+      .trim();
+  };
+
+  const cleanedDescription = cleanDescription(episode.description);
+
   // Check if description overflows
   useEffect(() => {
     if (descriptionRef.current) {
@@ -26,7 +45,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
       const isContentOverflowing = element.scrollHeight > element.clientHeight;
       setIsOverflowing(isContentOverflowing);
     }
-  }, [episode.description]);
+  }, [cleanedDescription]);
 
   const handleCardClick = () => {
     router.push(`/episodes/${episode.episodeNumber}`);
@@ -77,11 +96,13 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             {/* Description - Collapsible with line-clamp */}
           <div 
             ref={descriptionRef}
-              className={`body-text text-sm text-white/80 leading-relaxed prose prose-invert prose-sm max-w-none transition-all duration-300 ${
+              className={`body-text text-sm text-white/80 leading-relaxed max-w-none transition-all duration-300 whitespace-pre-wrap ${
                 isExpanded ? "" : "line-clamp-3"
             }`}
-            dangerouslySetInnerHTML={{ __html: episode.description }}
-          />
+              style={{ wordBreak: 'break-word' }}
+          >
+              {cleanedDescription}
+          </div>
           
             {/* Read More / Show Less Button */}
           {isOverflowing && (

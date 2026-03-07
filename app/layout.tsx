@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // SF Hebrew Local Font Configuration
@@ -13,22 +13,23 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   metadataBase: new URL("https://howtosolvethis.com"),
   title: {
-    default: "איך פותרים את זה?",
+    default: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
     template: "%s | איך פותרים את זה?",
   },
   description:
-    "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
+    "פודקאסט על יזמות, פתרון בעיות ואקלים. מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו - מבי-טק ועד פודטק. הירשמו עכשיו.",
   keywords: [
+    "פודקאסט",
+    "יזמות",
+    "פתרון בעיות",
     "Climate-Tech Israel",
     "Sustainability",
     "Startups",
-    "פודקאסט",
     "קליימט-טק",
     "חדשנות",
     "ישראל",
     "סביבה",
     "טכנולוגיה",
-    "יזמות",
     "ClimaTech",
     "Climate Tech",
     "משבר אקלים",
@@ -38,6 +39,8 @@ export const metadata: Metadata = {
     "Blue Tech",
     "קיימות",
     "בן סהר",
+    "ספוטיפיי",
+    "פודקאסט ישראלי",
   ],
   authors: [{ name: "בן סהר", url: "https://www.linkedin.com/in/ben-sahar/" }],
   creator: "בן סהר",
@@ -58,22 +61,22 @@ export const metadata: Metadata = {
     locale: "he_IL",
     url: "/",
     siteName: "איך פותרים את זה?",
-    title: "איך פותרים את זה?",
+    title: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
     description:
-      "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
+      "מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו. פודקאסט על יזמות, חדשנות ופתרונות סביבתיים בישראל.",
     images: [
       {
         url: "/images/earth-hero.png",
         width: 1200,
         height: 630,
-        alt: "איך פותרים את זה?",
+        alt: "איך פותרים את זה? - פודקאסט יזמות ופתרון בעיות",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "איך פותרים את זה?",
-    description: "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
+    title: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
+    description: "מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו",
     images: ["/images/earth-hero.png"],
     creator: "@bensahar",
   },

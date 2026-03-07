@@ -46,8 +46,8 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       height: 1400,
       caption: episode.title,
     },
-    audio: {
-      "@type": "AudioObject",
+    associatedMedia: {
+      "@type": "MediaObject",
       contentUrl: episode.audioUrl,
       duration: episode.duration,
       encodingFormat: "audio/mpeg",
