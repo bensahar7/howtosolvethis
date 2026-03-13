@@ -43,7 +43,7 @@ export default function PodcastSeriesSchema() {
       "Science",
     ],
     keywords: "קליימט-טק, יזמות, אקלים, חדשנות, סביבה, טכנולוגיה, ישראל, Climate Tech, Sustainability, Startups",
-    webFeed: "https://anchor.fm/s/f8c5a9a8/podcast/rss",
+    webFeed: "https://anchor.fm/s/f75630a4/podcast/rss",
     potentialAction: {
       "@type": "ListenAction",
       target: [

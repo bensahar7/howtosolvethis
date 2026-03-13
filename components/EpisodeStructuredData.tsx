@@ -61,7 +61,7 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       name: "איך פותרים את זה?",
       description: "פודקאסט שמנגיש את הבעיות הגדולות של תקופתינו ומפגיש בין יזמים, חוקרים ומשקיעים בעולמות האקלים והסביבה",
       url: "https://howtosolvethis.com",
-      webFeed: "https://anchor.fm/s/f2ae20b0/podcast/rss",
+      webFeed: "https://anchor.fm/s/f75630a4/podcast/rss",
       author: {
         "@type": "Person",
         name: "בן סהר",

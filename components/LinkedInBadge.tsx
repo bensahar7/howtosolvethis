@@ -45,7 +45,7 @@ export default function LinkedInBadge() {
         aria-label="Ben Sahar on X (Twitter)"
       >
         <svg
-          className="w-5 h-5"
+          className="w-5 h-5 text-white"
           fill="currentColor"
           viewBox="0 0 24 24"
         >

@@ -1,6 +1,0 @@
-# https://howtosolvethis.com/robots.txt
-User-agent: *
-Allow: /
-
-# Sitemaps
-Sitemap: https://howtosolvethis.com/sitemap.xml

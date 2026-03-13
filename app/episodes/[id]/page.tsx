@@ -405,7 +405,8 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 
                 {/* Hidden full transcript for search engine crawling */}
                 {/* This ensures the full content is in the initial HTML for Google indexing */}
-                <div className="sr-only" aria-hidden="true">
+                {/* Note: sr-only keeps it visually hidden but crawlable by Google */}
+                <div className="sr-only">
                   <h2>תמליל מלא - {episode.title}</h2>
                   <div>{metadata.transcript}</div>
                 </div>

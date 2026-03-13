@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { EnrichedEpisode } from "@/types/episode";
 import { useState, useRef, useEffect } from "react";
 import SpotifyIcon from "./SpotifyIcon";
@@ -13,11 +13,11 @@ interface EpisodeCardProps {
 }
 
 export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
-  const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const metadata = episode.metadata;
+  const episodeUrl = `/episodes/${episode.episodeNumber}`;
 
   // Clean markdown and HTML formatting from description
   const cleanDescription = (text: string): string => {
@@ -47,13 +47,9 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
     }
   }, [cleanedDescription]);
 
-  const handleCardClick = () => {
-    router.push(`/episodes/${episode.episodeNumber}`);
-  };
-
   return (
+    <Link href={episodeUrl} className="block h-full">
     <article 
-      onClick={handleCardClick}
       className="glass glass-hover rounded-sm overflow-hidden group relative flex flex-col h-full cursor-pointer transition-all duration-300 hover:scale-[1.02]"
     >
       {/* Episode Image with Grayscale Filter */}
@@ -266,5 +262,6 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
           </div>
       </div>
     </article>
+    </Link>
   );
 }

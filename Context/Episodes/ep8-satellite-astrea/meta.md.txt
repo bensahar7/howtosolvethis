@@ -6,7 +6,7 @@
 - **Background:** גיאופיזיקאי (האוניברסיטה העברית ובן-גוריון)
 - **Sector:** Space-Tech / Water-Tech / Infrastructure Monitoring
 - **Keywords:** ניטור לווייני/Satellite Monitoring, זיהוי נזילות/Leak Detection, חישה מרחוק/Remote Sensing
-- **Company Website:** [https://www.structure-pal.com/](https://asterra.io/)
+- **Company Website:** https://asterra.io/
 - **Company Name:** Asterra‏
 - **Company Logo:** asterra.jpeg
 ## The Problem (The Invisible Waste)

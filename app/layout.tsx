@@ -80,9 +80,6 @@ export const metadata: Metadata = {
     images: ["/images/earth-hero.png"],
     creator: "@bensahar",
   },
-  verification: {
-    google: "your-google-verification-code", // להחליף בקוד אמיתי
-  },
 };
 
 import StructuredData from "@/components/StructuredData";

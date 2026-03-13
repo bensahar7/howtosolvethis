@@ -13,16 +13,65 @@ function matchEpisodeWithMetadata(rssEpisode: RSSEpisode, allMetadata: LocalMeta
   return allMetadata.find((meta) => meta.folderName === targetFolder) || null;
 }
 
+/**
+ * Build fallback EnrichedEpisodes from local metadata when RSS feed is unavailable.
+ * This prevents episode pages from returning 404 if the external RSS feed is down,
+ * which is critical for Google indexing (intermittent 404s cause de-indexing).
+ */
+function buildFallbackEpisodes(localMetadata: LocalMetadata[]): EnrichedEpisode[] {
+  const reverseMapping: Record<string, number> = {};
+  for (const [epNum, folder] of Object.entries(EPISODE_MAPPING)) {
+    reverseMapping[folder] = parseInt(epNum, 10);
+  }
+
+  return localMetadata
+    .filter((meta) => meta.folderName && reverseMapping[meta.folderName])
+    .map((meta) => {
+      const episodeNumber = reverseMapping[meta.folderName!];
+      return {
+        title: meta.title || `Episode ${episodeNumber}`,
+        description: meta.problem || meta.solution || "",
+        pubDate: new Date().toISOString(),
+        imageUrl: "/images/earth-hero.png",
+        audioUrl: "",
+        guid: `fallback-episode-${episodeNumber}`,
+        episodeNumber,
+        metadata: meta,
+      } as EnrichedEpisode;
+    })
+    .sort((a, b) => (b.episodeNumber || 0) - (a.episodeNumber || 0));
+}
+
 async function getEnrichedEpisodesUncached(): Promise<EnrichedEpisode[]> {
   try {
     const [rssEpisodes, localMetadata] = await Promise.all([fetchRSSFeed(), getAllLocalMetadata()]);
+    
+    // If RSS feed failed but we have local metadata, use fallback
+    if (rssEpisodes.length === 0 && localMetadata.length > 0) {
+      console.warn("[episode-matcher] RSS feed returned 0 episodes, using local metadata fallback");
+      return buildFallbackEpisodes(localMetadata);
+    }
+    
     if (rssEpisodes.length === 0) return [];
+    
     return rssEpisodes.map((rssEpisode) => ({
       ...rssEpisode,
       metadata: matchEpisodeWithMetadata(rssEpisode, localMetadata),
     })).sort((a, b) => (b.episodeNumber || 0) - (a.episodeNumber || 0));
   } catch (error) {
     console.error("Error in getEnrichedEpisodes:", error);
+    
+    // Fallback: try to serve from local metadata even if RSS completely fails
+    try {
+      const localMetadata = await getAllLocalMetadata();
+      if (localMetadata.length > 0) {
+        console.warn("[episode-matcher] Using local metadata fallback after RSS error");
+        return buildFallbackEpisodes(localMetadata);
+      }
+    } catch (fallbackError) {
+      console.error("Fallback also failed:", fallbackError);
+    }
+    
     return [];
   }
 }
