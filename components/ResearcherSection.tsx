@@ -155,7 +155,6 @@ export default function ResearcherSection({
             </p>
           )}
         </div>
-        // Academic badge removed as requested
       </div>
     </section>
   );
