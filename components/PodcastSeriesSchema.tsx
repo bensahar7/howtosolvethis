@@ -73,7 +73,12 @@ export default function PodcastSeriesSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(podcastSeriesSchema) }}
+      dangerouslySetInnerHTML={{ 
+        __html: JSON.stringify(podcastSeriesSchema, null, 2)
+          .replace(/</g, '\\u003c')
+          .replace(/>/g, '\\u003e')
+          .replace(/&/g, '\\u0026')
+      }}
     />
   );
 }

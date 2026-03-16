@@ -21,7 +21,8 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
 
   // Clean markdown and HTML formatting from description
   const cleanDescription = (text: string): string => {
-    return text
+    const raw = text ?? "";
+    const cleaned = raw
       .replace(/<\/?p>/gi, '\n\n')          // Convert <p> tags to line breaks
       .replace(/<br\s*\/?>/gi, '\n')        // Convert <br> to line breaks
       .replace(/<\/?strong>/gi, '')         // Remove <strong> tags
@@ -32,8 +33,16 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
       .replace(/\*\*\*/g, '')               // Remove triple asterisks
       .replace(/\*\*/g, '')                 // Remove double asterisks (bold)
       .replace(/\*/g, '')                   // Remove single asterisks (italic)
+      .replace(/&quot;/g, '"')              // Decode &quot; to "
+      .replace(/&amp;/g, '&')               // Decode &amp; to &
+      .replace(/&lt;/g, '<')                // Decode &lt; to <
+      .replace(/&gt;/g, '>')                // Decode &gt; to >
+      .replace(/&#39;/g, "'")               // Decode &#39; to '
+      .replace(/&nbsp;/g, ' ')              // Decode &nbsp; to space
       .replace(/\n{3,}/g, '\n\n')           // Max 2 consecutive line breaks
       .trim();
+
+    return cleaned;
   };
 
   const cleanedDescription = cleanDescription(episode.description);
