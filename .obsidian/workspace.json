@@ -4,39 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "4e29e8eb6ae36f24",
+        "id": "8f87ce9237a396aa",
         "type": "tabs",
         "children": [
           {
-            "id": "c5a5805e6f641752",
+            "id": "8da2cad618ef2f45",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Context/Episodes/ep16-coral-reefs-vcorals/transcript.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "transcript"
-            }
-          },
-          {
-            "id": "ee05fcd73725c245",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HOWTOSOLVETHIS_Research_Summary.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "HOWTOSOLVETHIS_Research_Summary"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -195,14 +176,19 @@
       "bases:Create new base": false
     }
   },
-  "active": "ee05fcd73725c245",
+  "active": "8da2cad618ef2f45",
   "lastOpenFiles": [
+    "Context/Episodes/ep16-coral-reefs-vcorals/transcript.md",
+    "Context/Episodes/ep12-foodtech-oshi/logo.jpeg",
+    "Context/Episodes/ep10-waste-to-energy-boson/boson.jpg",
+    "Context/Episodes/ep8-satellite-astrea/asterra‏.png",
+    "Context/Episodes/ep6-textile-recycling-textre/meta.md.md",
+    "HOWTOSOLVETHIS_Research_Summary.md",
     "ANIMATION_IMPROVEMENTS.md",
     "components/CustomCursor.tsx",
     "components/ScrollProgress.tsx",
     "components/MagneticButton.tsx",
     "components/ParticleBackground.tsx",
-    "Context/Episodes/ep16-coral-reefs-vcorals/transcript.md",
     "MULTI_COMPANY_RESEARCHER_IMPLEMENTATION.md",
     "CONTENT_RENDERING_FIXES.md",
     "SCHEMA_VALIDATION_CHECKLIST.md",
@@ -227,21 +213,15 @@
     "SCHEMA_ARCHITECTURE.md",
     "SCHEMA_VERIFICATION_GUIDE.md",
     "Context/Episodes/ep2- Salicrop/transcript.md",
-    "Context/Episodes/ep2- Salicrop/meta.md.md",
-    "Context/Episodes/ep13-materials-polymertal/transcript.md",
     "Context/Episodes/ep2- Salicrop 1/transcript.txt",
     "Context/Episodes/ep2- Salicrop 1/meta.md.txt",
     "Context/Episodes/ep2- Salicrop 1/logo.jpg",
     "Context/Episodes/ep2- Salicrop 1",
     "Context/Episodes/ep4-structurepal/meta.md.txt",
-    "Context/Episodes/ep11-foodtech-brevel/transcript.md",
     "Context/Episodes/ep11-foodtech-brevel/logo.png",
     "Context/Episodes/ep14-blue-tech-econcrete/logo.png",
     "Context/Episodes/ep10-waste-to-energy-boson 1/logo.jpg",
     "Context/Episodes/ep9-agritech-greeneye/logo.png",
-    "Context/Episodes/ep8-satellite-astrea/logo.jpg",
-    "Context/Episodes/ep2- Salicrop/logo.jpg",
-    "Context/Episodes/ep3-daikawood/logo.png",
-    "Context/Episodes/ep4-structurepal/logo.jpg"
+    "Context/Episodes/ep8-satellite-astrea/logo.jpg"
   ]
 }

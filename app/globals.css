@@ -419,11 +419,25 @@ a {
 }
 
 /* Logo Image Styling - Grayscale with Smooth Transition */
-.logo-image {
-  object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.6;
-  transition: filter 0.4s ease, opacity 0.4s ease;
+.logo-scroll-track {
+  display: flex;
+  gap: 3rem; 
+  animation: scroll-rtl 35s linear infinite;
+  will-change: transform;
+  /* הוסף את השורה הזו כאן */
+  width: max-content; 
+}
+
+@media (min-width: 768px) {
+  .logo-image-container {
+    height: 3.5rem;
+    width: 10rem;
+  }
+  
+  .logo-scroll-track {
+    /* וגם כאן לוודא שה-gap מעודכן */
+    gap: 4rem; 
+  }
 }
 
 /* Logo Hover State - Full Color */
