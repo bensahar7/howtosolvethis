@@ -203,7 +203,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
           {/* Platform Icons - Listen Now */}
           <div className="mt-4 pt-4 border-t border-white/10">
             <div className="technical-text text-[10px] mb-3 text-white/60">
-              האזן עכשיו
+              רוצה להקשיב?
             </div>
             <div className="flex gap-2">
               {/* Spotify */}

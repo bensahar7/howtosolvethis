@@ -10,6 +10,7 @@ export default function ScrollToEpisodesButton() {
     <a
       href="#episodes"
       className="btn-glass"
+      style={{ direction: 'rtl', textAlign: 'right' }}
       onClick={handleClick}
     >
       לפרקים

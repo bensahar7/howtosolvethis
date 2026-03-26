@@ -97,7 +97,7 @@ export default function HomePage() {
                   aria-label="האזן בספוטיפיי - פודקאסט איך פותרים את זה"
                 >
                   <SpotifyIcon className="w-7 h-7 md:w-8 md:h-8 transition-transform group-hover:scale-110 flex-shrink-0" />
-                  <span className="text-lg md:text-xl font-bold">האזן בספוטיפיי</span>
+                  <span className="text-lg md:text-xl font-bold">קדימה</span>
                 </a>
                 
                 {/* Secondary CTA: Scroll to Episodes */}
