@@ -94,7 +94,14 @@ async function fetchRSSFeedUncached(): Promise<RSSEpisode[]> {
         if (season === 1) {
           episodeNumber = episodeInSeason; // Season 1: episodes 1-10
         } else if (season === 2) {
-          episodeNumber = 10 + episodeInSeason; // Season 2: episodes 11-14 (10 + 1-4)
+          // Anchor's RSS sometimes continues numbering in `itunes:episode`
+          // as an absolute index (e.g. CoffeeSai arrives as season=2, episode=15,
+          // but the local episode metadata is labeled as Episode 15).
+          //
+          // Heuristic:
+          // - For "small" season-2 indices, keep the historical +10 behavior.
+          // - For larger indices, treat `itunes:episode` as the absolute episode number.
+          episodeNumber = episodeInSeason >= 10 ? episodeInSeason : 10 + episodeInSeason;
         }
       }
       

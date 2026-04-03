@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import ScrollToEpisodesButton from "@/components/ScrollToEpisodesButton";
 import PodcastSeriesSchema from "@/components/PodcastSeriesSchema";
-import InfiniteLogoScroll from "@/components/InfiniteLogoScroll";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Suspense } from "react";
 
@@ -39,9 +38,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Infinite Logo Scroll - Authority & Social Proof */}
-      <InfiniteLogoScroll />
 
       {/* Stats Card - Modern Design with Icons */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
@@ -86,23 +82,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* CTA Buttons - Right-aligned for RTL */}
-              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                {/* Primary CTA: Spotify (Glassmorphism) */}
-                <a
-                  href="https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-spotify group w-full sm:w-auto"
-                  aria-label="האזן בספוטיפיי - פודקאסט איך פותרים את זה"
-                >
-                  <SpotifyIcon className="w-7 h-7 md:w-8 md:h-8 transition-transform group-hover:scale-110 flex-shrink-0" />
-                  <span className="text-lg md:text-xl font-bold">קדימה</span>
-                </a>
-                
-                {/* Secondary CTA: Scroll to Episodes */}
-                <ScrollToEpisodesButton />
-              </div>
             </div>
           </div>
         </div>

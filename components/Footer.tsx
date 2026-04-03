@@ -19,7 +19,7 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div className="col-span-12 lg:col-span-4">
-            <h4 className="technical-text mb-4">Navigation</h4>
+            <h4 className="technical-text mb-4">ניווט</h4>
             <nav className="flex flex-col gap-3">
               <Link
                 href="#episodes"
@@ -44,7 +44,7 @@ export default function Footer() {
 
           {/* Social Links */}
           <div className="col-span-12 lg:col-span-4">
-            <h4 className="technical-text mb-4">Connect</h4>
+            <h4 className="technical-text mb-4">עקבו</h4>
             <div className="flex gap-4 flex-wrap">
               {/* Spotify */}
               <a
@@ -142,10 +142,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="technical-text text-white/40">
-            © {new Date().getFullYear()} איך פותרים את זה? · All rights reserved
+            © {new Date().getFullYear()} איך פותרים את זה? · כל הזכויות שמורות
           </p>
           <p className="technical-text text-white/40">
-            Built with Next.js · Designed with Atmospheric Curiosity
+            נבנה עם Next.js · בעיצוב Atmospheric Curiosity
           </p>
         </div>
       </div>

@@ -15,26 +15,12 @@ export default async function EpisodeGrid() {
   }
 
   return (
-    <div className="grid grid-cols-12 gap-6">
-      {episodes.map((episode, index) => {
-        // Asymmetric grid placement - different column spans
-        // Create visual interest by varying card positions
-        const isFirst = index === 0;
-        const isEven = index % 2 === 0;
-        
-        // Featured episode (first) gets larger placement
-        const colSpan = isFirst 
-          ? "col-span-12 lg:col-span-8 lg:col-start-3" 
-          : isEven 
-            ? "col-span-12 md:col-span-6 lg:col-span-5"
-            : "col-span-12 md:col-span-6 lg:col-span-5 lg:col-start-7";
-
-        return (
-          <div key={episode.guid} className={`${colSpan} flex`}>
-            <EpisodeCard episode={episode} index={index} />
-          </div>
-        );
-      })}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {episodes.map((episode, index) => (
+        <div key={episode.guid} className="flex">
+          <EpisodeCard episode={episode} index={index} />
+        </div>
+      ))}
     </div>
   );
 }

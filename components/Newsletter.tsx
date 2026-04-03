@@ -76,7 +76,7 @@ export default function Newsletter() {
 
             {/* Privacy Note */}
             <p className="technical-text text-center mt-6 text-white/40">
-              We respect your privacy · Unsubscribe anytime
+              אנו מכבדים את פרטיותכם · אפשר להסיר בכל רגע
             </p>
           </div>
         </div>

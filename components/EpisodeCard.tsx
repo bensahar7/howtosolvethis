@@ -18,6 +18,9 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
   const descriptionRef = useRef<HTMLDivElement>(null);
   const metadata = episode.metadata;
   const episodeUrl = `/episodes/${episode.episodeNumber}`;
+  const spotifyListenUrl = episode.spotifyEpisodeId
+    ? `https://open.spotify.com/episode/${episode.spotifyEpisodeId}`
+    : "https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y";
 
   // Clean markdown and HTML formatting from description
   const cleanDescription = (text: string): string => {
@@ -77,7 +80,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
         
         {/* Episode Number Badge - HUD Style */}
         <div className="absolute top-4 right-4 glass px-3 py-1 rounded-sm">
-          <span className="technical-text">EP {episode.episodeNumber || index + 1}</span>
+          <span className="technical-text">פרק {episode.episodeNumber || index + 1}</span>
         </div>
       </div>
 
@@ -144,7 +147,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             <div className="text-white/80 text-xs truncate">
               {metadata?.guests && metadata.guests.length > 0
                 ? metadata.guests.join(", ")
-                : "TBD"}
+                : "טרם פורסם"}
             </div>
           </div>
 
@@ -200,11 +203,8 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
           </div>
         )}
 
-          {/* Platform Icons - Listen Now */}
+        {/* Platform Icons (secondary) */}
           <div className="mt-4 pt-4 border-t border-white/10">
-            <div className="technical-text text-[10px] mb-3 text-white/60">
-              רוצה להקשיב?
-            </div>
             <div className="flex gap-2">
               {/* Spotify */}
               <a

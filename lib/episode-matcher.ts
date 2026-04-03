@@ -8,6 +8,13 @@ import { getTranscriptByEpisode } from "./transcript-reader";
 function matchEpisodeWithMetadata(rssEpisode: RSSEpisode, allMetadata: LocalMetadata[]): LocalMetadata | null {
   const rssEpisodeNum = rssEpisode.episodeNumber;
   if (!rssEpisodeNum) return null;
+
+  // Prefer matching by episodeNumber parsed from local `meta.md.txt`.
+  // This is more robust than relying solely on folder-name mapping.
+  const directMatch = allMetadata.find((meta) => meta.episodeNumber === rssEpisodeNum);
+  if (directMatch) return directMatch;
+
+  // Fallback to manual mapping between RSS episode numbers and local folder names.
   const targetFolder = EPISODE_MAPPING[rssEpisodeNum];
   if (!targetFolder) return null;
   return allMetadata.find((meta) => meta.folderName === targetFolder) || null;

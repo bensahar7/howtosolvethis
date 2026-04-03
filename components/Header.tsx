@@ -12,22 +12,6 @@ export default function Header() {
               איך פותרים את זה?
             </h1>
           </div>
-
-          {/* Left Side - Navigation + CTA (RTL) */}
-          <nav className="flex items-center gap-8">
-            <Link
-              href="/#episodes"
-              className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
-            >
-              פרקים
-            </Link>
-            <Link
-              href="/#about"
-              className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
-            >
-              אודות
-            </Link>
-          </nav>
         </div>
       </div>
     </header>

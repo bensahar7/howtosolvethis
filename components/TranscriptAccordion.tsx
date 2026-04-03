@@ -22,7 +22,6 @@ export default function TranscriptAccordion({
         aria-controls="transcript-content"
       >
         <div>
-          <h2 className="text-xl md:text-2xl font-bold text-white text-right">תמליל מלא</h2>
           <p className="technical-text text-[10px] md:text-xs text-white/60 mt-1 md:mt-2">
             FULL TRANSCRIPT
           </p>
