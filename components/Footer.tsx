@@ -42,7 +42,7 @@ export default function Footer() {
                 className="glass p-3 rounded-sm glass-hover"
                 aria-label="Spotify"
               >
-                <SpotifyIcon className="w-5 h-5" />
+                <SpotifyIcon className="w-5 h-5 text-white" />
               </a>
 
               {/* Apple Podcasts */}
