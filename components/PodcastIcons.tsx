@@ -25,12 +25,12 @@ export function YouTubeIcon({ className = "w-5 h-5" }: IconProps) {
   );
 }
 
-// Snipd Icon (Teal circular brand logo)
+// Snipd Icon
 export function SnipdIcon({ className = "w-5 h-5" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" fill="#00D4AA"/>
-      <path d="M8 12L11 15L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M8 12L11 15L16 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
