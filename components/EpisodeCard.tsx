@@ -64,7 +64,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
           src={episode.imageUrl}
           alt={`תמונת עטיפה לפרק: ${episode.title}`}
           fill
-            className="object-cover img-grayscale-default group-hover:filter-none transition-all duration-300"
+            className="object-cover transition-all duration-300"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={index < 3}
             loading={index < 6 ? 'eager' : 'lazy'}
