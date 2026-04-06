@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { EnrichedEpisode } from "@/types/episode";
 import { useState, useRef, useEffect } from "react";
-import SpotifyIcon from "./SpotifyIcon";
-import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
 
 interface EpisodeCardProps {
   episode: EnrichedEpisode;
@@ -18,10 +16,6 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
   const descriptionRef = useRef<HTMLDivElement>(null);
   const metadata = episode.metadata;
   const episodeUrl = `/episodes/${episode.episodeNumber}`;
-  const spotifyListenUrl = episode.spotifyEpisodeId
-    ? `https://open.spotify.com/episode/${episode.spotifyEpisodeId}`
-    : "https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y";
-
   // Clean markdown and HTML formatting from description
   const cleanDescription = (text: string): string => {
     const raw = text ?? "";
@@ -62,7 +56,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
   return (
     <Link href={episodeUrl} className="block h-full">
     <article 
-      className="glass glass-hover rounded-sm overflow-hidden group relative flex flex-col h-full cursor-pointer transition-all duration-300 hover:scale-[1.02]"
+      className="glass glass-hover rounded-sm overflow-hidden group relative flex flex-col h-full cursor-pointer"
     >
       {/* Episode Image with Grayscale Filter */}
       <div className="relative aspect-video overflow-hidden flex-shrink-0">
@@ -85,7 +79,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
       </div>
 
       {/* Card Content */}
-      <div className="p-6 flex flex-col flex-1">
+      <div className="p-4 md:p-6 flex flex-col flex-1">
         {/* Sector Tag - Hebrew Label */}
         {metadata?.sector && (
           <div className="mb-3">
@@ -104,7 +98,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             {/* Description - Collapsible with line-clamp */}
           <div 
             ref={descriptionRef}
-              className={`body-text text-sm text-white/80 leading-relaxed max-w-none transition-all duration-300 whitespace-pre-wrap ${
+              className={`body-text text-base text-white/80 leading-relaxed max-w-none transition-all duration-300 whitespace-pre-wrap ${
                 isExpanded ? "" : "line-clamp-3"
             }`}
               style={{ wordBreak: 'break-word' }}
@@ -203,72 +197,6 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
           </div>
         )}
 
-        {/* Platform Icons (secondary) */}
-          <div className="mt-4 pt-4 border-t border-white/10">
-            <div className="flex gap-2">
-              {/* Spotify */}
-              <a
-                href={episode.spotifyEpisodeId 
-                  ? `https://open.spotify.com/episode/${episode.spotifyEpisodeId}` 
-                  : `https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
-                aria-label="Spotify"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <SpotifyIcon className="w-5 h-5" />
-              </a>
-
-              {/* Apple Podcasts */}
-              <a
-                href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
-                aria-label="Apple Podcasts"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ApplePodcastsIcon className="w-5 h-5 text-white/80" />
-              </a>
-
-              {/* YouTube Music */}
-              <a
-                href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
-                aria-label="YouTube Music"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <YouTubeMusicIcon className="w-5 h-5 text-[#FF0000]" />
-              </a>
-
-              {/* Pocket Casts */}
-              <a
-                href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
-                aria-label="Pocket Casts"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <PocketCastsIcon className="w-5 h-5 text-[#F43E37]" />
-              </a>
-
-              {/* Snipd */}
-              <a
-                href="https://share.snipd.com/show/7a974146-82a7-43fb-b42e-b7b4a719201d"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass p-2 rounded-sm glass-hover flex-1 flex items-center justify-center"
-                aria-label="Snipd"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <SnipdIcon className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
       </div>
     </article>
     </Link>

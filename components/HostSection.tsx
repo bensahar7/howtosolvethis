@@ -2,53 +2,59 @@ import Link from "next/link";
 
 export default function HostSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
-      <div className="grid grid-cols-12 gap-6 md:gap-10 items-start">
-        <div className="col-span-12 lg:col-span-5">
-          <div className="glass p-6 md:p-10 rounded-sm">
-            <div className="technical-text text-xs text-white/40 mb-4">
-              המארח
+    <section className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24" id="host">
+      <div className="grid grid-cols-12 gap-6">
+        <div className="col-span-12 lg:col-span-6 lg:col-start-4">
+          <div className="glass p-8 md:p-12 rounded-sm text-center">
+            {/* Label */}
+            <div className="technical-text text-xs text-white/40 mb-6 tracking-widest">
+              המנחה
             </div>
+
+            {/* Avatar */}
+            <div className="flex justify-center mb-6">
+              <div
+                className="w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold text-white border border-white/30"
+                style={{ background: "rgba(0,0,0,0.55)" }}
+              >
+                B
+              </div>
+            </div>
+
+            {/* Name */}
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">בן סהר</h2>
-            <p className="body-text text-base md:text-lg text-white/80 leading-relaxed">
-              בכל פרק אנחנו צוללים לבעיה, שואלים את השאלות הנכונות, ומחברים בין מחקר לעשייה.
-              אם אתם אוהבים פתרונות שמתחילים בשטח — אתם בבית.
+
+            {/* Bio */}
+            <p className="body-text text-base md:text-lg text-white/75 leading-relaxed max-w-lg mx-auto mb-8">
+              חוקר, מראיין ומנחה — מביא בכל פרק את האנשים שפותרים את הבעיות הגדולות של ימינו בגובה העיניים
             </p>
-            <div className="mt-6 flex gap-3 flex-wrap">
+
+            {/* Social Links */}
+            <div className="flex gap-3 flex-wrap justify-center">
               <Link
-                href="https://www.linkedin.com/in/ben-sahar/"
+                href="https://ben1580094.substack.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium"
+                className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
               >
-                LinkedIn
+                Substack
               </Link>
               <Link
                 href="https://x.com/bensahar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium"
+                className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
               >
                 X
               </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-span-12 lg:col-span-7">
-          <div className="glass p-6 md:p-10 rounded-sm">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="glass p-4 rounded-sm">
-                <div className="technical-text text-xs text-white/40 mb-2">הסגנון</div>
-                <div className="text-white/90 font-medium">עריכתי, חד, ועקבי</div>
-              </div>
-              <div className="glass p-4 rounded-sm">
-                <div className="technical-text text-xs text-white/40 mb-2">המטרה</div>
-                <div className="text-white/90 font-medium">להביא פתרונות לפרונט</div>
-              </div>
-            </div>
-            <div className="mt-6 technical-text text-white/40 text-xs">
-              טיפ קטן: שמרו את הפרקים שאתם אוהבים — ונדבר בפרק הבא.
+              <Link
+                href="https://www.linkedin.com/in/ben-sahar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
+              >
+                LinkedIn
+              </Link>
             </div>
           </div>
         </div>
@@ -56,4 +62,3 @@ export default function HostSection() {
     </section>
   );
 }
-

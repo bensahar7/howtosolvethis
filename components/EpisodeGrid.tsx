@@ -17,7 +17,7 @@ export default async function EpisodeGrid() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
       {episodes.map((episode, index) => (
-        <div key={episode.guid} className="flex">
+        <div key={episode.guid} className="flex relative hover:z-10">
           <EpisodeCard episode={episode} index={index} />
         </div>
       ))}

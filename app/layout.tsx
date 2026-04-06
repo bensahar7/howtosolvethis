@@ -114,7 +114,7 @@ export default function RootLayout({
         <div className="fixed inset-0 -z-10 bg-black/40" />
 
         {/* Scrollable Content */}
-        <main className="relative z-0 pt-32">{children}</main>
+        <main className="relative z-0 pt-16 md:pt-20">{children}</main>
       </body>
     </html>
   );

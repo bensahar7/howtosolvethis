@@ -41,11 +41,11 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-24">
+    <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24">
       <div className="grid grid-cols-12 gap-6">
         {/* Asymmetric placement */}
         <div className="col-span-12 lg:col-span-8 lg:col-start-3">
-          <div className="glass p-12 rounded-sm">
+          <div className="glass p-6 md:p-12 rounded-sm">
             {/* Section Header */}
             <div className="text-center mb-8">
               <h2 className="text-4xl font-bold text-white mb-4">
