@@ -183,18 +183,20 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 {episode.title}
               </h1>
 
-              {/* Episode Image */}
-              <div className="relative aspect-video overflow-hidden rounded-sm mb-6">
-                <Image
-                  src={episode.imageUrl}
-                  alt={episode.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 70vw"
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
-                />
+              {/* Episode Image — square crop, constrained width to avoid low-res stretch */}
+              <div className="flex justify-center mb-6">
+                <div className="relative w-48 h-48 md:w-64 md:h-64 overflow-hidden rounded-sm flex-shrink-0">
+                  <Image
+                    src={episode.imageUrl}
+                    alt={episode.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="256px"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                  />
+                </div>
               </div>
 
               {/* Description with Read More */}

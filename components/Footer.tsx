@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
 import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
 
@@ -15,19 +14,6 @@ export default function Footer() {
             </h3>
             <p className="body-text text-sm text-white/70 leading-relaxed">
             </p>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="col-span-12 lg:col-span-4">
-            <h4 className="technical-text mb-4">ניווט</h4>
-            <nav className="flex flex-col gap-3">
-              <Link
-                href="#episodes"
-                className="text-white/70 hover:text-white transition-colors text-sm py-2 min-h-[44px] flex items-center"
-              >
-                פרקים
-              </Link>
-            </nav>
           </div>
 
           {/* Social Links */}
