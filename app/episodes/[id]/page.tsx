@@ -314,7 +314,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
                     aria-label="Spotify"
                   >
-                    <SpotifyIcon className="w-6 h-6 md:w-8 md:h-8" />
+                    <SpotifyIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                   </a>
                   <a
                     href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
@@ -323,7 +323,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
                     aria-label="Apple Podcasts"
                   >
-                    <ApplePodcastsIcon className="w-6 h-6 md:w-8 md:h-8 text-white/80" />
+                    <ApplePodcastsIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                   </a>
                   <a
                     href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
@@ -332,7 +332,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
                     aria-label="YouTube Music"
                   >
-                    <YouTubeMusicIcon className="w-6 h-6 md:w-8 md:h-8 text-[#FF0000]" />
+                    <YouTubeMusicIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                   </a>
                   <a
                     href="https://www.youtube.com/@howtosolvethis"
@@ -341,7 +341,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
                     aria-label="YouTube"
                   >
-                    <YouTubeIcon className="w-6 h-6 md:w-8 md:h-8 text-[#FF0000]" />
+                    <YouTubeIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                   </a>
                   <a
                     href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
@@ -350,7 +350,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
                     aria-label="Pocket Casts"
                   >
-                    <PocketCastsIcon className="w-6 h-6 md:w-8 md:h-8 text-[#F43E37]" />
+                    <PocketCastsIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                   </a>
                   <a
                     href="https://castbox.fm/channel/id6193220?country=us"
@@ -359,7 +359,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
                     aria-label="Castbox"
                   >
-                    <CastboxIcon className="w-6 h-6 md:w-8 md:h-8 text-[#F55B23]" />
+                    <CastboxIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                   </a>
                 </div>
               </div>
