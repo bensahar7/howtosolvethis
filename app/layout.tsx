@@ -56,10 +56,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  alternates: {
+    canonical: "https://howtosolvethis.com",
+  },
   openGraph: {
     type: "website",
     locale: "he_IL",
-    url: "/",
+    url: "https://howtosolvethis.com",
     siteName: "איך פותרים את זה?",
     title: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
     description:

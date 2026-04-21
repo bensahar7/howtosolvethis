@@ -80,9 +80,13 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       url: "https://howtosolvethis.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://howtosolvethis.com/images/earth-hero.png",
+        url: "https://howtosolvethis.com/logo.png",
+        width: 512,
+        height: 512,
       },
     },
+
+    isAccessibleForFree: true,
     
     // Creator/contributor information
     creator: metadata?.guests && metadata.guests.length > 0 
@@ -143,26 +147,53 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       inLanguage: "he",
     } : undefined,
     
-    // Interaction statistics
-    interactionStatistic: {
-      "@type": "InteractionCounter",
-      interactionType: "https://schema.org/ListenAction",
-      userInteractionCount: 0,
-    },
+  };
+
+  // BreadcrumbList schema — enables breadcrumb trails in Google SERPs
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "איך פותרים את זה?",
+        item: "https://howtosolvethis.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "פרקים",
+        item: "https://howtosolvethis.com/#episodes",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `פרק ${episode.episodeNumber}: ${episode.title}`,
+        item: `https://howtosolvethis.com/episodes/${episode.episodeNumber}`,
+      },
+    ],
   };
 
   // Remove undefined fields for clean JSON-LD
   const cleanedSchema = JSON.parse(JSON.stringify(episodeSchema));
 
+  const escape = (obj: object) =>
+    JSON.stringify(obj, null, 2)
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026');
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ 
-        __html: JSON.stringify(cleanedSchema, null, 2)
-          .replace(/</g, '\\u003c')
-          .replace(/>/g, '\\u003e')
-          .replace(/&/g, '\\u0026')
-      }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: escape(cleanedSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: escape(breadcrumbSchema) }}
+      />
+    </>
   );
 }

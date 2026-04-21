@@ -35,9 +35,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (episodeNumMatch) {
           const episodeNumber = parseInt(episodeNumMatch[1], 10);
           
+          // Use file mtime so Google sees stable dates and trusts crawl signals
+          const stat = await fs.stat(path.join(episodePath, "meta.md.txt"));
           episodePages.push({
             url: `${baseUrl}/episodes/${episodeNumber}`,
-            lastModified: new Date().toISOString(), // Fresh timestamp to force re-crawl
+            lastModified: stat.mtime.toISOString(),
             changeFrequency: "monthly" as const,
             priority: 0.8,
           });

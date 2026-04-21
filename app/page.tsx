@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import EpisodeGrid from "@/components/EpisodeGrid";
 import HostSection from "@/components/HostSection";
@@ -6,6 +7,30 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import PodcastSeriesSchema from "@/components/PodcastSeriesSchema";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Suspense } from "react";
+
+// Override layout defaults with explicit home page canonical
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://howtosolvethis.com",
+  },
+  openGraph: {
+    type: "website",
+    locale: "he_IL",
+    url: "https://howtosolvethis.com",
+    siteName: "איך פותרים את זה?",
+    title: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
+    description:
+      "מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו. פודקאסט על יזמות, חדשנות ופתרונות סביבתיים בישראל.",
+    images: [
+      {
+        url: "https://howtosolvethis.com/images/earth-hero.png",
+        width: 1200,
+        height: 630,
+        alt: "איך פותרים את זה? - פודקאסט יזמות ופתרון בעיות",
+      },
+    ],
+  },
+};
 
 export default function HomePage() {
   return (
