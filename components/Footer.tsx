@@ -9,16 +9,16 @@ export default function Footer() {
         <div className="grid grid-cols-12 gap-8">
           {/* Brand Section */}
           <div className="col-span-12 lg:col-span-4">
-            <h3 className="text-2xl font-bold text-white mb-3">
+            <p className="text-2xl font-bold text-white mb-3">
               איך פותרים את זה?
-            </h3>
+            </p>
             <p className="body-text text-sm text-white/70 leading-relaxed">
             </p>
           </div>
 
           {/* Social Links */}
           <div className="col-span-12 lg:col-span-4">
-            <h4 className="technical-text mb-4">עקבו</h4>
+            <p className="technical-text mb-4">עקבו</p>
             <div className="flex gap-4 flex-wrap">
               {/* Spotify */}
               <a

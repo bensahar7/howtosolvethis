@@ -36,9 +36,9 @@ export default function ResearcherSection({
             />
           </svg>
         </div>
-        <h3 className="text-lg md:text-xl font-bold text-white/90 technical-text">
+        <h2 className="text-lg md:text-xl font-bold text-white/90 technical-text">
          Research Context
-        </h3>
+        </h2>
       </div>
 
       {/* Researcher Info */}
@@ -46,9 +46,9 @@ export default function ResearcherSection({
         {/* Name and Title */}
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2 flex-wrap">
-            <h4 className="text-xl md:text-2xl font-bold text-white">
+            <h3 className="text-xl md:text-2xl font-bold text-white">
               {researcher.name}
-            </h4>
+            </h3>
             
             {/* LinkedIn Icon */}
             {researcher.linkedIn && (

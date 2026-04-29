@@ -19,9 +19,9 @@ export default function MultiCompanySection({ companies }: MultiCompanySectionPr
   if (companies.length === 1) {
     return (
       <section className="mb-6 md:mb-8">
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-6 text-center technical-text">
+        <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center technical-text">
           החברה המוצגת / Featured Company
-        </h3>
+        </h2>
         <CompanyCard company={companies[0]} index={0} />
       </section>
     );
@@ -31,9 +31,9 @@ export default function MultiCompanySection({ companies }: MultiCompanySectionPr
   return (
     <section className="mb-6 md:mb-8">
       {/* Section Header */}
-      <h3 className="text-xl md:text-2xl font-bold text-white mb-6 text-center technical-text">
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center technical-text">
         פתרונות בשוק / Market Solutions
-      </h3>
+      </h2>
 
       {/* Grid: 1 column on mobile, 2 columns on tablet+ */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
