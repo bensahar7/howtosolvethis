@@ -6,19 +6,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://howtosolvethis.com";
   const episodesDir = path.join(process.cwd(), "Context", "Episodes");
 
-  // Static pages
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: new Date().toISOString(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-  ];
-
   // Dynamically scan for episodes with meta.md.txt files
   const episodePages: MetadataRoute.Sitemap = [];
-  
+  let latestEpisodeMtime: Date | null = null;
+
   try {
     const entries = await fs.readdir(episodesDir, { withFileTypes: true });
     const episodeDirs = entries.filter((entry) => entry.isDirectory());
@@ -37,6 +28,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           
           // Use file mtime so Google sees stable dates and trusts crawl signals
           const stat = await fs.stat(path.join(episodePath, "meta.md.txt"));
+          if (!latestEpisodeMtime || stat.mtime > latestEpisodeMtime) {
+            latestEpisodeMtime = stat.mtime;
+          }
           episodePages.push({
             url: `${baseUrl}/episodes/${episodeNumber}`,
             lastModified: stat.mtime.toISOString(),
@@ -60,6 +54,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     console.error("Error generating sitemap:", error);
   }
+
+  const staticPages: MetadataRoute.Sitemap = [
+    {
+      url: baseUrl,
+      lastModified: (latestEpisodeMtime ?? new Date(0)).toISOString(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: (latestEpisodeMtime ?? new Date(0)).toISOString(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+  ];
 
   return [...staticPages, ...episodePages];
 }

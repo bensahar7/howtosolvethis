@@ -60,7 +60,7 @@ export async function generateMetadata({
   
   // SEO Title: Episode [Number]: [Title] | [Guests]
   const guests = metadata?.guests?.join(", ") || "";
-  const seoTitle = `Episode ${episodeNumber}: ${episode.title}${guests ? ` | ${guests}` : ""}`;
+  const seoTitle = `פרק ${episodeNumber}: ${episode.title}${guests ? ` | ${guests}` : ""}`;
   
   // SEO Description: Use metadata.problem (limit to 155 chars)
   const seoDescription = metadata?.problem 
@@ -114,9 +114,12 @@ export async function generateMetadata({
       creator: "@bensahar",
     },
     
-    // Canonical URL
+    // Canonical URL + machine-readable markdown alternate
     alternates: {
       canonical: `https://howtosolvethis.com/episodes/${id}`,
+      types: {
+        "text/markdown": `https://howtosolvethis.com/episodes/${id}/markdown`,
+      },
     },
   };
 }
@@ -140,6 +143,35 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
     ? `https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}?utm_source=generator&theme=0`
     : null;
   const episodeUrl = `https://howtosolvethis.com/episodes/${id}`;
+
+  // Build a self-contained TL;DR block for AI extraction
+  const firstSentence = (text?: string | null) => {
+    if (!text) return "";
+    const cleaned = text.replace(/\s+/g, " ").trim();
+    const match = cleaned.match(/^.{20,200}?[.!?׃]/);
+    return (match ? match[0] : cleaned.slice(0, 200)).trim();
+  };
+  const guestNames = metadata?.guests?.join(", ");
+  const companyName =
+    metadata?.companies?.[0]?.name || metadata?.companyName;
+  const tldrParts = [
+    `בפרק ${episode.episodeNumber} של "איך פותרים את זה?"`,
+    guestNames && `בן סהר מארח את ${guestNames}`,
+    companyName && `מחברת ${companyName}`,
+    metadata?.sector && `(${metadata.sector})`,
+  ].filter(Boolean);
+  const tldrIntro = tldrParts.join(" ") + ".";
+  const tldrProblem = firstSentence(metadata?.problem);
+  const tldrSolution = firstSentence(metadata?.solution);
+
+  // Visible "last updated" date from pubDate
+  const formattedDate = episode.pubDate
+    ? new Date(episode.pubDate).toLocaleDateString("he-IL", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
 
   return (
     <>
@@ -179,9 +211,30 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 )}
               </div>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                 {episode.title}
               </h1>
+
+              {formattedDate && (
+                <p className="technical-text text-white/60 mb-4">
+                  פורסם: <time dateTime={episode.pubDate}>{formattedDate}</time>
+                </p>
+              )}
+
+              {/* TL;DR — self-contained summary for AI extraction */}
+              {(tldrProblem || tldrSolution) && (
+                <div
+                  data-tldr
+                  className="glass p-4 md:p-5 rounded-sm mb-6 border-l-2 border-white/20"
+                >
+                  <p className="technical-text text-white/60 mb-2">תקציר</p>
+                  <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                    {tldrIntro}
+                    {tldrProblem && <> הבעיה: {tldrProblem}</>}
+                    {tldrSolution && <> הפתרון: {tldrSolution}</>}
+                  </p>
+                </div>
+              )}
 
               {/* Episode Image — square crop, constrained width to avoid low-res stretch */}
               <div className="flex justify-center mb-6">
@@ -243,7 +296,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
 
             {/* 3. Contextual Value: The Problem & The Solution */}
             {metadata?.problem && (
-              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
+              <div data-problem className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">הבעיה</h2>
                 <p className="text-white/80 text-sm md:text-base leading-relaxed whitespace-pre-wrap">
                   {metadata.problem}
@@ -252,7 +305,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
             )}
 
             {metadata?.solution && (
-              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
+              <div data-solution className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">הפתרון</h2>
                 <p className="text-white/80 text-sm md:text-base leading-relaxed whitespace-pre-wrap">
                   {metadata.solution}
@@ -399,19 +452,10 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
 
             {/* 6. Content Archive: Transcript (Accordion - closed by default) */}
             {metadata?.transcript && (
-              <>
-                <TranscriptAccordion
-                  transcript={metadata.transcript}
-                  episodeTitle={episode.title}
-                />
-                
-                {/* Hidden full transcript for search engine crawling */}
-                {/* This ensures the full content is in the initial HTML for Google indexing */}
-                {/* Note: sr-only keeps it visually hidden but crawlable by Google */}
-                <div className="sr-only">
-                  <div>{metadata.transcript}</div>
-                </div>
-              </>
+              <TranscriptAccordion
+                transcript={metadata.transcript}
+                episodeTitle={episode.title}
+              />
             )}
 
             {/* Related Episodes */}

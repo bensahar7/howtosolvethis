@@ -71,7 +71,7 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
     
     // Episode metadata
     episodeNumber: episode.episodeNumber,
-    inLanguage: "he",
+    inLanguage: "he-IL",
     
     // Publisher information - helps Google understand authority
     publisher: {
@@ -129,14 +129,22 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
           "@type": "Organization",
           name: company.name,
           url: company.website,
+          industry: company.sector || metadata?.sector,
         }))
-      : metadata?.companyName 
+      : metadata?.companyName
         ? [{
             "@type": "Organization",
             name: metadata.companyName,
             url: metadata.companyWebsite,
+            industry: metadata?.sector,
           }]
         : undefined,
+
+    // Speakable — marks key passages for voice/audio extraction
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "[data-tldr]", "[data-problem]", "[data-solution]"],
+    },
     
     // Full transcript for content validation - CRITICAL for indexing
     // Including full transcript helps Google understand content depth
@@ -144,7 +152,7 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       "@type": "MediaObject",
       text: metadata.transcript, // Full transcript, not truncated
       encodingFormat: "text/plain",
-      inLanguage: "he",
+      inLanguage: "he-IL",
     } : undefined,
     
   };
@@ -175,6 +183,39 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
     ],
   };
 
+  // FAQPage schema — high-ROI for AI extraction
+  const faqEntries: Array<{ q: string; a: string }> = [];
+  if (metadata?.guests?.length) {
+    faqEntries.push({
+      q: "מי האורח בפרק זה?",
+      a: metadata.guests.join(", ") +
+        (metadata.companyName ? ` מחברת ${metadata.companyName}` : ""),
+    });
+  }
+  if (metadata?.problem) {
+    faqEntries.push({ q: "מה הבעיה שהפרק עוסק בה?", a: metadata.problem });
+  }
+  if (metadata?.solution) {
+    faqEntries.push({ q: "מהו הפתרון?", a: metadata.solution });
+  }
+  if (metadata?.sector) {
+    faqEntries.push({ q: "באיזה סקטור עוסק הפרק?", a: metadata.sector });
+  }
+  faqEntries.push({
+    q: "איפה ניתן להאזין לפרק?",
+    a: "הפרק זמין ב-Spotify, Apple Podcasts, YouTube Music, Pocket Casts ו-Castbox.",
+  });
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqEntries.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+
   // Remove undefined fields for clean JSON-LD
   const cleanedSchema = JSON.parse(JSON.stringify(episodeSchema));
 
@@ -193,6 +234,10 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: escape(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: escape(faqSchema) }}
       />
     </>
   );

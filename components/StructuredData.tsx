@@ -27,7 +27,7 @@ export default function StructuredData() {
     },
     sameAs: [
       "https://www.linkedin.com/in/ben-sahar/",
-      "https://open.spotify.com/show/4VKarRdsnGJxd4VDXXfVKH",
+      "https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y",
       "https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970",
       "https://www.youtube.com/@HowToSolveThis",
     ],
@@ -49,15 +49,46 @@ export default function StructuredData() {
     publisher: {
       "@id": "https://howtosolvethis.com/#organization",
     },
-    inLanguage: "he",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://howtosolvethis.com/?search={search_term_string}",
+    inLanguage: "he-IL",
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "מה זה 'איך פותרים את זה?'",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "פודקאסט עברי על קליימט-טק וחדשנות ישראלית. בכל פרק יזם או חוקר מציג בעיה סביבתית אמיתית והפתרון שהוא בנה.",
+        },
       },
-      "query-input": "required name=search_term_string",
-    },
+      {
+        "@type": "Question",
+        name: "מי המגיש?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "בן סהר, יזם בתחום הקליימט-טק והקיימות.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "באילו תחומים הפודקאסט עוסק?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "קליימט-טק, AgriTech, FoodTech, Blue Tech, אנרגיה, קיימות וחדשנות סביבתית בישראל.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "איפה אפשר להאזין?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "הפודקאסט זמין ב-Spotify, Apple Podcasts, YouTube Music, Pocket Casts ו-Castbox.",
+        },
+      },
+    ],
   };
 
   return (
@@ -76,8 +107,19 @@ export default function StructuredData() {
       {/* WebSite Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ 
+        dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema, null, 2)
+            .replace(/</g, '\\u003c')
+            .replace(/>/g, '\\u003e')
+            .replace(/&/g, '\\u0026')
+        }}
+      />
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema, null, 2)
             .replace(/</g, '\\u003c')
             .replace(/>/g, '\\u003e')
             .replace(/&/g, '\\u0026')

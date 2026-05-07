@@ -31,7 +31,7 @@ export default function PodcastSeriesSchema() {
     publisher: {
       "@id": "https://howtosolvethis.com/#organization",
     },
-    inLanguage: "he",
+    inLanguage: "he-IL",
     genre: [
       "Technology",
       "Climate",
@@ -49,7 +49,7 @@ export default function PodcastSeriesSchema() {
       target: [
         {
           "@type": "EntryPoint",
-          urlTemplate: "https://open.spotify.com/show/4VKarRdsnGJxd4VDXXfVKH",
+          urlTemplate: "https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y",
           actionPlatform: [
             "http://schema.org/DesktopWebPlatform",
             "http://schema.org/MobileWebPlatform",
