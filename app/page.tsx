@@ -5,6 +5,7 @@ import HostSection from "@/components/HostSection";
 import PlatformLinksSection from "@/components/PlatformLinksSection";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import PodcastSeriesSchema from "@/components/PodcastSeriesSchema";
+import HomeFaqSchema from "@/components/HomeFaqSchema";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { Suspense } from "react";
 
@@ -37,6 +38,7 @@ export default function HomePage() {
     <>
       {/* PodcastSeries Schema for Home Page */}
       <PodcastSeriesSchema />
+      <HomeFaqSchema />
       
       <Header />
 

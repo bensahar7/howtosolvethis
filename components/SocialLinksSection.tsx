@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
+import { trackSocialClick, trackListenPlatform } from "@/lib/analytics";
 
 export default function SocialLinksSection() {
   return (
@@ -14,6 +17,7 @@ export default function SocialLinksSection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Link
           href="https://www.linkedin.com/company/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94"
+          onClick={() => trackSocialClick("linkedin", "social_section")}
           target="_blank"
           rel="noopener noreferrer"
           className="glass p-5 rounded-sm glass-hover inline-flex items-center gap-4 justify-center md:justify-start"
@@ -26,6 +30,7 @@ export default function SocialLinksSection() {
 
         <Link
           href="https://www.facebook.com/profile.php?id=61560006065019"
+          onClick={() => trackSocialClick("facebook", "social_section")}
           target="_blank"
           rel="noopener noreferrer"
           className="glass p-5 rounded-sm glass-hover inline-flex items-center gap-4 justify-center md:justify-start"
@@ -38,6 +43,7 @@ export default function SocialLinksSection() {
 
         <Link
           href="https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y"
+          onClick={() => trackListenPlatform("Spotify", "social_section")}
           target="_blank"
           rel="noopener noreferrer"
           className="glass p-5 rounded-sm glass-hover inline-flex items-center gap-4 justify-center md:justify-start"

@@ -1,6 +1,7 @@
 "use client";
 import SpotifyIcon from "./SpotifyIcon";
 import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
+import { trackListenPlatform, trackSocialClick } from "@/lib/analytics";
 
 export default function Footer() {
   return (
@@ -23,6 +24,7 @@ export default function Footer() {
               {/* Spotify */}
               <a
                 href="https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y"
+                onClick={() => trackListenPlatform("Spotify", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
@@ -34,6 +36,7 @@ export default function Footer() {
               {/* Apple Podcasts */}
               <a
                 href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
+                onClick={() => trackListenPlatform("Apple Podcasts", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
@@ -45,6 +48,7 @@ export default function Footer() {
               {/* YouTube Music */}
               <a
                 href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
+                onClick={() => trackListenPlatform("YouTube Music", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
@@ -56,6 +60,7 @@ export default function Footer() {
               {/* Pocket Casts */}
               <a
                 href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
+                onClick={() => trackListenPlatform("Pocket Casts", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
@@ -67,6 +72,7 @@ export default function Footer() {
               {/* Snipd */}
               <a
                 href="https://share.snipd.com/show/7a974146-82a7-43fb-b42e-b7b4a719201d"
+                onClick={() => trackListenPlatform("Snipd", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover"
@@ -78,6 +84,7 @@ export default function Footer() {
               {/* Podcast LinkedIn Page */}
               <a
                 href="https://www.linkedin.com/company/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94"
+                onClick={() => trackSocialClick("linkedin", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover text-white"
@@ -95,11 +102,11 @@ export default function Footer() {
               {/* Facebook Page */}
               <a
                 href="https://www.facebook.com/profile.php?id=61560006065019"
+                onClick={() => trackSocialClick("facebook", "footer")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-3 rounded-sm glass-hover text-white"
                 aria-label="Facebook Page"
-                onClick={() => {}}
               >
                 <svg
                   className="w-5 h-5"

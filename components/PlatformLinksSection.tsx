@@ -1,3 +1,5 @@
+"use client";
+
 import SpotifyIcon from "./SpotifyIcon";
 import {
   ApplePodcastsIcon,
@@ -5,6 +7,7 @@ import {
   PocketCastsIcon,
   SnipdIcon,
 } from "./PodcastIcons";
+import { trackListenPlatform } from "@/lib/analytics";
 
 const SPOTIFY_SHOW_URL = "https://open.spotify.com/show/1ddFDGd1vH4UWIlfGjhS2Y";
 const APPLE_PODCASTS_URL =
@@ -66,6 +69,7 @@ export default function PlatformLinksSection() {
           <a
             key={p.name}
             href={p.url}
+            onClick={() => trackListenPlatform(p.name, "platform_links_section")}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={p.label}

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { trackNewsletterClick, trackSocialClick } from "@/lib/analytics";
 
 export default function HostSection() {
   return (
@@ -26,13 +29,14 @@ export default function HostSection() {
 
             {/* Bio */}
             <p className="body-text text-base md:text-lg text-white/75 leading-relaxed max-w-lg mx-auto mb-8">
-              חוקר, מראיין ומנחה — מביא בכל פרק את האנשים שפותרים את הבעיות הגדולות של ימינו בגובה העיניים
+              מביא בכל פרק את האנשים שפותרים את הבעיות הגדולות של ימינו בגובה העיניים
             </p>
 
             {/* Social Links */}
             <div className="flex gap-3 flex-wrap justify-center">
               <Link
                 href="https://ben1580094.substack.com"
+                onClick={() => trackNewsletterClick("host_section")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
@@ -41,6 +45,7 @@ export default function HostSection() {
               </Link>
               <Link
                 href="https://x.com/bensahar"
+                onClick={() => trackSocialClick("x", "host_section")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
@@ -49,6 +54,7 @@ export default function HostSection() {
               </Link>
               <Link
                 href="https://www.linkedin.com/in/ben-sahar/"
+                onClick={() => trackSocialClick("linkedin", "host_section")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"

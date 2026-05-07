@@ -455,6 +455,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
               <TranscriptAccordion
                 transcript={metadata.transcript}
                 episodeTitle={episode.title}
+                episodeNumber={episode.episodeNumber}
               />
             )}
 

@@ -1,14 +1,17 @@
 "use client";
 import { useState } from "react";
+import { trackTranscriptOpened } from "@/lib/analytics";
 
 interface TranscriptAccordionProps {
   transcript: string;
   episodeTitle: string;
+  episodeNumber?: number;
 }
 
 export default function TranscriptAccordion({
   transcript,
   episodeTitle,
+  episodeNumber,
 }: TranscriptAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,7 +19,11 @@ export default function TranscriptAccordion({
     <section className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
       {/* Header with Toggle */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          const next = !isOpen;
+          setIsOpen(next);
+          if (next && episodeNumber != null) trackTranscriptOpened(episodeNumber);
+        }}
         className="w-full flex items-center justify-between mb-4 md:mb-6 group"
         aria-expanded={isOpen}
         aria-controls="transcript-content"

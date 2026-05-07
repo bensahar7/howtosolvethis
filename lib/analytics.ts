@@ -1,66 +1,62 @@
 /**
- * Analytics Utilities
- * Google Analytics 4 integration (optional)
+ * Analytics — GA4 thin wrapper.
+ * No-ops when NEXT_PUBLIC_GA_MEASUREMENT_ID is unset or running on the server.
  */
 
-// Type definitions for gtag
 declare global {
   interface Window {
-    gtag?: (
-      command: string,
-      targetId: string,
-      config?: Record<string, unknown>
-    ) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-// Track page views
+const fire = (action: string, params: Record<string, unknown> = {}) => {
+  if (typeof window === "undefined" || !window.gtag) return;
+  window.gtag("event", action, params);
+};
+
 export const pageview = (url: string) => {
-  if (!GA_MEASUREMENT_ID || !window.gtag) return;
-  
-  window.gtag("config", GA_MEASUREMENT_ID, {
-    page_path: url,
-  });
+  if (!GA_MEASUREMENT_ID || typeof window === "undefined" || !window.gtag) return;
+  window.gtag("config", GA_MEASUREMENT_ID, { page_path: url });
 };
 
-// Track custom events
-export const event = ({
-  action,
-  category,
-  label,
-  value,
-}: {
-  action: string;
-  category: string;
-  label?: string;
-  value?: number;
-}) => {
-  if (!window.gtag) return;
-
-  window.gtag("event", action, {
-    event_category: category,
-    event_label: label,
-    value: value,
+export const trackListenPlatform = (
+  platform: string,
+  location: string,
+  episodeNumber?: number
+) =>
+  fire("listen_platform_clicked", {
+    platform,
+    location,
+    episode_number: episodeNumber,
   });
-};
 
-// Track Spotify plays
-export const trackSpotifyPlay = (episodeNumber: number, episodeTitle: string) => {
-  event({
-    action: "play_episode",
-    category: "Engagement",
-    label: `Episode ${episodeNumber}: ${episodeTitle}`,
-    value: episodeNumber,
+export const trackEpisodeCardClick = (
+  episodeNumber: number,
+  episodeTitle: string,
+  location: string
+) =>
+  fire("episode_card_clicked", {
+    episode_number: episodeNumber,
+    episode_title: episodeTitle,
+    location,
   });
-};
 
-// Track newsletter signups
-export const trackNewsletterSignup = () => {
-  event({
-    action: "newsletter_signup",
-    category: "Conversion",
-    label: "Substack Newsletter",
+export const trackTranscriptOpened = (episodeNumber: number) =>
+  fire("transcript_opened", { episode_number: episodeNumber });
+
+export const trackNewsletterClick = (location: string) =>
+  fire("newsletter_clicked", { location });
+
+export const trackSocialClick = (platform: string, location: string) =>
+  fire("social_clicked", { platform, location });
+
+export const trackCompanyLinkClick = (
+  companyName: string,
+  episodeNumber: number
+) =>
+  fire("company_link_clicked", {
+    company_name: companyName,
+    episode_number: episodeNumber,
   });
-};

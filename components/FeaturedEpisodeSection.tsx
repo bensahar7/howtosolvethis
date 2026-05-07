@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import SpotifyIcon from "./SpotifyIcon";
 import { EnrichedEpisode } from "@/types/episode";
 import { ApplePodcastsIcon } from "./PodcastIcons";
+import { trackListenPlatform } from "@/lib/analytics";
 
 const APPLE_PODCASTS_URL =
   "https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970";
@@ -43,6 +46,13 @@ export default function FeaturedEpisodeSection({ episode }: { episode: EnrichedE
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
                 <a
                   href={spotifyUrl}
+                  onClick={() =>
+                    trackListenPlatform(
+                      "Spotify",
+                      "featured_section",
+                      episode.episodeNumber
+                    )
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-spotify group w-full sm:w-auto flex items-center justify-center gap-3"
@@ -53,6 +63,13 @@ export default function FeaturedEpisodeSection({ episode }: { episode: EnrichedE
                 </a>
                 <a
                   href={APPLE_PODCASTS_URL}
+                  onClick={() =>
+                    trackListenPlatform(
+                      "Apple Podcasts",
+                      "featured_section",
+                      episode.episodeNumber
+                    )
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="glass p-4 rounded-sm glass-hover inline-flex items-center justify-center gap-3 w-full sm:w-auto"

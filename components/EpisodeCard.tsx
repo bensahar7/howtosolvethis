@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { EnrichedEpisode } from "@/types/episode";
 import { useState, useRef, useEffect } from "react";
+import { trackEpisodeCardClick } from "@/lib/analytics";
 
 interface EpisodeCardProps {
   episode: EnrichedEpisode;
@@ -54,7 +55,17 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
   }, [cleanedDescription]);
 
   return (
-    <Link href={episodeUrl} className="block h-full">
+    <Link
+      href={episodeUrl}
+      onClick={() =>
+        trackEpisodeCardClick(
+          episode.episodeNumber ?? index + 1,
+          episode.title,
+          "episode_grid"
+        )
+      }
+      className="block h-full"
+    >
     <article 
       className="glass glass-hover rounded-sm overflow-hidden group relative flex flex-col h-full cursor-pointer"
     >
