@@ -158,7 +158,6 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
     `בפרק ${episode.episodeNumber} של "איך פותרים את זה?"`,
     guestNames && `בן סהר מארח את ${guestNames}`,
     companyName && `מחברת ${companyName}`,
-    metadata?.sector && `(${metadata.sector})`,
   ].filter(Boolean);
   const tldrIntro = tldrParts.join(" ") + ".";
   const tldrProblem = firstSentence(metadata?.problem);
@@ -227,12 +226,20 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                   data-tldr
                   className="glass p-4 md:p-5 rounded-sm mb-6 border-l-2 border-white/20"
                 >
-                  <p className="technical-text text-white/60 mb-2">תקציר</p>
-                  <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                  <p className="technical-text text-white/60 mb-3">תקציר</p>
+                  <p className="text-white/90 text-sm md:text-base leading-relaxed mb-3">
                     {tldrIntro}
-                    {tldrProblem && <> הבעיה: {tldrProblem}</>}
-                    {tldrSolution && <> הפתרון: {tldrSolution}</>}
                   </p>
+                  {tldrProblem && (
+                    <p className="text-white/90 text-sm md:text-base leading-relaxed mb-2">
+                      <span className="font-bold">הבעיה:</span> {tldrProblem}
+                    </p>
+                  )}
+                  {tldrSolution && (
+                    <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                      <span className="font-bold">הפתרון:</span> {tldrSolution}
+                    </p>
+                  )}
                 </div>
               )}
 

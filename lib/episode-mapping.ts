@@ -9,8 +9,8 @@
 export const EPISODE_MAPPING: Record<number, string> = {
   // Season 1 (Episodes 1-10)
   1: "ep1-bees", // "מה הסיפור עם היעלמות הדבורים?" → Bees
-  2: "ep3-daikawood", // "מה הבעיה עם מחזור של עץ?" → Daikawood (wood waste)
-  3: "ep2- Salicrop", // "מה קורה כשצמחים בלחץ?" → Salicrop (resilient seeds)
+  2: "ep2- Salicrop", // "מה קורה כשצמחים בלחץ?" → Salicrop (resilient seeds)
+  3: "ep3-daikawood", // "מה הבעיה עם מחזור של עץ?" → Daikawood (wood waste)
   4: "ep4-structurepal", // "איך אפשר להפחית את השימוש בבטון?" → StructurePal (concrete)
   5: "ep5-wildfires-firewave", // "איך אפשר למנוע שריפות?" → Firewave
   6: "ep6-textile-recycling-textre", // "למה קשה למחזר בגדים?" → Textre
