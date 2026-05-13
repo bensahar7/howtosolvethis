@@ -27,6 +27,30 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@/components', '@/lib'],
   },
+  async redirects() {
+    return [
+      // Canonicalize host: www.howtosolvethis.com → howtosolvethis.com
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.howtosolvethis.com" }],
+        destination: "https://howtosolvethis.com/:path*",
+        permanent: true,
+      },
+      // Drop stray search-template query params that Google indexed from a stale SearchAction schema
+      {
+        source: "/",
+        has: [{ type: "query", key: "search" }],
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/",
+        has: [{ type: "query", key: "s" }],
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 // Wrap with bundle analyzer (enabled with ANALYZE=true)
