@@ -185,25 +185,81 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
 
   // FAQPage schema — high-ROI for AI extraction
   const faqEntries: Array<{ q: string; a: string }> = [];
+
+  // Guest question — enriched with company + role context
   if (metadata?.guests?.length) {
+    const guestList = metadata.guests.join(" ו-");
+    const companyContext = metadata.companies?.length
+      ? metadata.companies.map(c => c.name).join(" ו-")
+      : metadata.companyName;
+    const sectorContext = metadata.sector ? ` בתחום ה-${metadata.sector}` : "";
     faqEntries.push({
-      q: "מי האורח בפרק זה?",
-      a: metadata.guests.join(", ") +
-        (metadata.companyName ? ` מחברת ${metadata.companyName}` : ""),
+      q: `מי האורח/ת בפרק ${episode.episodeNumber} של 'איך פותרים את זה?'?`,
+      a: `${guestList}${companyContext ? ` מחברת ${companyContext}` : ""}${sectorContext}. הפרק מתמקד ב${episode.title}.`,
     });
   }
+
+  // Problem — with episode context
   if (metadata?.problem) {
-    faqEntries.push({ q: "מה הבעיה שהפרק עוסק בה?", a: metadata.problem });
+    faqEntries.push({
+      q: `מה הבעיה שפרק ${episode.episodeNumber} עוסק בה?`,
+      a: metadata.problem,
+    });
   }
+
+  // Solution — with company attribution
   if (metadata?.solution) {
-    faqEntries.push({ q: "מהו הפתרון?", a: metadata.solution });
+    const companyName = metadata.companies?.[0]?.name || metadata.companyName;
+    faqEntries.push({
+      q: companyName
+        ? `איך ${companyName} פותרים את הבעיה?`
+        : "מהו הפתרון שמוצג בפרק?",
+      a: metadata.solution,
+    });
   }
+
+  // Entrepreneur tip — high value for AI extraction
+  if (metadata?.entrepreneurTip) {
+    faqEntries.push({
+      q: "מה הטיפ ליזמים מהפרק הזה?",
+      a: metadata.entrepreneurTip,
+    });
+  }
+
+  // Sector context question
   if (metadata?.sector) {
-    faqEntries.push({ q: "באיזה סקטור עוסק הפרק?", a: metadata.sector });
+    faqEntries.push({
+      q: `באיזה תחום עוסק פרק ${episode.episodeNumber}?`,
+      a: `הפרק עוסק בתחום ה-${metadata.sector}. הפודקאסט 'איך פותרים את זה?' מכסה מגוון תחומים בקליימט-טק ישראלי, כולל AgriTech, FoodTech, Blue Tech, אנרגיה ועוד.`,
+    });
   }
+
+  // Key points summary — if available
+  if (metadata?.keyPoints?.length) {
+    faqEntries.push({
+      q: "מה הנקודות המרכזיות בפרק?",
+      a: metadata.keyPoints.join(". ") + ".",
+    });
+  }
+
+  // Company website — drives traffic + helps AI cite
+  const mainCompany = metadata?.companies?.[0];
+  if (mainCompany?.website) {
+    faqEntries.push({
+      q: `מה האתר של ${mainCompany.name}?`,
+      a: `אתר החברה: ${mainCompany.website}. ${mainCompany.focus ? `${mainCompany.name} מתמקדת ב-${mainCompany.focus}.` : ""}`,
+    });
+  } else if (metadata?.companyWebsite && metadata?.companyName) {
+    faqEntries.push({
+      q: `מה האתר של ${metadata.companyName}?`,
+      a: `אתר החברה: ${metadata.companyWebsite}.`,
+    });
+  }
+
+  // Listening platforms — always last
   faqEntries.push({
     q: "איפה ניתן להאזין לפרק?",
-    a: "הפרק זמין ב-Spotify, Apple Podcasts, YouTube Music, Pocket Casts ו-Castbox.",
+    a: `הפרק זמין ב-Spotify, Apple Podcasts, YouTube Music, Pocket Casts, Castbox ו-Snipd. ניתן גם להאזין באתר howtosolvethis.com/episodes/${episode.episodeNumber} עם תמלול מלא.`,
   });
 
   const faqSchema = {

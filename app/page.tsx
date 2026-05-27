@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: "he_IL",
     url: "https://howtosolvethis.com",
     siteName: "איך פותרים את זה?",
-    title: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
+    title: "איך פותרים את זה | פודקאסט על האנשים שפותרים את הבעיות הגדולות של ימינו",
     description:
       "מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו. פודקאסט על יזמות, חדשנות ופתרונות סביבתיים בישראל.",
     images: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         url: "https://howtosolvethis.com/images/earth-hero.png",
         width: 1200,
         height: 630,
-        alt: "איך פותרים את זה? - פודקאסט יזמות ופתרון בעיות",
+        alt: "איך פותרים את זה - פודקאסט על האנשים שפותרים את הבעיות הגדולות של ימינו",
       },
     ],
   },
