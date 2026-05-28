@@ -480,3 +480,8 @@ a {
 .rounded-sm {
   border-radius: 0.125rem !important;
 }
+
+/* Rotate chevron when <details> is open */
+details[open] .details-chevron {
+  transform: rotate(180deg);
+}
