@@ -13,7 +13,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const metadata: Metadata = {
   metadataBase: new URL("https://howtosolvethis.com"),
   title: {
-    default: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
+    default: "איך פותרים את זה? | פודקאסט על יזמות ופתרון בעיות",
     template: "%s | איך פותרים את זה?",
   },
   description:
@@ -72,13 +72,13 @@ export const metadata: Metadata = {
         url: "/images/earth-hero.png",
         width: 1200,
         height: 630,
-        alt: "איך פותרים את זה? - פודקאסט יזמות ופתרון בעיות",
+        alt: "איך פותרים את זה? - פודקאסט על יזמות ופתרון בעיות",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "איך פותרים את זה? | פודקאסט יזמות ופתרון בעיות",
+    title: "איך פותרים את זה? | פודקאסט על יזמות ופתרון בעיות",
     description: "מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו",
     images: ["/images/earth-hero.png"],
     creator: "@bensahar",

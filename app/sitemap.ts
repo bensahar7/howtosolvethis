@@ -1,70 +1,46 @@
 import { MetadataRoute } from "next";
-import fs from "fs/promises";
-import path from "path";
+import { getEnrichedEpisodes } from "@/lib/episode-matcher";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://howtosolvethis.com";
-  const episodesDir = path.join(process.cwd(), "Context", "Episodes");
 
-  // Dynamically scan for episodes with meta.md.txt files
+  // Derive episode URLs from getEnrichedEpisodes() — the SAME source the episode
+  // routes (generateStaticParams) use. This guarantees the sitemap can never list a
+  // URL that 404s, nor omit a page that actually exists. Previously the sitemap was
+  // built by scanning folder names (e.g. "ep19-…") while the routes were built from
+  // RSS episode numbers; the two drifted apart and the sitemap shipped a /episodes/19
+  // that 404'd while omitting the real /episodes/16.
+  const episodes = await getEnrichedEpisodes();
+
+  const seen = new Set<number>();
   const episodePages: MetadataRoute.Sitemap = [];
-  let latestEpisodeMtime: Date | null = null;
-
-  try {
-    const entries = await fs.readdir(episodesDir, { withFileTypes: true });
-    const episodeDirs = entries.filter((entry) => entry.isDirectory());
-
-    for (const dir of episodeDirs) {
-      const episodePath = path.join(episodesDir, dir.name);
-      
-      // Check if meta.md.txt exists
-      try {
-        await fs.access(path.join(episodePath, "meta.md.txt"));
-        
-        // Extract episode number from directory name (e.g., "ep1-bees" -> 1)
-        const episodeNumMatch = dir.name.match(/ep(\d+)/i);
-        if (episodeNumMatch) {
-          const episodeNumber = parseInt(episodeNumMatch[1], 10);
-          
-          // Use file mtime so Google sees stable dates and trusts crawl signals
-          const stat = await fs.stat(path.join(episodePath, "meta.md.txt"));
-          if (!latestEpisodeMtime || stat.mtime > latestEpisodeMtime) {
-            latestEpisodeMtime = stat.mtime;
-          }
-          episodePages.push({
-            url: `${baseUrl}/episodes/${episodeNumber}`,
-            lastModified: stat.mtime.toISOString(),
-            changeFrequency: "monthly" as const,
-            priority: 0.8,
-          });
-        }
-      } catch {
-        // Skip directories without meta.md.txt
-        continue;
-      }
-    }
-
-    // Sort by episode number descending
-    episodePages.sort((a, b) => {
-      const numA = parseInt(a.url.split('/').pop() || '0', 10);
-      const numB = parseInt(b.url.split('/').pop() || '0', 10);
-      return numB - numA;
+  for (const ep of episodes) {
+    if (typeof ep.episodeNumber !== "number" || seen.has(ep.episodeNumber)) continue;
+    seen.add(ep.episodeNumber);
+    episodePages.push({
+      url: `${baseUrl}/episodes/${ep.episodeNumber}`,
+      // Use the published date so Google sees stable lastmod values and trusts the feed.
+      lastModified: ep.pubDate
+        ? new Date(ep.pubDate).toISOString()
+        : new Date().toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     });
-
-  } catch (error) {
-    console.error("Error generating sitemap:", error);
   }
+
+  // episodes are sorted newest-first, so the first entry is the most recent date.
+  const latest = episodePages[0]?.lastModified ?? new Date().toISOString();
 
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: (latestEpisodeMtime ?? new Date(0)).toISOString(),
+      lastModified: latest,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: (latestEpisodeMtime ?? new Date(0)).toISOString(),
+      lastModified: latest,
       changeFrequency: "monthly",
       priority: 0.6,
     },

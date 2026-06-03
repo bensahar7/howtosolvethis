@@ -24,6 +24,13 @@ export const EPISODE_MAPPING: Record<number, string> = {
   12: "ep12-foodtech-brevel", // S2E2: "איך מפיקים חלבון מאצות?" → Brevel (microalgae)
   13: "ep13-foodtech-oshi", // S2E3: "מה הבעיה עם תעשיית הסלמון?" → Oshi (salmon alternative)
   14: "ep14-materials-polymertal", // S2E4: "Polymertal - החברה שמפתחת אלטרנטיבה למתכת"
-  15: "ep15-foodtech-coffeesai", // S2E5: "CoffeeSai - Lab-Grown Cell-Based Coffee"
-  16: "ep16-coral-reefs-vcorals", // S2E6: "Coral Reefs - להציל את היערות של הים"
+  15: "ep15-foodtech-coffeesai", // RSS S2E15: "CoffeeSai - Lab-Grown Cell-Based Coffee"
+  // 16 = Maji ("איך מנטרים את טיהור המים", RSS S2E16) — published, but has no local
+  //      Context/Episodes/ep16-*/meta.md.txt yet, so its page renders from RSS only.
+  //      Once that file exists with a "# Episode 16" header, matchEpisodeWithMetadata's
+  //      directMatch joins it automatically; no entry is needed here.
+  //
+  // NOTE: ep19-coral-reefs-vcorals (labeled "Episode 19") is an UNPUBLISHED draft. It is
+  // intentionally absent from the RSS feed, so it has no route/sitemap entry. Add a `19:`
+  // mapping here only after the episode actually goes live in the RSS feed.
 };
