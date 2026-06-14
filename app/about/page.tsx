@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AboutContent from "@/components/AboutContent";
+import { getAboutContent } from "@/lib/about-reader";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -129,7 +131,9 @@ const escape = (obj: object) =>
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026");
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { eyebrow, title, body } = await getAboutContent();
+
   return (
     <>
       <script
@@ -153,139 +157,7 @@ export default function AboutPage() {
               חזרה לעמוד הבית
             </Link>
 
-            {/* Intro + Bio */}
-            <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-              <p className="technical-text text-xs text-white/40 mb-4 tracking-widest">
-                אודות המנחה
-              </p>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                בן סהר
-              </h1>
-              <p className="technical-text text-xs text-white/50 mb-6">
-                חוקר קליימט-טק &middot; יזם &middot; מנחה פודקאסט
-              </p>
-              <p
-                data-tldr
-                className="body-text text-base md:text-lg text-white/85 leading-relaxed mb-6"
-              >
-               אני מראיין פאונדרים, חוקרים ומשקיעים שפותרים את הבעיות הגדודולות של ימינו, מהסרת פחמן וגידול קפה בתלת מימד, ועד
-               חלופות לבטון ואלטרנטיבות לסלמון.
-              </p>
-              <p className="body-text text-sm md:text-base text-white/70 leading-relaxed mb-4">
-              הפודקאסט נולד מתוך סקרנות אמיתית. רציתי להבין איך סטארטאפים פותרים תא הבעיות הגדולות של תקופתנו מבפנים, ולשתף על זה בגובה העיניים.
-
-              </p>
-              <p className="body-text text-sm md:text-base text-white/70 leading-relaxed">
-                עד היום ראיינתי מעל 15 יזמים וחוקרים מתחומי ה-AgriTech, FoodTech,
-                Blue Tech, אנרגיה, חומרים ועוד. כל פרק בנוי סביב מבנה ברור:
-                הבעיה, הפתרון, והטיפ ליזם — כדי שגם מי שלא מגיע מהתחום יוכל
-                להבין ולהתחבר.
-              </p>
-            </div>
-
-            {/* Mission */}
-            <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
-                למה הקמתי את הפודקאסט
-              </h2>
-              <p className="body-text text-sm md:text-base text-white/80 leading-relaxed mb-4">
-                תעשיית הקליימט-טק בישראל צומחת מהר, אבל רוב התוכן עליה נכתב
-                באנגלית ומיועד למשקיעים. רציתי ליצור מקום שבו כל מי שמתעניין —
-                סטודנטים, מהנדסים, יזמים בתחילת הדרך — יכול להבין מה קורה
-                בתעשייה ומה הפתרונות שנבנים כאן.
-              </p>
-              <p className="body-text text-sm md:text-base text-white/80 leading-relaxed">
-                המטרה היא להנגיש את המורכבות שמאחורי הסטארטאפים שפותרים את הבעיות
-                הגדולות של תקופתינו, ולהפגיש בין יזמים, חוקרים ומשקיעים.
-              </p>
-            </div>
-
-            {/* Expertise Areas */}
-            <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
-                נושאי הפודקאסט
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <h3 className="text-sm font-bold text-white/90 mb-2">קליימט-טק וסביבה</h3>
-                  <ul className="list-disc list-inside text-white/70 text-sm leading-relaxed space-y-1">
-                    <li>הסרת פחמן (Carbon Removal)</li>
-                    <li>אנרגיה מתחדשת</li>
-                    <li>חומרים ירוקים ומחזור</li>
-                    <li>Blue Tech ואקולוגיה ימית</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white/90 mb-2">יזמות וטכנולוגיה</h3>
-                  <ul className="list-disc list-inside text-white/70 text-sm leading-relaxed space-y-1">
-                    <li>AgriTech ו-FoodTech</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Podcast Numbers */}
-            <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
-                הפודקאסט במספרים
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div>
-                  <p className="text-2xl md:text-3xl font-bold text-white">16+</p>
-                  <p className="technical-text text-xs text-white/50 mt-1">פרקים</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-bold text-white">15+</p>
-                  <p className="technical-text text-xs text-white/50 mt-1">יזמים וחוקרים</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-bold text-white">6</p>
-                  <p className="technical-text text-xs text-white/50 mt-1">פלטפורמות</p>
-                </div>
-                <div>
-                  <p className="text-2xl md:text-3xl font-bold text-white">8+</p>
-                  <p className="technical-text text-xs text-white/50 mt-1">סקטורים</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact / Guest CTA */}
-            <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
-                רוצים להתארח? בואו נדבר
-              </h2>
-              <p className="body-text text-sm md:text-base text-white/80 leading-relaxed mb-6">
-                אני מחפש יזמים, חוקרים ומשקיעים שפותרים בעיות סביבתיות אמיתיות
-                ורוצים לשתף את הסיפור שלהם. אם יש לכם סטארטאפ או מחקר בתחום
-                הקליימט-טק — אשמח לשמוע.
-              </p>
-              <div className="flex gap-3 flex-wrap">
-                <a
-                  href="https://www.linkedin.com/in/ben-sahar/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://x.com/bensahar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
-                >
-                  X
-                </a>
-                <a
-                  href="https://ben1580094.substack.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass glass-hover inline-flex items-center justify-center px-6 py-3 rounded-sm font-medium text-white"
-                >
-                  Substack
-                </a>
-              </div>
-            </div>
+            <AboutContent eyebrow={eyebrow} title={title} body={body} />
           </div>
         </div>
       </article>

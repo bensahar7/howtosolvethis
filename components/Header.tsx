@@ -10,6 +10,14 @@ export default function Header() {
               איך פותרים את זה?
             </span>
           </Link>
+          <nav className="ms-auto flex items-center gap-6">
+            <Link
+              href="/about"
+              className="text-sm md:text-base text-white/80 hover:text-white transition-colors"
+            >
+              אודות
+            </Link>
+          </nav>
         </div>
       </div>
     </header>
