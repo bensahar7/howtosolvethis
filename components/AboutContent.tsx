@@ -1,4 +1,8 @@
 import React from "react";
+import AnimatedCounter from "@/components/AnimatedCounter";
+
+// A stats list item: bold value + dash + label, e.g. `**16+** — פרקים`.
+const STAT_ITEM = /^\*\*(.+?)\*\*\s*[—–-]\s*(.+)$/;
 
 interface AboutContentProps {
   eyebrow?: string;
@@ -104,15 +108,51 @@ function renderBlocks(
 
     const lines = block.split(/\r?\n/);
     if (lines.every((l) => /^[-*]\s+/.test(l.trim()))) {
+      const items = lines.map((l) => l.replace(/^[-*]\s+/, "").trim());
+
+      // A list where every item is `**value** — label` renders as a
+      // homepage-style stats grid (big animated number + technical label).
+      const stats = items.map((item) => item.match(STAT_ITEM));
+      if (stats.every(Boolean)) {
+        return (
+          <div
+            key={key}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center"
+          >
+            {stats.map((m, si) => {
+              const value = m![1].trim();
+              const label = m![2].trim();
+              const num = value.match(/^(\d+)(.*)$/);
+              return (
+                <div key={`${key}-stat-${si}`}>
+                  {num ? (
+                    <AnimatedCounter
+                      value={parseInt(num[1], 10)}
+                      suffix={num[2]}
+                      className="text-2xl md:text-5xl font-bold text-white mb-1 md:mb-2 block"
+                    />
+                  ) : (
+                    <span className="text-2xl md:text-5xl font-bold text-white mb-1 md:mb-2 block">
+                      {value}
+                    </span>
+                  )}
+                  <div className="technical-text text-white/60 text-[9px] md:text-sm">
+                    {label}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+
       return (
         <ul
           key={key}
           className="list-disc list-inside text-white/70 text-sm leading-relaxed space-y-1 mb-4"
         >
-          {lines.map((l, li) => (
-            <li key={`${key}-li-${li}`}>
-              {renderInline(l.replace(/^[-*]\s+/, "").trim(), `${key}-${li}`)}
-            </li>
+          {items.map((item, li) => (
+            <li key={`${key}-li-${li}`}>{renderInline(item, `${key}-${li}`)}</li>
           ))}
         </ul>
       );
