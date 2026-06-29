@@ -171,8 +171,8 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
       {
         "@type": "ListItem",
         position: 2,
-        name: "פרקים",
-        item: "https://howtosolvethis.com/#episodes",
+        name: "כל הפרקים",
+        item: "https://howtosolvethis.com/episodes",
       },
       {
         "@type": "ListItem",

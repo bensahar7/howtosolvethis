@@ -30,6 +30,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^16.1.6"
+    "@next/bundle-analyzer": "^16.1.6",
+    "playwright": "^1.61.0"
   }
 }

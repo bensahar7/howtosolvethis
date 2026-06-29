@@ -31,6 +31,9 @@
 /* Fallback to system Hebrew fonts */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Arial Hebrew", system-ui, sans-serif;
+  /* Dark base so the first paint matches the earth background (which is near-black
+     at the edges) instead of flashing grey while earth-hero.png downloads. */
+  background-color: #000;
 }
 
 /* ============================================

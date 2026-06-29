@@ -140,23 +140,46 @@ export default function HomePage() {
   );
 }
 
-// Loading Skeleton for Episode Grid
+// Loading Skeleton for Episode Grid.
+// Mirrors the real grid (EpisodeGrid.tsx) and card (EpisodeCard.tsx) layout
+// so content swaps in without a layout jump. Pulse comes from .skeleton-glass.
 function EpisodeGridSkeleton() {
   return (
-    <div className="grid grid-cols-12 gap-6">
+    <div
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+      aria-hidden="true"
+    >
       {[1, 2, 3, 4, 5, 6].map((i) => (
-        <div
-          key={i}
-          className="col-span-12 md:col-span-6 lg:col-span-4"
-        >
-          <div className="glass rounded-sm overflow-hidden skeleton-glass">
-            <div className="aspect-video bg-white/5" />
-            <div className="p-6 space-y-3">
-              <div className="h-4 bg-white/5 rounded w-1/3" />
-              <div className="h-6 bg-white/5 rounded w-full" />
-              <div className="h-4 bg-white/5 rounded w-2/3" />
+        <div key={i} className="flex">
+          <article className="glass rounded-sm overflow-hidden skeleton-glass flex flex-col h-full w-full">
+            {/* Image */}
+            <div className="aspect-video bg-white/5 flex-shrink-0" />
+
+            {/* Content */}
+            <div className="p-4 md:p-6 flex flex-col flex-1">
+              {/* Sector line */}
+              <div className="h-3 bg-white/5 w-1/3 mb-4" />
+              {/* Title */}
+              <div className="h-5 bg-white/5 w-5/6 mb-3" />
+              {/* Description lines */}
+              <div className="space-y-2 mb-4 flex-1">
+                <div className="h-3.5 bg-white/5 w-full" />
+                <div className="h-3.5 bg-white/5 w-11/12" />
+                <div className="h-3.5 bg-white/5 w-3/4" />
+              </div>
+              {/* Footer (guests / date) */}
+              <div className="flex items-center gap-6 pt-6 border-t border-white/10 mt-auto">
+                <div className="flex-1 space-y-1.5">
+                  <div className="h-2.5 bg-white/5 w-1/2" />
+                  <div className="h-3 bg-white/5 w-3/4" />
+                </div>
+                <div className="flex-1 space-y-1.5">
+                  <div className="h-2.5 bg-white/5 w-1/2" />
+                  <div className="h-3 bg-white/5 w-2/3" />
+                </div>
+              </div>
             </div>
-          </div>
+          </article>
         </div>
       ))}
     </div>

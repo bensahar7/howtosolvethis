@@ -44,3 +44,9 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# local tooling / artifacts
+/outputs
+/.playwright-mcp
+/.claude
+/.agents

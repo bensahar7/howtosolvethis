@@ -95,6 +95,8 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
+        {/* Preload the fixed background so it paints sooner (no grey flash). */}
+        <link rel="preload" as="image" href="/images/earth-hero.png" />
         <StructuredData />
       </head>
       <body
@@ -105,9 +107,10 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         
-        {/* Fixed Earth Background */}
+        {/* Fixed Earth Background. Black fallback color prevents a grey flash
+            before earth-hero.png finishes downloading. */}
         <div
-          className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
+          className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat bg-black"
           style={{
             backgroundImage: "url('/images/earth-hero.png')",
           }}

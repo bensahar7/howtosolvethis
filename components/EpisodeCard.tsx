@@ -91,11 +91,11 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
 
       {/* Card Content */}
       <div className="p-4 md:p-6 flex flex-col flex-1">
-        {/* Sector Tag - Hebrew Label */}
+        {/* Sector Tag - Hebrew Label. Single line: overflow is truncated with "…". */}
         {metadata?.sector && (
-          <div className="mb-3">
-            <span className="technical-text text-white/40 text-[10px]">תחום</span>
-            <span className="text-white/80 text-sm ms-2">{metadata.sector}</span>
+          <div className="mb-3 flex items-baseline gap-2 min-w-0">
+            <span className="technical-text text-white/40 text-[10px] flex-shrink-0">תחום</span>
+            <span className="text-white/80 text-sm truncate">{metadata.sector}</span>
           </div>
         )}
 

@@ -17,6 +17,8 @@ export async function GET() {
     "## Main",
     "",
     `- [Homepage](${baseUrl}): All episodes, about the show, and host info`,
+    `- [All Episodes](${baseUrl}/episodes): Full episode index, newest to oldest`,
+    `- [About](${baseUrl}/about): About host Ben Sahar and the podcast`,
     "",
     "## Episodes",
     "",
