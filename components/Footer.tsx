@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import SpotifyIcon from "./SpotifyIcon";
 import { ApplePodcastsIcon, YouTubeMusicIcon, PocketCastsIcon, SnipdIcon } from "./PodcastIcons";
 import { trackListenPlatform, trackSocialClick } from "@/lib/analytics";
@@ -16,6 +17,28 @@ export default function Footer() {
             <p className="body-text text-sm text-white/70 leading-relaxed">
             </p>
           </div>
+
+          {/* Site Navigation — static, crawlable internal links (every page). */}
+          <nav className="col-span-12 lg:col-span-4" aria-label="ניווט אתר">
+            <p className="technical-text mb-4">ניווט</p>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Link href="/" className="body-text text-sm text-white/70 hover:text-white transition-colors">
+                  דף הבית
+                </Link>
+              </li>
+              <li>
+                <Link href="/episodes" className="body-text text-sm text-white/70 hover:text-white transition-colors">
+                  כל הפרקים
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="body-text text-sm text-white/70 hover:text-white transition-colors">
+                  אודות
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
           {/* Social Links */}
           <div className="col-span-12 lg:col-span-4">

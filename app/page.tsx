@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import EpisodeGrid from "@/components/EpisodeGrid";
 import HostSection from "@/components/HostSection";
 import PlatformLinksSection from "@/components/PlatformLinksSection";
+import Footer from "@/components/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import PodcastSeriesSchema from "@/components/PodcastSeriesSchema";
 import HomeFaqSchema from "@/components/HomeFaqSchema";
@@ -135,6 +136,9 @@ export default function HomePage() {
 
       {/* Platform Links Section */}
       <PlatformLinksSection />
+
+      {/* Footer — carries the static, crawlable internal navigation */}
+      <Footer />
 
     </>
   );
