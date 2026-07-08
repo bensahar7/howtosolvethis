@@ -25,6 +25,7 @@ export const EPISODE_MAPPING: Record<number, string> = {
   13: "ep13-foodtech-oshi", // S2E3: "מה הבעיה עם תעשיית הסלמון?" → Oshi (salmon alternative)
   14: "ep14-materials-polymertal", // S2E4: "Polymertal - החברה שמפתחת אלטרנטיבה למתכת"
   15: "ep15-foodtech-coffeesai", // RSS S2E15: "CoffeeSai - Lab-Grown Cell-Based Coffee"
+  17: "ep17-senecio", // S2E7: "Senecio Robotics - הדברה ביולוגית ליתושים" (Sterile Insect Technique)
   // 16 = Maji ("איך מנטרים את טיהור המים", RSS S2E16) — published, but has no local
   //      Context/Episodes/ep16-*/meta.md.txt yet, so its page renders from RSS only.
   //      Once that file exists with a "# Episode 16" header, matchEpisodeWithMetadata's
