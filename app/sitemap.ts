@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
+import { episodePath } from "@/lib/episode-url";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://howtosolvethis.com";
@@ -18,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (typeof ep.episodeNumber !== "number" || seen.has(ep.episodeNumber)) continue;
     seen.add(ep.episodeNumber);
     episodePages.push({
-      url: `${baseUrl}/episodes/${ep.episodeNumber}`,
+      url: `${baseUrl}${episodePath(ep)}`,
       // Use the published date so Google sees stable lastmod values and trusts the feed.
       lastModified: ep.pubDate
         ? new Date(ep.pubDate).toISOString()

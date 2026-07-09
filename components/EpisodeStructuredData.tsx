@@ -1,4 +1,5 @@
 import { EnrichedEpisode } from "@/types/episode";
+import { episodePath } from "@/lib/episode-url";
 
 interface EpisodeStructuredDataProps {
   episode: EnrichedEpisode;
@@ -16,6 +17,7 @@ interface EpisodeStructuredDataProps {
  */
 export default function EpisodeStructuredData({ episode }: EpisodeStructuredDataProps) {
   const metadata = episode.metadata;
+  const episodeUrl = `https://howtosolvethis.com${episodePath(episode)}`;
   
   // Clean description for schema (remove HTML tags)
   const cleanDescription = (text?: string | null): string => {
@@ -27,12 +29,12 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
   const episodeSchema = {
     "@context": "https://schema.org",
     "@type": "PodcastEpisode",
-    "@id": `https://howtosolvethis.com/episodes/${episode.episodeNumber}#episode`,
-    
+    "@id": `${episodeUrl}#episode`,
+
     // Core identification fields
     name: episode.title,
     description: cleanDescription(metadata?.problem || episode.description),
-    url: `https://howtosolvethis.com/episodes/${episode.episodeNumber}`,
+    url: episodeUrl,
     
     // Temporal metadata
     datePublished: episode.pubDate,
@@ -178,7 +180,7 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
         "@type": "ListItem",
         position: 3,
         name: `פרק ${episode.episodeNumber}: ${episode.title}`,
-        item: `https://howtosolvethis.com/episodes/${episode.episodeNumber}`,
+        item: episodeUrl,
       },
     ],
   };
@@ -259,7 +261,7 @@ export default function EpisodeStructuredData({ episode }: EpisodeStructuredData
   // Listening platforms — always last
   faqEntries.push({
     q: "איפה ניתן להאזין לפרק?",
-    a: `הפרק זמין ב-Spotify, Apple Podcasts, YouTube Music, Pocket Casts, Castbox ו-Snipd. ניתן גם להאזין באתר howtosolvethis.com/episodes/${episode.episodeNumber} עם תמלול מלא.`,
+    a: `הפרק זמין ב-Spotify, Apple Podcasts, YouTube Music, Pocket Casts, Castbox ו-Snipd. ניתן גם להאזין באתר howtosolvethis.com${episodePath(episode)} עם תמלול מלא.`,
   });
 
   const faqSchema = {

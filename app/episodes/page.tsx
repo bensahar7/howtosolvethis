@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AllEpisodeCard from "@/components/AllEpisodeCard";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
+import { episodePath } from "@/lib/episode-url";
 
 // Static, indexable hub page — strengthens internal linking to every episode.
 export const dynamic = "force-static";
@@ -57,8 +58,8 @@ export default async function AllEpisodesPage() {
         position: i + 1,
         item: {
           "@type": "PodcastEpisode",
-          "@id": `${BASE}/episodes/${ep.episodeNumber}#episode`,
-          url: `${BASE}/episodes/${ep.episodeNumber}`,
+          "@id": `${BASE}${episodePath(ep)}#episode`,
+          url: `${BASE}${episodePath(ep)}`,
           name: ep.title,
           episodeNumber: ep.episodeNumber,
           datePublished: ep.pubDate,

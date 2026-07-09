@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { EnrichedEpisode } from "@/types/episode";
+import { episodePath } from "@/lib/episode-url";
 import { useState, useRef, useEffect } from "react";
 import { trackEpisodeCardClick } from "@/lib/analytics";
 
@@ -16,7 +17,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
   const [isOverflowing, setIsOverflowing] = useState(false);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const metadata = episode.metadata;
-  const episodeUrl = `/episodes/${episode.episodeNumber}`;
+  const episodeUrl = episodePath(episode);
   // Clean markdown and HTML formatting from description
   const cleanDescription = (text: string): string => {
     const raw = text ?? "";

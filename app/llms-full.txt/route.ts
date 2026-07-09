@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
+import { episodePath } from "@/lib/episode-url";
 import { BilingualTag } from "@/types/episode";
 
 export const revalidate = 3600;
@@ -28,9 +29,9 @@ export async function GET() {
 
     lines.push(`## Episode ${ep.episodeNumber}: ${ep.title}`);
     lines.push("");
-    lines.push(`**URL:** ${baseUrl}/episodes/${ep.episodeNumber}`);
+    lines.push(`**URL:** ${baseUrl}${episodePath(ep)}`);
     lines.push(
-      `**Markdown:** ${baseUrl}/episodes/${ep.episodeNumber}/markdown`
+      `**Markdown:** ${baseUrl}${episodePath(ep)}/markdown`
     );
     if (m?.sector) lines.push(`**Sector:** ${m.sector}`);
     if (m?.guests?.length) lines.push(`**Guests:** ${m.guests.join(", ")}`);
