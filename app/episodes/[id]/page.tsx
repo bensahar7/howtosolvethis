@@ -1,5 +1,6 @@
 import { getEnrichedEpisodes, getEpisodeWithTranscript } from "@/lib/episode-matcher";
-import { notFound } from "next/navigation";
+import { episodePath, episodeSlugId } from "@/lib/episode-url";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -57,7 +58,11 @@ export async function generateMetadata({
   }
 
   const metadata = episode.metadata;
-  
+
+  // Canonical slugged path, e.g. /episodes/17-senecio-robotics
+  const canonicalId = episodeSlugId(episode);
+  const canonicalUrl = `https://howtosolvethis.com/episodes/${canonicalId}`;
+
   // SEO Title: Episode [Number]: [Title] | [Guests]
   const guests = metadata?.guests?.join(", ") || "";
   const seoTitle = `פרק ${episodeNumber}: ${episode.title}${guests ? ` | ${guests}` : ""}`;
@@ -88,7 +93,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       locale: "he_IL",
-      url: `https://howtosolvethis.com/episodes/${id}`,
+      url: canonicalUrl,
       siteName: "איך פותרים את זה?",
       title: seoTitle,
       description: seoDescription,
@@ -116,9 +121,9 @@ export async function generateMetadata({
     
     // Canonical URL + machine-readable markdown alternate
     alternates: {
-      canonical: `https://howtosolvethis.com/episodes/${id}`,
+      canonical: canonicalUrl,
       types: {
-        "text/markdown": `https://howtosolvethis.com/episodes/${id}/markdown`,
+        "text/markdown": `https://howtosolvethis.com/episodes/${canonicalId}/markdown`,
       },
     },
   };
@@ -134,7 +139,15 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
   if (!episode) {
     notFound();
   }
-  
+
+  // Enforce the canonical slugged URL: any legacy /episodes/17 or stale slug
+  // permanently redirects (308) to /episodes/17-senecio-robotics so link equity
+  // consolidates on one URL and old indexed numeric links keep resolving.
+  const canonicalId = episodeSlugId(episode);
+  if (id !== canonicalId) {
+    permanentRedirect(episodePath(episode));
+  }
+
   // Fetch all episodes for RelatedEpisodes component (without transcripts for performance)
   const allEpisodes = await getEnrichedEpisodes();
 
@@ -142,7 +155,7 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
   const spotifyEmbedUrl = episode.spotifyEpisodeId
     ? `https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}?utm_source=generator&theme=0`
     : null;
-  const episodeUrl = `https://howtosolvethis.com/episodes/${id}`;
+  const episodeUrl = `https://howtosolvethis.com${episodePath(episode)}`;
 
   // Build a self-contained TL;DR block for AI extraction
   const firstSentence = (text?: string | null) => {
@@ -218,6 +231,66 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                 <p className="technical-text text-white/60 mb-4">
                   פורסם: <time dateTime={episode.pubDate}>{formattedDate}</time>
                 </p>
+              )}
+
+              {/* Listen — platform icons surfaced at the top for quick access */}
+              {episode.audioUrl && (
+                <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-6">
+                  <a
+                    href={episode.audioUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover rounded-sm flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+                    aria-label="Spotify"
+                  >
+                    <SpotifyIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </a>
+                  <a
+                    href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover rounded-sm flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+                    aria-label="Apple Podcasts"
+                  >
+                    <ApplePodcastsIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </a>
+                  <a
+                    href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover rounded-sm flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+                    aria-label="YouTube Music"
+                  >
+                    <YouTubeMusicIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@howtosolvethis"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover rounded-sm flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+                    aria-label="YouTube"
+                  >
+                    <YouTubeIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </a>
+                  <a
+                    href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover rounded-sm flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+                    aria-label="Pocket Casts"
+                  >
+                    <PocketCastsIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </a>
+                  <a
+                    href="https://castbox.fm/channel/id6193220?country=us"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass glass-hover rounded-sm flex items-center justify-center w-11 h-11 md:w-12 md:h-12"
+                    aria-label="Castbox"
+                  >
+                    <CastboxIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </a>
+                </div>
               )}
 
               {/* TL;DR — self-contained summary for AI extraction */}
@@ -360,69 +433,6 @@ export default async function EpisodePage({ params }: { params: Promise<{ id: st
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy"
                   />
-                </div>
-              </div>
-            )}
-
-            {/* Platform Links */}
-            {episode.audioUrl && (
-              <div className="glass p-6 md:p-12 rounded-sm mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-white mb-4">האזן בפלטפורמות אחרות</h2>
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
-                  <a
-                    href={episode.audioUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
-                    aria-label="Spotify"
-                  >
-                    <SpotifyIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                  </a>
-                  <a
-                    href="https://podcasts.apple.com/us/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/id1750929970"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
-                    aria-label="Apple Podcasts"
-                  >
-                    <ApplePodcastsIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                  </a>
-                  <a
-                    href="https://music.youtube.com/playlist?list=PLkPsVtA1_TZ_iuvlbCTHa4gmWl4vXdp89"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
-                    aria-label="YouTube Music"
-                  >
-                    <YouTubeMusicIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                  </a>
-                  <a
-                    href="https://www.youtube.com/@howtosolvethis"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
-                    aria-label="YouTube"
-                  >
-                    <YouTubeIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                  </a>
-                  <a
-                    href="https://pocketcasts.com/podcast/%D7%90%D7%99%D7%9A-%D7%A4%D7%95%D7%AA%D7%A8%D7%99%D7%9D-%D7%90%D7%AA-%D7%96%D7%94/1c570bc0-073c-013d-0d1e-0243b8a24f53"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
-                    aria-label="Pocket Casts"
-                  >
-                    <PocketCastsIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                  </a>
-                  <a
-                    href="https://castbox.fm/channel/id6193220?country=us"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 md:p-4 rounded-sm glass-hover flex items-center justify-center min-h-[48px]"
-                    aria-label="Castbox"
-                  >
-                    <CastboxIcon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                  </a>
                 </div>
               </div>
             )}

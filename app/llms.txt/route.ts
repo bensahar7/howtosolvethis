@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
+import { episodePath } from "@/lib/episode-url";
 
 export const revalidate = 3600;
 
@@ -29,7 +30,7 @@ export async function GET() {
     const title = ep.title;
     const sector = ep.metadata?.sector ? `: ${ep.metadata.sector}` : "";
     lines.push(
-      `- [Episode ${num}: ${title}](${baseUrl}/episodes/${num}/markdown)${sector}`
+      `- [Episode ${num}: ${title}](${baseUrl}${episodePath(ep)}/markdown)${sector}`
     );
   }
 

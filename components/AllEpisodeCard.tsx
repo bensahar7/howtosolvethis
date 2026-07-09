@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { EnrichedEpisode } from "@/types/episode";
+import { episodePath } from "@/lib/episode-url";
 
 interface AllEpisodeCardProps {
   episode: EnrichedEpisode;
@@ -25,7 +26,7 @@ function cleanDescription(text: string): string {
 }
 
 export default function AllEpisodeCard({ episode, index }: AllEpisodeCardProps) {
-  const episodeUrl = `/episodes/${episode.episodeNumber}`;
+  const episodeUrl = episodePath(episode);
   const summary = cleanDescription(episode.description);
   const formattedDate = new Date(episode.pubDate).toLocaleDateString("he-IL", {
     year: "numeric",

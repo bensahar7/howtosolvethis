@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getEpisodeWithTranscript } from "@/lib/episode-matcher";
+import { episodePath } from "@/lib/episode-url";
 import { BilingualTag } from "@/types/episode";
 
 export const revalidate = 3600;
@@ -39,7 +40,7 @@ export async function GET(
       `**Published:** ${new Date(episode.pubDate).toISOString().split("T")[0]}`
     );
   lines.push(
-    `**Listen:** https://howtosolvethis.com/episodes/${episodeNumber}`
+    `**Listen:** https://howtosolvethis.com${episodePath(episode)}`
   );
   lines.push("");
 
