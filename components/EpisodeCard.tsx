@@ -148,7 +148,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
         {/* Metadata Footer - HUD Lines - Hebrew Labels */}
           <div className="flex items-center gap-6 pt-6 border-t border-white/10 mt-auto">
           {/* Guests - Show TBD if no metadata */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <div className="technical-text text-[10px] mb-1.5">אורחים</div>
             <div className="text-white/80 text-xs truncate">
               {metadata?.guests && metadata.guests.length > 0
@@ -160,7 +160,7 @@ export default function EpisodeCard({ episode, index }: EpisodeCardProps) {
             <div className="hud-line-vertical h-8" />
 
           {/* Date */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
             <div className="technical-text text-[10px] mb-1.5">תאריך</div>
             <div className="text-white/80 text-xs">
               {new Date(episode.pubDate).toLocaleDateString("he-IL", {
