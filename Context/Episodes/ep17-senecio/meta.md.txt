@@ -4,7 +4,7 @@
 - **Guests:** חנן לפק (Senecio Robotics)
 - **Role:** מייסד ומנכ"ל
 - **Sector:** Deep-Tech / CleanTech / Bio-Tech / Robotics
-- **Keywords:** טיפול בשפכיהדברה ביולוגית/Biological Control, יתושים עקרים/Sterile Insect Technique, רובוטיקה/Robotics, דיפ-טק/Deep-Tech
+- **Keywords:**  הדברה ביולוגית/Biological Control, יתושים עקרים/Sterile Insect Technique, רובוטיקה/Robotics, דיפ-טק/Deep-Tech
 
 - **Company Website:** https://www.senecio-robotics.com/
 - **Company Name:** Senecio Robotics
