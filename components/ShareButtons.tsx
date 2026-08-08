@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEpisodeShared } from "@/lib/analytics";
+
 interface ShareButtonsProps {
   episodeTitle: string;
   episodeUrl: string;
@@ -9,16 +11,19 @@ export default function ShareButtons({ episodeTitle, episodeUrl }: ShareButtonsP
   const shareToWhatsApp = () => {
     const text = encodeURIComponent(`שווה להאזין: ${episodeTitle}`);
     const url = encodeURIComponent(episodeUrl);
+    trackEpisodeShared("whatsapp");
     window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
   };
 
   const shareToLinkedIn = () => {
     const url = encodeURIComponent(episodeUrl);
+    trackEpisodeShared("linkedin");
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
   };
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(episodeUrl);
+    trackEpisodeShared("copy_link");
     // TODO: Add toast notification "הקישור הועתק!"
   };
 
