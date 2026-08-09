@@ -56,23 +56,58 @@ export default function ChatWidget() {
         body: JSON.stringify({ question }),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        trackChatResponse("success");
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.answer, sources: data.sources },
-        ]);
-      } else {
+      if (!res.ok || !res.body) {
+        const data = await res.json().catch(() => ({}));
         trackChatResponse("error");
-        // 400/429 carry a user-facing Hebrew reason (too long, daily cap).
+        // 400/429/503 carry a user-facing Hebrew reason (too long, daily cap,
+        // service unavailable). Anything else is a bug, not something to show.
         const reason =
-          res.status === 429 || res.status === 400
+          [400, 429, 503].includes(res.status) && data.error
             ? data.error
             : "שגיאה: לא הצלחתי לעבד את השאלה.";
         setMessages((prev) => [...prev, { role: "assistant", content: reason }]);
+        return;
       }
+
+      // Newline-delimited JSON: a `sources` event, then `delta` text events.
+      // The assistant bubble is appended empty up front and grown in place so
+      // the answer paints token by token instead of after the last one.
+      const index = messages.length + 1;
+      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      const handle = (line: string) => {
+        if (!line.trim()) return;
+        const event = JSON.parse(line);
+        setMessages((prev) => {
+          const next = [...prev];
+          const msg = next[index];
+          if (!msg) return prev;
+          if (event.type === "sources") next[index] = { ...msg, sources: event.sources };
+          else if (event.type === "delta")
+            next[index] = { ...msg, content: msg.content + event.text };
+          else if (event.type === "error")
+            next[index] = { ...msg, content: event.error };
+          return next;
+        });
+      };
+
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        // The last element is whatever came after the final newline — an
+        // incomplete line that must wait for the next chunk.
+        buffer = lines.pop() ?? "";
+        lines.forEach(handle);
+      }
+      handle(buffer);
+
+      trackChatResponse("success");
     } catch {
       trackChatResponse("error");
       setMessages((prev) => [
