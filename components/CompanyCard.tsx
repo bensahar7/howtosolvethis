@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { CompanyInfo } from "@/types/episode";
+import { trackCompanyLinkClick } from "@/lib/analytics";
 
 interface CompanyCardProps {
   company: CompanyInfo;
@@ -138,6 +139,7 @@ export default function CompanyCard({ company, index = 0 }: CompanyCardProps) {
       {company.website && (
         <a
           href={company.website}
+          onClick={() => trackCompanyLinkClick(company.name)}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex w-full items-center justify-center gap-2 glass px-4 py-3 rounded-sm transition-all duration-300 hover:scale-105 active:scale-95 min-h-[48px]"

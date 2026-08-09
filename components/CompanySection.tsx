@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import { trackCompanyLinkClick } from "@/lib/analytics";
 
 interface CompanySectionProps {
   companyName?: string;
@@ -105,6 +106,7 @@ export default function CompanySection({
           {companyWebsite && (
             <a
               href={companyWebsite}
+              onClick={() => trackCompanyLinkClick(companyName)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center glass p-3 rounded-sm transition-all duration-300 hover:scale-110 active:scale-95"

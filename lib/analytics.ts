@@ -1,7 +1,8 @@
 /**
- * Analytics — GA4 thin wrapper.
- * No-ops when NEXT_PUBLIC_GA_MEASUREMENT_ID is unset or running on the server.
+ * Analytics event wrappers for PostHog and GA4.
  */
+
+import posthog from "posthog-js";
 
 declare global {
   interface Window {
@@ -12,6 +13,13 @@ declare global {
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const fire = (action: string, params: Record<string, unknown> = {}) => {
+  if (
+    process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+    process.env.NEXT_PUBLIC_POSTHOG_HOST
+  ) {
+    posthog.capture(action, params);
+  }
+
   if (typeof window === "undefined" || !window.gtag) return;
   window.gtag("event", action, params);
 };
@@ -52,11 +60,8 @@ export const trackNewsletterClick = (location: string) =>
 export const trackSocialClick = (platform: string, location: string) =>
   fire("social_clicked", { platform, location });
 
-export const trackCompanyLinkClick = (
-  companyName: string,
-  episodeNumber: number
-) =>
-  fire("company_link_clicked", {
-    company_name: companyName,
-    episode_number: episodeNumber,
-  });
+export const trackCompanyLinkClick = (companyName: string) =>
+  fire("company_link_clicked", { company_name: companyName });
+
+export const trackEpisodeShared = (shareMethod: "whatsapp" | "linkedin" | "copy_link") =>
+  fire("episode_shared", { share_method: shareMethod });

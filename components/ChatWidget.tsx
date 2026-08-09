@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import posthog from "posthog-js";
 
 interface Message {
   role: "user" | "assistant";
@@ -41,6 +42,14 @@ export default function ChatWidget() {
     setInput("");
     setMessages((prev) => [...prev, { role: "user", content: question }]);
     setLoading(true);
+    if (
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST
+    ) {
+      posthog.capture("chat_question_submitted", {
+        question_length: question.length,
+      });
+    }
 
     try {
       const res = await fetch(`${API_BASE}/api/chat`, {
@@ -52,6 +61,12 @@ export default function ChatWidget() {
       const data = await res.json();
 
       if (res.ok) {
+        if (
+          process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+          process.env.NEXT_PUBLIC_POSTHOG_HOST
+        ) {
+          posthog.capture("chat_response_received");
+        }
         setMessages((prev) => [
           ...prev,
           { role: "assistant", content: data.answer, sources: data.sources },
