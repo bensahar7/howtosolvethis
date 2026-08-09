@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "מדברים עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו. פודקאסט על יזמות, חדשנות ופתרונות סביבתיים בישראל.",
     images: [
       {
-        url: "https://howtosolvethis.com/images/earth-hero.png",
+        url: "https://howtosolvethis.com/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "איך פותרים את זה? - פודקאסט על הבעיות הגדולות של ימינו בגובה העיניים",

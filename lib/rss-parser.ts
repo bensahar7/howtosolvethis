@@ -144,7 +144,7 @@ async function fetchRSSFeedUncached(): Promise<RSSEpisode[]> {
         imageUrl:
           item.itunes?.image ||
           feed.image?.url ||
-          "/images/earth-hero.png",
+          "/images/earth-hero.jpg",
         // Prioritize Spotify URL, then link field, then enclosure as last resort
         audioUrl: spotifyUrl || item.link || item.enclosure?.url || "",
         guid: item.guid || item.link || `episode-${index}`,

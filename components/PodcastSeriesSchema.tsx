@@ -14,7 +14,7 @@ export default function PodcastSeriesSchema() {
     url: "https://howtosolvethis.com",
     image: {
       "@type": "ImageObject",
-      url: "https://howtosolvethis.com/images/earth-hero.png",
+      url: "https://howtosolvethis.com/images/og-image.jpg",
       width: 1200,
       height: 630,
     },

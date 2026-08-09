@@ -39,7 +39,7 @@ function buildFallbackEpisodes(localMetadata: LocalMetadata[]): EnrichedEpisode[
         title: meta.title || `Episode ${episodeNumber}`,
         description: meta.problem || meta.solution || "",
         pubDate: new Date().toISOString(),
-        imageUrl: "/images/earth-hero.png",
+        imageUrl: "/images/earth-hero.jpg",
         audioUrl: "",
         guid: `fallback-episode-${episodeNumber}`,
         episodeNumber,
