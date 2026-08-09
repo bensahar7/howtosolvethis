@@ -488,3 +488,33 @@ a {
 details[open] .details-chevron {
   transform: rotate(180deg);
 }
+
+/* ============================================
+   CHAT WIDGET LAUNCHER
+   ============================================ */
+
+/* Uses the Spotify-green accent so the pill separates from the dark earth
+   background instead of reading as another glass panel. */
+.chat-launcher {
+  background: rgba(29, 185, 84, 0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(29, 185, 84, 0.55);
+  color: #1ed760;
+}
+
+/* Plain white, not .technical-text: that class's uppercase + 0.1em tracking is
+   built for Latin metadata labels and renders Hebrew cramped and hard to read.
+   White on the green fill also beats green-on-green for contrast. */
+.chat-launcher-label {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+@media (hover: hover) {
+  .chat-launcher:hover {
+    background: rgba(29, 185, 84, 0.32);
+    border-color: rgba(29, 185, 84, 0.8);
+  }
+}

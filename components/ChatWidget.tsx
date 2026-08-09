@@ -77,7 +77,9 @@ export default function ChatWidget() {
   return (
     <div
       dir="rtl"
-      className="fixed bottom-4 left-4 z-[60] flex flex-col items-start gap-3 md:bottom-6 md:left-6"
+      /* items-end, not items-start: the wrapper is RTL, where "start" is the
+         right edge — that pushed the launcher inward once the panel opened. */
+      className="fixed bottom-4 left-4 z-[60] flex flex-col items-end gap-3 md:bottom-6 md:left-6"
     >
       {open && (
         <div
@@ -87,7 +89,9 @@ export default function ChatWidget() {
         >
           {/* Header */}
           <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10">
-            <span className="technical-text">שאלו על הפודקאסט</span>
+            <span className="text-sm font-semibold text-white">
+              שאלו על הפודקאסט
+            </span>
             <button
               type="button"
               onClick={() => setOpen(false)}
@@ -124,7 +128,7 @@ export default function ChatWidget() {
                   {msg.content}
                 </div>
                 {msg.sources && msg.sources.length > 0 && (
-                  <div className="technical-text mt-1.5 normal-case">
+                  <div className="mt-1.5 text-xs text-white/50">
                     מקורות: {msg.sources.join(" | ")}
                   </div>
                 )}
@@ -172,10 +176,10 @@ export default function ChatWidget() {
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
         aria-label={open ? "סגירת הצ׳אט" : "שאלו על הפודקאסט"}
-        className="glass glass-hover rounded-sm flex items-center gap-2 px-4 py-3 text-white"
+        className="chat-launcher glass-hover rounded-sm flex items-center gap-2 px-5 py-3.5"
       >
         <span aria-hidden="true">💬</span>
-        <span className="technical-text">שאלו על הפודקאסט</span>
+        <span className="chat-launcher-label">שאלו על הפודקאסט</span>
       </button>
     </div>
   );
