@@ -1,44 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { trackEvent } from "@/lib/logger";
+import { useEffect, useRef } from "react";
+import { trackCtaClick } from "@/lib/analytics";
 
 export default function Newsletter() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const embedRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-
-    try {
-      // Substack subscription endpoint
-      const response = await fetch("https://ben1580094.substack.com/api/v1/free", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          first_url: window.location.href,
-        }),
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        setEmail("");
-        trackEvent("newsletter_signup", {
-          source: "custom_form",
-          email_domain: email.split("@")[1],
-        });
-      } else {
-        setStatus("error");
+  // Signup happens inside a cross-origin Substack iframe, so its clicks are
+  // invisible to both PostHog autocapture and any handler we attach. The
+  // window blur that fires when focus enters the iframe is the only signal
+  // available — treat it as intent to subscribe.
+  useEffect(() => {
+    const handleBlur = () => {
+      if (document.activeElement === embedRef.current?.querySelector("iframe")) {
+        trackCtaClick("newsletter_embed_engaged", "newsletter_section");
       }
-    } catch (error) {
-      console.error("Newsletter signup error:", error);
-      setStatus("error");
-    }
-  };
+    };
+
+    window.addEventListener("blur", handleBlur);
+    return () => window.removeEventListener("blur", handleBlur);
+  }, []);
 
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24">
@@ -59,7 +40,7 @@ export default function Newsletter() {
             <div className="border-t border-white/10 mb-8" />
 
             {/* Substack iframe with dark theme filter */}
-            <div className="max-w-md mx-auto">
+            <div ref={embedRef} className="max-w-md mx-auto">
               <iframe
                 src="https://ben1580094.substack.com/embed"
                 width="100%"

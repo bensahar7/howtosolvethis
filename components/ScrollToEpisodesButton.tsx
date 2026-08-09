@@ -1,8 +1,11 @@
 "use client";
 
+import { trackCtaClick } from "@/lib/analytics";
+
 export default function ScrollToEpisodesButton() {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    trackCtaClick("scroll_to_episodes", "hero");
     document.getElementById('episodes')?.scrollIntoView({ behavior: 'smooth' });
   };
 

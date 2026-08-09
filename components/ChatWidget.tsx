@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import posthog from "posthog-js";
+import {
+  trackChatOpened,
+  trackChatClosed,
+  trackChatQuestion,
+  trackChatResponse,
+} from "@/lib/analytics";
 
 interface Message {
   role: "user" | "assistant";
@@ -42,14 +47,7 @@ export default function ChatWidget() {
     setInput("");
     setMessages((prev) => [...prev, { role: "user", content: question }]);
     setLoading(true);
-    if (
-      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
-      process.env.NEXT_PUBLIC_POSTHOG_HOST
-    ) {
-      posthog.capture("chat_question_submitted", {
-        question_length: question.length,
-      });
-    }
+    trackChatQuestion(question.length);
 
     try {
       const res = await fetch(`${API_BASE}/api/chat`, {
@@ -61,17 +59,13 @@ export default function ChatWidget() {
       const data = await res.json();
 
       if (res.ok) {
-        if (
-          process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
-          process.env.NEXT_PUBLIC_POSTHOG_HOST
-        ) {
-          posthog.capture("chat_response_received");
-        }
+        trackChatResponse("success");
         setMessages((prev) => [
           ...prev,
           { role: "assistant", content: data.answer, sources: data.sources },
         ]);
       } else {
+        trackChatResponse("error");
         // 400/429 carry a user-facing Hebrew reason (too long, daily cap).
         const reason =
           res.status === 429 || res.status === 400
@@ -80,6 +74,7 @@ export default function ChatWidget() {
         setMessages((prev) => [...prev, { role: "assistant", content: reason }]);
       }
     } catch {
+      trackChatResponse("error");
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "שגיאה: בעיית תקשורת עם השרת." },
@@ -105,7 +100,10 @@ export default function ChatWidget() {
             <span className="technical-text">שאלו על הפודקאסט</span>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                trackChatClosed(messages.length);
+                setOpen(false);
+              }}
               aria-label="סגירת הצ׳אט"
               className="text-white/60 hover:text-white transition-colors text-lg leading-none"
             >
@@ -184,7 +182,12 @@ export default function ChatWidget() {
       {/* Launcher */}
       <button
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          const next = !open;
+          if (next) trackChatOpened();
+          else trackChatClosed(messages.length);
+          setOpen(next);
+        }}
         aria-expanded={open}
         aria-label={open ? "סגירת הצ׳אט" : "שאלו על הפודקאסט"}
         className="glass glass-hover rounded-sm flex items-center gap-2 px-4 py-3 text-white"

@@ -3,6 +3,7 @@ import { EnrichedEpisode } from "@/types/episode";
 import { episodePath } from "@/lib/episode-url";
 import Link from "next/link";
 import Image from "next/image";
+import { trackEpisodeCardClick } from "@/lib/analytics";
 
 interface RelatedEpisodesProps {
   currentEpisode: EnrichedEpisode;
@@ -41,6 +42,13 @@ export default function RelatedEpisodes({ currentEpisode, allEpisodes }: Related
           <Link
             key={episode.episodeNumber}
             href={episodePath(episode)}
+            onClick={() =>
+              trackEpisodeCardClick(
+                episode.episodeNumber,
+                episode.title,
+                "related_episodes"
+              )
+            }
             className="glass rounded-sm overflow-hidden transition-all duration-300 active:scale-95 lg:hover:scale-105 group"
             style={{ boxShadow: "0 0 20px rgba(255,255,255,0)" }}
             onMouseEnter={(e) => {

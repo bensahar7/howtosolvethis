@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { trackNavClick, trackMenuToggle } from "@/lib/analytics";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -38,7 +39,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center h-16 md:h-20">
           {/* Brand — right (RTL start) */}
-          <Link href="/" className="flex items-center gap-3">
+          <Link
+            href="/"
+            onClick={() => trackNavClick("brand_home", "/")}
+            className="flex items-center gap-3"
+          >
             <span className="text-xl md:text-2xl font-bold text-white tracking-tight">
               איך פותרים את זה?
             </span>
@@ -49,7 +54,13 @@ export default function Header() {
             <div ref={menuRef} className="relative">
               <button
                 type="button"
-                onClick={() => setOpen((v) => !v)}
+                onClick={() => {
+                  // Compute outside the updater: StrictMode invokes updaters
+                  // twice in dev, which would double-fire the event.
+                  const next = !open;
+                  trackMenuToggle(next);
+                  setOpen(next);
+                }}
                 aria-haspopup="menu"
                 aria-expanded={open}
                 aria-label="תפריט"
@@ -76,7 +87,10 @@ export default function Header() {
                       key={item.href}
                       href={item.href}
                       role="menuitem"
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        trackNavClick(item.label, item.href);
+                        setOpen(false);
+                      }}
                       className="block px-5 py-3 text-sm md:text-base text-white/80 hover:text-white hover:bg-white/10 transition-colors text-left"
                     >
                       {item.label}

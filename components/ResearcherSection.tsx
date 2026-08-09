@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ResearcherInfo } from "@/types/episode";
+import { trackGuestLinkClick } from "@/lib/analytics";
 
 interface ResearcherSectionProps {
   researcher: ResearcherInfo;
@@ -54,6 +55,7 @@ export default function ResearcherSection({
             {researcher.linkedIn && (
               <Link
                 href={researcher.linkedIn}
+                onClick={() => trackGuestLinkClick(researcher.name, "linkedin")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-2 rounded-sm transition-all duration-300 hover:scale-110 active:scale-95"
@@ -82,6 +84,7 @@ export default function ResearcherSection({
             {researcher.googleScholar && (
               <Link
                 href={researcher.googleScholar}
+                onClick={() => trackGuestLinkClick(researcher.name, "google_scholar")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-2 rounded-sm transition-all duration-300 hover:scale-110 active:scale-95"
@@ -110,6 +113,7 @@ export default function ResearcherSection({
             {researcher.website && (
               <Link
                 href={researcher.website}
+                onClick={() => trackGuestLinkClick(researcher.name, "website")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass p-2 rounded-sm transition-all duration-300 hover:scale-110 active:scale-95"

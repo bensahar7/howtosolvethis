@@ -3,6 +3,8 @@
  * Provides structured logging with different levels and contexts
  */
 
+import { fire } from "@/lib/analytics";
+
 type LogLevel = "debug" | "info" | "warn" | "error";
 
 interface LogContext {
@@ -108,10 +110,8 @@ class Logger {
   trackEvent(eventName: string, properties?: Record<string, unknown>) {
     this.info(`Event: ${eventName}`, properties);
 
-    // Send to Google Analytics
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", eventName, properties);
-    }
+    // Route through lib/analytics so PostHog and GA4 both receive it.
+    fire(eventName, properties);
   }
 
   /**

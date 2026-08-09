@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { EnrichedEpisode } from "@/types/episode";
 import { episodePath } from "@/lib/episode-url";
+import { trackEpisodeCardClick } from "@/lib/analytics";
 
 interface AllEpisodeCardProps {
   episode: EnrichedEpisode;
@@ -34,11 +37,20 @@ export default function AllEpisodeCard({ episode, index }: AllEpisodeCardProps) 
     day: "numeric",
   });
 
+  // All three links in this card lead to the same episode page.
+  const handleClick = () =>
+    trackEpisodeCardClick(
+      episode.episodeNumber ?? index + 1,
+      episode.title,
+      "episodes_list"
+    );
+
   return (
     <article className="glass glass-hover rounded-sm overflow-hidden group flex items-center gap-4 md:gap-6 p-3 md:p-4">
       {/* Thumbnail (right in RTL) — links to the episode page */}
       <Link
         href={episodeUrl}
+        onClick={handleClick}
         className="relative w-24 h-24 md:w-36 md:h-36 flex-shrink-0 overflow-hidden rounded-sm"
       >
         <Image
@@ -65,7 +77,11 @@ export default function AllEpisodeCard({ episode, index }: AllEpisodeCardProps) 
 
         {/* Title */}
         <h2 className="text-lg md:text-2xl font-bold text-white mb-1.5 md:mb-2 leading-snug line-clamp-1">
-          <Link href={episodeUrl} className="group-hover:text-blue-300 transition-colors">
+          <Link
+            href={episodeUrl}
+            onClick={handleClick}
+            className="group-hover:text-blue-300 transition-colors"
+          >
             {episode.title}
           </Link>
         </h2>
@@ -79,6 +95,7 @@ export default function AllEpisodeCard({ episode, index }: AllEpisodeCardProps) 
       {/* Play button (left in RTL) */}
       <Link
         href={episodeUrl}
+        onClick={handleClick}
         aria-label={`האזן לפרק: ${episode.title}`}
         className="glass glass-hover flex-shrink-0 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full text-white hover:text-[#1ed760] transition-colors"
       >
