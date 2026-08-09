@@ -6,7 +6,7 @@
  * Styled with glassmorphism for atmospheric design
  */
 
-import { trackEvent } from "@/lib/logger";
+import { trackEvent } from "@/lib/analytics";
 
 export default function LinkedInBadge() {
   const handleClick = () => {

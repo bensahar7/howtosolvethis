@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { trackEvent } from "@/lib/logger";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -29,7 +29,6 @@ export default function Newsletter() {
         setEmail("");
         trackEvent("newsletter_signup", {
           source: "custom_form",
-          email_domain: email.split("@")[1],
         });
       } else {
         setStatus("error");

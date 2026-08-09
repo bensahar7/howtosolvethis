@@ -12,7 +12,7 @@ declare global {
 
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-const fire = (action: string, params: Record<string, unknown> = {}) => {
+export const trackEvent = (action: string, params: Record<string, unknown> = {}) => {
   if (
     process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
     process.env.NEXT_PUBLIC_POSTHOG_HOST
@@ -34,7 +34,7 @@ export const trackListenPlatform = (
   location: string,
   episodeNumber?: number
 ) =>
-  fire("listen_platform_clicked", {
+  trackEvent("listen_platform_clicked", {
     platform,
     location,
     episode_number: episodeNumber,
@@ -45,23 +45,23 @@ export const trackEpisodeCardClick = (
   episodeTitle: string,
   location: string
 ) =>
-  fire("episode_card_clicked", {
+  trackEvent("episode_card_clicked", {
     episode_number: episodeNumber,
     episode_title: episodeTitle,
     location,
   });
 
 export const trackTranscriptOpened = (episodeNumber: number) =>
-  fire("transcript_opened", { episode_number: episodeNumber });
+  trackEvent("transcript_opened", { episode_number: episodeNumber });
 
 export const trackNewsletterClick = (location: string) =>
-  fire("newsletter_clicked", { location });
+  trackEvent("newsletter_clicked", { location });
 
 export const trackSocialClick = (platform: string, location: string) =>
-  fire("social_clicked", { platform, location });
+  trackEvent("social_clicked", { platform, location });
 
 export const trackCompanyLinkClick = (companyName: string) =>
-  fire("company_link_clicked", { company_name: companyName });
+  trackEvent("company_link_clicked", { company_name: companyName });
 
 export const trackEpisodeShared = (shareMethod: "whatsapp" | "linkedin" | "copy_link") =>
-  fire("episode_shared", { share_method: shareMethod });
+  trackEvent("episode_shared", { share_method: shareMethod });
