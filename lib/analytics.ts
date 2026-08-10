@@ -12,9 +12,10 @@ declare global {
 
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+// Must mirror the init guard in instrumentation-client.ts: the token alone
+// decides whether PostHog is live (the host only picks the region).
 export const POSTHOG_ENABLED = Boolean(
-  process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
-    process.env.NEXT_PUBLIC_POSTHOG_HOST
+  process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
 );
 
 /**

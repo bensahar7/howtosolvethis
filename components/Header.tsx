@@ -31,6 +31,7 @@ export default function Header() {
 
   const menuItems = [
     { href: "/episodes", label: "פרקים" },
+    { href: "/blog", label: "בלוג" },
     { href: "/about", label: "אודות" },
   ];
 

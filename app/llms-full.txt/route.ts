@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getEnrichedEpisodes } from "@/lib/episode-matcher";
 import { episodePath } from "@/lib/episode-url";
 import { BilingualTag } from "@/types/episode";
+import { getAllPosts, blogPostPath, DEFAULT_AUTHOR } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -13,6 +14,7 @@ function formatKeyword(k: string | BilingualTag): string {
 export async function GET() {
   const baseUrl = "https://howtosolvethis.com";
   const episodes = await getEnrichedEpisodes();
+  const posts = await getAllPosts();
 
   const lines: string[] = [
     "# איך פותרים את זה? — How To Solve This?",
@@ -60,6 +62,39 @@ export async function GET() {
 
     lines.push("---");
     lines.push("");
+  }
+
+  if (posts.length) {
+    lines.push("# Blog");
+    lines.push("");
+
+    for (const post of posts) {
+      lines.push(`## ${post.title}`);
+      lines.push("");
+      lines.push(`**URL:** ${baseUrl}${blogPostPath(post.slug)}`);
+      lines.push(`**Markdown:** ${baseUrl}${blogPostPath(post.slug)}/markdown`);
+      lines.push(`**Author:** ${post.author ?? DEFAULT_AUTHOR}`);
+      lines.push(`**Published:** ${post.date}`);
+      if (post.updated && post.updated !== post.date) {
+        lines.push(`**Updated:** ${post.updated}`);
+      }
+      if (post.tags?.length) lines.push(`**Tags:** ${post.tags.join(", ")}`);
+      lines.push("");
+      lines.push(post.description);
+      lines.push("");
+
+      if (post.takeaways?.length) {
+        lines.push("**Key Takeaways:**");
+        post.takeaways.forEach((point) => lines.push(`- ${point}`));
+        lines.push("");
+      }
+
+      // Full body: this file exists so an LLM can ingest the site in one fetch.
+      lines.push(post.raw);
+      lines.push("");
+      lines.push("---");
+      lines.push("");
+    }
   }
 
   return new NextResponse(lines.join("\n"), {

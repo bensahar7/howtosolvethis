@@ -33,6 +33,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="body-text text-sm text-white/70 hover:text-white transition-colors">
+                  בלוג
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="body-text text-sm text-white/70 hover:text-white transition-colors">
                   אודות
                 </Link>

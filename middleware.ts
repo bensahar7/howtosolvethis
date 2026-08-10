@@ -35,7 +35,9 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - ingest (PostHog proxy — security headers are meaningless on analytics
+     *   beacons and this keeps them off the middleware invocation path)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    "/((?!api|ingest|_next/static|_next/image|favicon.ico).*)",
   ],
 };
