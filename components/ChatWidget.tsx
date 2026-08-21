@@ -56,22 +56,72 @@ export default function ChatWidget() {
         body: JSON.stringify({ question }),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        trackChatResponse("success");
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.answer, sources: data.sources },
-        ]);
-      } else {
+      // Errors still come back as a single JSON object, not a stream.
+      if (!res.ok || !res.body) {
+        const data = await res.json().catch(() => ({}));
         trackChatResponse("error");
-        // 400/429 carry a user-facing Hebrew reason (too long, daily cap).
+        // 400/429/503 carry a user-facing Hebrew reason (too long, daily cap,
+        // service unavailable).
         const reason =
-          res.status === 429 || res.status === 400
+          res.status === 429 || res.status === 400 || res.status === 503
             ? data.error
             : "שגיאה: לא הצלחתי לעבד את השאלה.";
         setMessages((prev) => [...prev, { role: "assistant", content: reason }]);
+        return;
+      }
+
+      trackChatResponse("success");
+
+      // Append one empty assistant message, then grow it as deltas arrive.
+      let index = -1;
+      setMessages((prev) => {
+        index = prev.length;
+        return [...prev, { role: "assistant", content: "" }];
+      });
+      // The first token is the moment the user stops waiting.
+      setLoading(false);
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      const applyEvent = (event: Record<string, string | string[]>) => {
+        setMessages((prev) =>
+          prev.map((msg, i) => {
+            if (i !== index) return msg;
+            if (event.type === "sources") {
+              return { ...msg, sources: event.sources as string[] };
+            }
+            if (event.type === "delta") {
+              return { ...msg, content: msg.content + (event.text as string) };
+            }
+            if (event.type === "error") {
+              return { ...msg, content: event.error as string };
+            }
+            return msg;
+          })
+        );
+      };
+
+      // The answer streams back as newline-delimited JSON — one JSON object per
+      // line, not a single document, so res.json() cannot parse it. A network
+      // chunk can split mid-line, so only whole lines are parsed and the
+      // remainder carries over.
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            applyEvent(JSON.parse(line));
+          } catch {
+            // Ignore a malformed line rather than killing the whole stream.
+          }
+        }
       }
     } catch {
       trackChatResponse("error");
