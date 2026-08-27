@@ -24,6 +24,22 @@ export const metadata: Metadata = {
     title: "כל הפרקים | איך פותרים את זה?",
     description:
       "כל פרקי הפודקאסט 'איך פותרים את זה?' במקום אחד — שיחות עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו.",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "איך פותרים את זה? - כל הפרקים",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "כל הפרקים | איך פותרים את זה?",
+    description:
+      "כל פרקי הפודקאסט 'איך פותרים את זה?' במקום אחד — שיחות עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו.",
+    images: ["/images/og-image.jpg"],
+    creator: "@bensahar",
   },
 };
 
@@ -87,11 +103,11 @@ export default async function AllEpisodesPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
 
       <Header />

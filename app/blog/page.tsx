@@ -10,7 +10,7 @@ export const revalidate = 3600;
 const SITE_URL = "https://howtosolvethis.com";
 
 const INDEX_DESCRIPTION =
-  "מאמרים על קליימט-טק, יזמות סביבתית וחדשנות ישראלית — מאחורי הקלעים של הפודקאסט איך פותרים את זה?";
+  "מאמרים על הנושאים שאנחנו מדברים עליהם בפודקאסט";
 
 export const metadata: Metadata = {
   title: "בלוג",
@@ -28,11 +28,21 @@ export const metadata: Metadata = {
     siteName: "איך פותרים את זה?",
     title: "בלוג | איך פותרים את זה?",
     description: INDEX_DESCRIPTION,
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "איך פותרים את זה? - בלוג",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "בלוג | איך פותרים את זה?",
     description: INDEX_DESCRIPTION,
+    images: ["/images/og-image.jpg"],
+    creator: "@bensahar",
   },
 };
 

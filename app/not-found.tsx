@@ -1,4 +1,10 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "404 — הדף לא נמצא",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

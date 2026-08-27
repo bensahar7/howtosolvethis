@@ -15,6 +15,7 @@ export default function Footer() {
               איך פותרים את זה?
             </p>
             <p className="body-text text-sm text-white/70 leading-relaxed">
+              שיחות עם חוקרים ויזמים שפותרים את הבעיות הגדולות של ימינו — מקליימט-טק ועד פודטק.
             </p>
           </div>
 
