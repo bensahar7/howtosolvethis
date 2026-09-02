@@ -14,6 +14,33 @@ interface Message {
   sources?: string[];
 }
 
+/** Turn bare URLs in text into clickable links. */
+function linkify(text: string): (string | React.ReactElement)[] {
+  const urlRegex = /(https?:\/\/[^\s<>"'\])]+)/g;
+  const parts: (string | React.ReactElement)[] = [];
+  let lastIndex = 0;
+  let match;
+  while ((match = urlRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const url = match[1].replace(/[.,;:!?)\]]+$/, "");
+    parts.push(
+      <a
+        key={match.index}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-white/40 underline-offset-2 hover:decoration-white break-all"
+        dir="ltr"
+      >
+        {url}
+      </a>
+    );
+    lastIndex = match.index + url.length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+}
+
 // The RAG backend lives in a separate deployment. Set NEXT_PUBLIC_CHAT_API_URL
 // to it (e.g. https://ragpodcastchatbot.vercel.app) — otherwise the fetch
 // resolves to this site's own /api/chat, which does not exist here.
@@ -184,7 +211,7 @@ export default function ChatWidget() {
                       : "bg-black/40 border-white/10 text-white/90"
                   }`}
                 >
-                  {msg.content}
+                  {msg.role === "assistant" ? linkify(msg.content) : msg.content}
                 </div>
                 {msg.sources && msg.sources.length > 0 && (
                   <div className="technical-text mt-1.5 normal-case">
