@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import ChatWidget from "@/components/ChatWidget";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -136,8 +135,6 @@ export default function RootLayout({
 
         {/* Scrollable Content */}
         <main className="relative z-0 pt-16 md:pt-20">{children}</main>
-
-        <ChatWidget />
       </body>
     </html>
   );
